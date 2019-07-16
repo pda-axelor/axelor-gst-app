@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+
+<menuitem name="gst-dashboard" title="Dashboard" order="1" />
+
+
+<menuitem name="gst-party" 
+		title="Party" order="2" />
+
+	<menuitem name="gst-party-party" parent="gst-party"
+		title="Party" action="" order="1" />
+		
+	<menuitem name="gst-party-contact" parent="gst-party"
+		title="Contact" action="" order="2"/>
+		
+	<menuitem name="gst-party-configurations" parent="gst-party"
+		title="Configurations" action="" order="3"/>
+		
+	   <menuitem name="gst-party-configurations-address" parent="gst-party-configurations"
+		title="Address" action="" order="1"/>
+		
+		<menuitem name="gst-party-configurations-city" parent="gst-party-configurations"
+		title="City" action="" order="2"/>
+		
+		<menuitem name="gst-party-configurations-state" parent="gst-party-configurations"
+		title="State" action="" order="3"/>
+		
+		<menuitem name="gst-party-configurations-country" parent="gst-party-configurations"
+		title="Country" action="" order="4"/>
+		
+	
+<menuitem name="gst-product" 
+		title="Product" order="3" />
+
+	<menuitem name="gst-product-product" parent="gst-product"
+		title="Product" action="" order="1" />
+		
+	<menuitem name="gst-party-categories" parent="gst-product"
+		title="Product Categories" action="" order="2"/>
+		
+		
+<menuitem name="gst-invoice" 
+		title="Invoice" order="4" />
+
+	<menuitem name="gst-invoice-create" parent="gst-invoice"
+		title="Create Invoice" action="" order="1" />
+		
+	<menuitem name="gst-invoice-draft" parent="gst-invoice"
+		title="Draft Invoices" action="" order="2" />
+		
+		<menuitem name="gst-invoice-validated" parent="gst-invoice"
+		title="Validated Invoices" action="" order="3" />
+		
+		<menuitem name="gst-invoice-paid" parent="gst-invoice"
+		title="Paid Invoices" action="" order="4" />
+		
+		<menuitem name="gst-invoice-cancelled" parent="gst-invoice"
+		title="Cancelled Invoices" action="" order="5" />
+		
+		<menuitem name="gst-invoice-all" parent="gst-invoice"
+		title="All Invoices" action="" order="6" />
+		
+		
+<menuitem name="gst-company" 
+		title="Company" order="5" />
+
+	<menuitem name="gst-company-company" parent="gst-company"
+		title="Company" action="" order="1" />
+		
+	<menuitem name="gst-company-bankaccount" parent="gst-company"
+		title="Bank Account" action="" order="2" />
+		
+		<menuitem name="gst-company-sequence" parent="gst-company"
+		title="Sequence" action="" order="3" />
+	
+		
+	   
+
+	
+	
+
+
+</object-views>
