@@ -111,14 +111,17 @@
 	<action-view name="action.gst.invoice.draft.view" title="Draft Invoices"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<domain>status=1</domain>
 	</action-view>
 
 	<menuitem name="gst-root-invoice-validated" parent="gst-root-invoice"
-		title="Validated Invoices" action="action.gst.invoice.validated.view" order="3" />
+		title="Validated Invoices" action="action.gst.invoice.validated.view"
+		order="3" />
 
 	<action-view name="action.gst.invoice.validated.view"
 		title="Validated Invoices" model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<domain>status=2</domain>
 	</action-view>
 
 	<menuitem name="gst-root-invoice-paid" parent="gst-root-invoice"
@@ -127,14 +130,17 @@
 	<action-view name="action.gst.invoice.paid.view" title="Paid Invoices"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
-	</action-view>
+		<domain>status=3</domain>
+		</action-view>
 
 	<menuitem name="gst-root-invoice-cancelled" parent="gst-root-invoice"
-		title="Cancelled Invoices" action="action.gst.invoice.cancelled.view" order="5" />
+		title="Cancelled Invoices" action="action.gst.invoice.cancelled.view"
+		order="5" />
 
 	<action-view name="action.gst.invoice.cancelled.view"
 		title="Cancelled Invoices" model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<domain>status=4</domain>
 	</action-view>
 
 

@@ -6,34 +6,33 @@
 
 
 
-	
 
-		
-	<grid name="contact-grid" title="Contact"
-		model="com.axelor.gst.db.Contact">
+
+
+	<grid name="contact-grid" title="Contact" model="com.axelor.gst.db.Contact">
 
 		<field name="name" />
 		<field name="type" />
-        <field name="primaryEmail"/>
-        <field name="secondaryEmail" />
-        <field name="primaryPhone" />
-        <field name="SecondaryPhone" />
-        
+		<field name="primaryEmail" />
+		<field name="secondaryEmail" />
+		<field name="primaryPhone" />
+		<field name="SecondaryPhone" />
+
 	</grid>
 
-	<form name="contact-form" title="Contact"
-		model="com.axelor.gst.db.Contact" css="panel-red">
+	<form name="contact-form" title="Contact" model="com.axelor.gst.db.Contact"
+		css="panel-red">
 
 		<panel title="Overview">
-		<field name="name" required="true"/>
-		<field name="type" required="true"/>
-        <field name="primaryEmail"/>
-        <field name="secondaryEmail" />
-        <field name="primaryPhone" />
-        <field name="SecondaryPhone" />
-        </panel>
+			<field name="name" required="true" />
+			<field name="type" required="true" />
+			<field name="primaryEmail" />
+			<field name="secondaryEmail" />
+			<field name="primaryPhone" />
+			<field name="SecondaryPhone" />
+		</panel>
 
 	</form>
 
-    
+
 </object-views>

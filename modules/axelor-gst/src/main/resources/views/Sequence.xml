@@ -4,28 +4,27 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
-	
-	<grid name="sequence-grid" title="Sequence"
-		model="com.axelor.gst.db.Sequence">
+
+	<grid name="sequence-grid" title="Sequence" model="com.axelor.gst.db.Sequence">
 
 		<field name="prefix" />
 		<field name="suffix" />
-        <field name="padding"/>
-        <field name="nextNumber"/>
-        
+		<field name="padding" />
+		<field name="nextNumber" />
+
 	</grid>
 
-	<form name="sequence-form" title="Sequence"
-		model="com.axelor.gst.db.Sequence" css="panel-red">
+	<form name="sequence-form" title="Sequence" model="com.axelor.gst.db.Sequence"
+		css="panel-red">
 
 		<panel title="Overview">
-		<field name="prefix" />
-		<field name="suffix" />
-        <field name="padding"/>
-        <field name="nextNumber"/>
-        </panel>
+			<field name="prefix" />
+			<field name="suffix" />
+			<field name="padding" />
+			<field name="nextNumber" />
+		</panel>
 
 	</form>
 
-    
+
 </object-views>

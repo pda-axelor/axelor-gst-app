@@ -17,9 +17,9 @@
 
 	<selection name="account.type.selection">
 
-        <option value="1">Current</option>
+		<option value="1">Current</option>
 		<option value="2">Savings</option>
-		
+
 
 	</selection>
 

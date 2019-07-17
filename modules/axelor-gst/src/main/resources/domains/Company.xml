@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domain-models
-	xmlns="http://axelor.com/xml/ns/domain-models"
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
 	
@@ -8,13 +7,13 @@
 
 	<module name="axelor-gst" package="com.axelor.gst.db" />
 
-	<entity name="Company" sequential="true" cachable="true" >
+	<entity name="Company" sequential="true" cachable="true">
 
-		<string name="name" required="true"/>
-		<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile"/>
-		<one-to-many name="contactList" ref="com.axelor.gst.db.Contact"/>
-		<string name="gstIn" min="15" max="15"/>
-		<one-to-many name="bankAccountList" ref="com.axelor.gst.db.BankAccount"/>
-		<many-to-one name="address" ref="com.axelor.gst.db.Address"/>
+		<string name="name" required="true" />
+		<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile" />
+		<one-to-many name="contactList" ref="com.axelor.gst.db.Contact" />
+		<string name="gstIn" min="15" max="15" />
+		<one-to-many name="bankAccountList" ref="com.axelor.gst.db.BankAccount" />
+		<many-to-one name="address" ref="com.axelor.gst.db.Address" />
 	</entity>
 </domain-models>

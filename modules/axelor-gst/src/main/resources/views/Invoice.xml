@@ -5,8 +5,8 @@
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 
-	<kanban name="invoice-kanban" title="All Invoices"
-		model="com.axelor.gst.db.Invoice" columnBy="status" sequenceBy="priority">
+	<kanban name="invoice-kanban" title="All Invoices" model="com.axelor.gst.db.Invoice"
+		columnBy="status" sequenceBy="priority">
 		<field name="status" />
 		<field name="company" />
 		<field name="reference" />
@@ -29,6 +29,7 @@
 	<grid name="invoice-grid" title="Invoice" model="com.axelor.gst.db.Invoice">
 
 		<field name="status" />
+		<field name="isConfirmed" title="Confirmed" />
 		<field name="company" />
 		<field name="reference" />
 		<field name="dateTime" />
@@ -42,27 +43,43 @@
 	</grid>
 
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
-		css="panel-red">
+		css="panel-red" onNew="action-gst-invoice-record-on-new">
 
 		<panel title="Overview">
-			<field name="status" readonly="true" widget="NavSelect" />
+			<field name="status" widget="NavSelect" colspan="6" readonly="true" />
+			<field name="isConfirmed" title="Confirmed" widget="boolean-switch"
+				onChange="com.axelor.gst.controllers.InvoiceController:onConfirm" />
 			<field name="company" required="true" />
 			<field name="reference" readonly="true" />
 			<field name="dateTime" />
-			<field name="party" required="true" />
-			<field name="partyContact" />
-			<field name="invoiceAddress" required="true" />
-			<field name="shippingAddress" />
-			<field name="useInvoiceAddress" />
-			<field name="netAmount" readonly="true" />
-			<field name="netIGST" readonly="true" />
-			<field name="netCGST" readonly="true" />
-			<field name="netSGST" readonly="true" />
-			<field name="grossAmount" readonly="true" />
-			<field name="invoiceItemsList" />
+			<field name="netAmount" title="Net Amount" readonly="true" />
+			<field name="netIGST" title="Net IGST" readonly="true" />
+			<field name="netCGST" title="Net CGST" readonly="true" />
+			<field name="netSGST" title="Net SGST" readonly="true" />
+			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
 		</panel>
-
+		
+		<panel-tabs>
+			<panel title="Party Details" css="panel-blue">
+				<field name="party" required="true"
+					onChange="com.axelor.gst.controllers.InvoiceController:setParty" />
+				<field name="partyContact" />
+				<field name="invoiceAddress" required="true" />
+				<field name="shippingAddress" />
+				<field name="useInvoiceAddress"
+					onChange="com.axelor.gst.controllers.InvoiceController:setShippingAddress" />
+			</panel>
+			<panel title="Invoice Items" css="panel-green">
+				<field name="invoiceItemsList" colspan="12"
+					onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST" />
+			</panel>
+		</panel-tabs>
 	</form>
 
+	<action-record name="action-gst-invoice-record-on-new"
+		model="com.axelor.gst.db.Invoice">
+		<field name="status" expr="1" />
+		<field name="dateTime" expr="eval:__datetime__" />
+	</action-record>
 
 </object-views>

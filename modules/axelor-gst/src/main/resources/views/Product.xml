@@ -5,23 +5,23 @@
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 
-   <cards name="product-card" title="Product"
-		model="com.axelor.gst.db.Product" orderBy="name">
+	<cards name="product-card" title="Product" model="com.axelor.gst.db.Product"
+		orderBy="name">
 		<field name="name" />
 		<field name="code" />
-		<field name="hsbn"/>
-        <field name="productCategory"/>
-        <field name="salePrice" />
-        <field name="costPrice"/>
-        <field name="image"/>
-        <field name="gstRate"/>
+		<field name="hsbn" />
+		<field name="productCategory" />
+		<field name="salePrice" />
+		<field name="costPrice" />
+		<field name="image" />
+		<field name="gstRate" />
 
 		<template><![CDATA[
        <div class="span8 card-image">
-        <img ng-src="{{$image(null, 'image')}}">      
+        <img ng-src="{{$image('image', 'content')}}">
         <strong>Name:{{name}}</strong>
         <strong>HSBN: {{hsbn}}</strong>
-        <strong>Category : {{product Category}}</strong>
+        <strong>Category : {{productCategory}}</strong>
         <strong>Sale Price : {{salePrice}}</strong>
         <strong>Cost Price : {{costPrice}}</strong>
         <strong>GST Rate : {{gstRate}}</strong>
@@ -29,37 +29,36 @@
       
       
   ]]></template>
-	</cards>  
-		
-	<grid name="product-grid" title="Product"
-		model="com.axelor.gst.db.Product">
+	</cards>
+
+	<grid name="product-grid" title="Product" model="com.axelor.gst.db.Product">
 
 		<field name="name" />
 		<field name="code" />
-		<field name="hsbn"/>
-        <field name="productCategory"/>
-        <field name="salePrice" />
-        <field name="costPrice"/>
-        <field name="image"/>
-        <field name="gstRate"/>
+		<field name="hsbn" />
+		<field name="productCategory" />
+		<field name="salePrice" />
+		<field name="costPrice" />
+		<field name="image" />
+		<field name="gstRate" />
 	</grid>
 
-	<form name="product-form" title="Product"
-		model="com.axelor.gst.db.Product" css="panel-red">
+	<form name="product-form" title="Product" model="com.axelor.gst.db.Product"
+		css="panel-red">
 
 		<panel title="Overview">
-			
-		<field name="name" required="true"/>
-		<field name="code" required="true"/>
-		<field name="hsbn"/>
-        <field name="productCategory"/>
-        <field name="salePrice" />
-        <field name="costPrice"/>
-        <field name="image" widget="image"/>
-        <field name="gstRate"/>
+
+			<field name="name" required="true" />
+			<field name="code" required="true" />
+			<field name="hsbn" />
+			<field name="productCategory" />
+			<field name="salePrice" />
+			<field name="costPrice" />
+			<field name="image" widget="image" />
+			<field name="gstRate" />
 		</panel>
 
 	</form>
 
-    
+
 </object-views>

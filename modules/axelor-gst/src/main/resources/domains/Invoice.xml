@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domain-models
-	xmlns="http://axelor.com/xml/ns/domain-models"
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
 	
@@ -8,23 +7,28 @@
 
 	<module name="axelor-gst" package="com.axelor.gst.db" />
 
-	<entity name="Invoice" sequential="true" cachable="true" >
+	<entity name="Invoice" sequential="true" cachable="true">
 
-		<string name="status" readonly="true" selection="invoice.status.selection"/>
-		<many-to-one name="company" ref="com.axelor.gst.db.Company" required="true"/>
-		<string name="reference" readonly="true"/>
-		<datetime name="dateTime"/>
-		<integer name="priority"/>
-		<many-to-one name="party" ref="com.axelor.gst.db.Party" required="true"/>
+		<string name="status" readonly="true" selection="invoice.status.selection" />
+		<boolean name="isConfirmed" default="false" />
+		<many-to-one name="company" ref="com.axelor.gst.db.Company"
+			required="true" />
+		<string name="reference" readonly="true" />
+		<datetime name="dateTime" />
+		<integer name="priority" />
+		<many-to-one name="party" ref="com.axelor.gst.db.Party"
+			required="true" />
 		<many-to-one name="partyContact" ref="com.axelor.gst.db.Contact" />
-		<many-to-one name="invoiceAddress" ref="com.axelor.gst.db.Address" required="true"/>
+		<many-to-one name="invoiceAddress" ref="com.axelor.gst.db.Address"
+			required="true" />
 		<many-to-one name="shippingAddress" ref="com.axelor.gst.db.Address" />
-		<boolean name="useInvoiceAddress" default="true"/>
-	    <decimal name="netAmount" />
-	    <decimal name="netIGST" />
-	    <decimal name="netCGST" />
-	    <decimal name="netSGST" />
-	    <decimal name="grossAmount" />
-	    <one-to-many name="invoiceItemsList" ref="com.axelor.gst.db.InvoiceLine" mappedBy="invoice"/>
+		<boolean name="useInvoiceAddress" default="true" />
+		<decimal name="netAmount" />
+		<decimal name="netIGST" />
+		<decimal name="netCGST" />
+		<decimal name="netSGST" />
+		<decimal name="grossAmount" />
+		<one-to-many name="invoiceItemsList" ref="com.axelor.gst.db.InvoiceLine"
+			mappedBy="invoice" />
 	</entity>
 </domain-models>

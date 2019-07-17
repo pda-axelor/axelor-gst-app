@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domain-models
-	xmlns="http://axelor.com/xml/ns/domain-models"
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
 	
@@ -8,11 +7,11 @@
 
 	<module name="axelor-gst" package="com.axelor.gst.db" />
 
-	<entity name="Contact" sequential="true" cachable="true" >
+	<entity name="Contact" sequential="true" cachable="true">
 
-		<string name="name" required="true"/>
-		<integer name="type" required="true" selection="contact.type.selection"/>
-		<string name="primaryEmail"/>
+		<string name="name" required="true" />
+		<integer name="type" required="true" selection="contact.type.selection" />
+		<string name="primaryEmail" />
 		<string name="secondaryEmail" />
 		<string name="primaryPhone" />
 		<string name="secondaryPhone" />

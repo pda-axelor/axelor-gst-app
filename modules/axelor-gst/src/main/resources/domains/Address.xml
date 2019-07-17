@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<domain-models
-	xmlns="http://axelor.com/xml/ns/domain-models"
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models
 	
@@ -8,14 +7,16 @@
 
 	<module name="axelor-gst" package="com.axelor.gst.db" />
 
-	<entity name="Address" sequential="true" cachable="true" >
+	<entity name="Address" sequential="true" cachable="true">
 
-		<integer name="type" required="true" selection="address.type.selection"/>
-		<string name="lineOne" required="true"/>
-		<string name="lineTwo"/>
-		<many-to-one name="city" ref="com.axelor.gst.db.City" required="true"/>
-		<many-to-one name="state" ref="com.axelor.gst.db.State"/>
-		<many-to-one name="country" ref="com.axelor.gst.db.Country" required="true"/>
+		<integer name="type" required="true" selection="address.type.selection" />
+		<string name="lineOne" required="true" />
+		<string name="lineTwo" />
+		<many-to-one name="city" ref="com.axelor.gst.db.City"
+			required="true" />
+		<many-to-one name="state" ref="com.axelor.gst.db.State" />
+		<many-to-one name="country" ref="com.axelor.gst.db.Country"
+			required="true" />
 		<string name="pincode" />
 	</entity>
 </domain-models>

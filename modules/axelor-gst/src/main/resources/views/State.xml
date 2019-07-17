@@ -7,7 +7,7 @@
 
 	<grid name="gst-state-grid" title="State" model="com.axelor.gst.db.State">
 
-		<field name="name" />		
+		<field name="name" />
 		<field name="country" />
 
 
@@ -17,8 +17,8 @@
 		css="panel-red">
 
 		<panel title="Overview">
-			<field name="name" required="true"/>		
-			<field name="country" required="true"/>
+			<field name="name" required="true" />
+			<field name="country" required="true" />
 		</panel>
 
 	</form>

@@ -6,30 +6,29 @@
 
 
 
-	
-		
-	<grid name="bank-grid" title="Bank Account"
-		model="com.axelor.gst.db.BankAccount">
+
+
+	<grid name="bank-grid" title="Bank Account" model="com.axelor.gst.db.BankAccount">
 
 		<field name="bank" />
-		<field name="accountNumber"/>
-        <field name="ifsc"/>
-        <field name="type" />
-        <field name="address"/>
+		<field name="accountNumber" />
+		<field name="ifsc" />
+		<field name="type" />
+		<field name="address" />
 	</grid>
 
-	<form name="bank-form" title="Bank Account"
-		model="com.axelor.gst.db.BankAccount" css="panel-red">
+	<form name="bank-form" title="Bank Account" model="com.axelor.gst.db.BankAccount"
+		css="panel-red">
 
 		<panel title="Overview">
-			<field name="bank" required="true"/>
-		<field name="accountNumber" required="true"/>
-        <field name="ifsc" title="IFSC" required="true"/>
-        <field name="type" />
-        <field name="address"/>
+			<field name="bank" required="true" />
+			<field name="accountNumber" required="true" />
+			<field name="ifsc" title="IFSC" required="true" />
+			<field name="type" />
+			<field name="address" />
 		</panel>
 
 	</form>
 
-    
+
 </object-views>

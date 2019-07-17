@@ -6,37 +6,36 @@
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 
-	<grid name="company-grid" title="Company"
-		model="com.axelor.gst.db.Company">
+	<grid name="company-grid" title="Company" model="com.axelor.gst.db.Company">
 
-		<field name="name" required="true"/>
-		<field name="logo" showTitle="false" colSpan="12" widget="image"/>
-        <field name="gstIn" min="15" max="15"/>
-        
+		<field name="name" required="true" />
+		<field name="logo" showTitle="false" colSpan="12" widget="image" />
+		<field name="gstIn" min="15" max="15" />
+
 	</grid>
 
-	<form name="company-form" title="Company"
-		model="com.axelor.gst.db.Company" css="panel-red">
+	<form name="company-form" title="Company" model="com.axelor.gst.db.Company"
+		css="panel-red">
 
 		<panel title="Overview">
-			<field name="name" required="true"/>
-		    <field name="logo" widget="image"/>
-		    <field name="contact"  title="Contact">
-		      <editor x-show-titles="false">
-              <field name="name" colSpan="12" required="true"/>
-              <field name="type" colSpan="12" required="true"/>
-              <field name="primaryEmail" colSpan="4"/>
-              <field name="secondaryEmail" colSpan="4"/>
-              <field name="primaryPhone" colSpan="4"/>
-              <field name="secondaryPhone" colSpan="12" />
-              </editor>
-            </field>
-            <field name="gstIn" min="15" max="15"/>
-            <field name="backAccountList" title="Bank Details"/>
-            <field name="address"/>
+			<field name="name" required="true" />
+			<field name="logo" widget="image" />
+			<field name="contactList" title="Contact">
+		  		<editor x-show-titles="false">
+					<field name="name" colSpan="12" required="true" />
+					<field name="type" colSpan="12" required="true" />
+					<field name="primaryEmail" colSpan="6" />
+					<field name="secondaryEmail" colSpan="6" />
+					<field name="primaryPhone" colSpan="4" />
+					<field name="secondaryPhone" colSpan="12" />
+				</editor>  
+			</field>
+			<field name="gstIn" min="15" max="15" />
+			<field name="bankAccountList" title="Bank Details" />
+			<field name="address" />
 		</panel>
 
 	</form>
 
-    
+
 </object-views>

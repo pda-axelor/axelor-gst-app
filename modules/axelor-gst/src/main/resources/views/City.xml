@@ -18,9 +18,9 @@
 		css="panel-red">
 
 		<panel title="Overview">
-			<field name="name" required="true"/>
+			<field name="name" required="true" />
 			<field name="state" />
-			<field name="country" required="true"/>
+			<field name="country" required="true" />
 		</panel>
 
 	</form>
