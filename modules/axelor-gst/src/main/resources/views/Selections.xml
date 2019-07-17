@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+	<selection name="address.type.selection">
+
+		<option value="1">Default</option>
+		<option value="2">Invoice</option>
+		<option value="3">Shipping</option>
+		<option value="4">Other</option>
+
+	</selection>
+
+	<selection name="account.type.selection">
+
+        <option value="1">Current</option>
+		<option value="2">Savings</option>
+		
+
+	</selection>
+
+	<selection name="contact.type.selection">
+
+		<option value="1">Company</option>
+		<option value="2">Individual</option>
+		<option value="3">Others</option>
+
+	</selection>
+
+	<selection name="invoice.status.selection">
+
+		<option value="1">Draft</option>
+		<option value="2">Validated</option>
+		<option value="3">Paid</option>
+		<option value="4">Cancelled</option>
+
+	</selection>
+
+	<selection name="party.type.selection">
+
+		<option value="1">Company</option>
+		<option value="2">Individual</option>
+
+	</selection>
+
+</object-views>

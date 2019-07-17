@@ -12,7 +12,7 @@
         <!--	Get from sequence on Save -->
 		<string name="reference" readonly="true"/>
 		<string name="name" required="true"/>
-		<string name="type" selection="" required="true" default="Company"/>
+		<integer name="type" selection="party.type.selection" required="true"/>
 		<boolean name="isCustomer"/>
 		<boolean name="isSupplier"/>
 		<string name="gstIn" min="15" max="15"/>

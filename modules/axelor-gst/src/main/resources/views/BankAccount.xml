@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+
+	
+		
+	<grid name="bank-grid" title="Bank Account"
+		model="com.axelor.gst.db.BankAccount">
+
+		<field name="bank" />
+		<field name="accountNumber"/>
+        <field name="ifsc"/>
+        <field name="type" />
+        <field name="address"/>
+	</grid>
+
+	<form name="bank-form" title="Bank Account"
+		model="com.axelor.gst.db.BankAccount" css="panel-red">
+
+		<panel title="Overview">
+			<field name="bank" required="true"/>
+		<field name="accountNumber" required="true"/>
+        <field name="ifsc" title="IFSC" required="true"/>
+        <field name="type" />
+        <field name="address"/>
+		</panel>
+
+	</form>
+
+    
+</object-views>

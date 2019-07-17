@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+	<kanban name="invoice-kanban" title="All Invoices"
+		model="com.axelor.gst.db.Invoice" columnBy="status" sequenceBy="priority">
+		<field name="status" />
+		<field name="company" />
+		<field name="reference" />
+		<field name="dateTime" />
+		<field name="useInvoiceAddress" />
+		<field name="netAmount" />
+		<field name="netIGST" />
+		<field name="netCGST" />
+		<field name="netSGST" />
+		<field name="grossAmount" />
+		<template><![CDATA[
+  <h4>Invoice</h4>
+  <strong>Company : {{company}}</strong>
+  <div class="card-body">Reference : {{reference}} <br> Date : {{dateTime}}</div>
+  <div class="card-footer">Gross Amount : {{grossAmount}}</div>
+  ]]></template>
+	</kanban>
+
+
+	<grid name="invoice-grid" title="Invoice" model="com.axelor.gst.db.Invoice">
+
+		<field name="status" />
+		<field name="company" />
+		<field name="reference" />
+		<field name="dateTime" />
+		<field name="useInvoiceAddress" />
+		<field name="netAmount" />
+		<field name="netIGST" />
+		<field name="netCGST" />
+		<field name="netSGST" />
+		<field name="grossAmount" />
+
+	</grid>
+
+	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
+		css="panel-red">
+
+		<panel title="Overview">
+			<field name="status" readonly="true" widget="NavSelect" />
+			<field name="company" required="true" />
+			<field name="reference" readonly="true" />
+			<field name="dateTime" />
+			<field name="party" required="true" />
+			<field name="partyContact" />
+			<field name="invoiceAddress" required="true" />
+			<field name="shippingAddress" />
+			<field name="useInvoiceAddress" />
+			<field name="netAmount" readonly="true" />
+			<field name="netIGST" readonly="true" />
+			<field name="netCGST" readonly="true" />
+			<field name="netSGST" readonly="true" />
+			<field name="grossAmount" readonly="true" />
+			<field name="invoiceItemsList" />
+		</panel>
+
+	</form>
+
+
+</object-views>

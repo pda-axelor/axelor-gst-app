@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+ 
+	
+	<cards name="party-card" title="Party"
+		model="com.axelor.gst.db.Party" orderBy="name">
+		<field name="reference" />
+		<field name="name"/>
+        <field name="type"/>
+        <field name="isCustomer" />
+        <field name="isSupplier" />
+        <field name="gstIn" />
+
+		<template><![CDATA[
+
+      <div class="span8">
+    <strong>{{reference}}</strong><br/>
+    <strong>Name : {{name}}</strong><br/>
+    Type : {{type}}<br/>GSTIN : {{gstIn}}
+      </div>
+      
+  ]]></template>
+	</cards>  
+		
+	<grid name="party-grid" title="Party"
+		model="com.axelor.gst.db.Party">
+
+		<field name="reference" />
+		<field name="name"/>
+        <field name="type"/>
+        <field name="isCustomer" />
+        <field name="isSupplier" />
+        <field name="gstIn" />
+        
+	</grid>
+
+	<form name="party-form" title="Party"
+		model="com.axelor.gst.db.Party" css="panel-red">
+
+		<panel title="Overview">
+			<field name="reference" readonly="true"/>
+		<field name="name" required="true"/>
+        <field name="type" required="true" default="Company"/>
+        <field name="isCustomer" />
+        <field name="isSupplier" />
+        <field name="gstIn" min="15" max="15"/>
+        <field name="contactList">
+              <editor x-show-titles="false">
+              <field name="name" colSpan="12"/>
+              <field name="type" colSpan="12"/>
+              <field name="primaryEmail" colSpan="4"/>
+              <field name="secondaryEmail" colSpan="4"/>
+              <field name="primaryPhone" colSpan="4"/>
+              <field name="secondaryPhone" colSpan="12" />
+              </editor>
+         </field>
+        <field name="addressList">
+            <editor x-show-titles="false">             
+              <field name="type" colSpan="12" required="true"/>
+              <field name="lineOne" colSpan="4" required="true"/>
+              <field name="lineTwo" colSpan="4"/>
+              <field name="city" colSpan="4" required="true"/>
+              <field name="state" colSpan="12" />
+              <field name="country" colSpan="12" required="true"/>
+              <field name="pincode" />              
+              </editor>
+        </field>
+		</panel>
+
+	</form>
+
+    
+</object-views>

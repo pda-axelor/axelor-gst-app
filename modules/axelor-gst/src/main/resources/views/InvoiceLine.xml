@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+		
+	<grid name="invoiceline-grid" title="Invoice Line"
+		model="com.axelor.gst.db.InvoiceLine">
+
+		<field name="product" />
+		<field name="hsbn" />
+        <field name="item"/>
+        <field name="qty" />
+        <field name="price" />
+        <field name="netAmount" />
+        <field name="gstRate" />
+        <field name="netIGST" />
+        <field name="netSGST" />
+        <field name="netCGST" />      
+        <field name="grossAmount" />
+        
+	</grid>
+
+	<form name="invoiceline-form" title="Invoice Line"
+		model="com.axelor.gst.db.InvoiceLine" css="panel-red">
+
+		<panel title="Overview">
+		<field name="product" />
+		<field name="hsbn" />
+        <field name="item" required="true"/>
+        <field name="qty" />
+        <field name="price" />
+        <field name="netAmount" readonly="true"/>
+        <field name="gstRate" readonly="true"/>
+        <field name="netIGST" readonly="true"/>
+        <field name="netSGST" readonly="true"/>
+        <field name="netCGST" readonly="true"/>      
+        <field name="grossAmount" readonly="true"/>
+        </panel>
+
+	</form>
+
+    
+</object-views>

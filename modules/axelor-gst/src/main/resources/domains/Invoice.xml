@@ -10,7 +10,7 @@
 
 	<entity name="Invoice" sequential="true" cachable="true" >
 
-		<string name="status" readonly="true" />
+		<string name="status" readonly="true" selection="invoice.status.selection"/>
 		<many-to-one name="company" ref="com.axelor.gst.db.Company" required="true"/>
 		<string name="reference" readonly="true"/>
 		<datetime name="dateTime"/>
@@ -19,12 +19,12 @@
 		<many-to-one name="partyContact" ref="com.axelor.gst.db.Contact" />
 		<many-to-one name="invoiceAddress" ref="com.axelor.gst.db.Address" required="true"/>
 		<many-to-one name="shippingAddress" ref="com.axelor.gst.db.Address" />
-		<boolean name="useInvoiceAdress" default="true"/>
-	    <decimal name="netAmount" readonly="true"/>
-	    <decimal name="netIGST" readonly="true"/>
-	    <decimal name="netCGST" readonly="true"/>
-	    <decimal name="netSGST" readonly="true"/>
-	    <decimal name="grossAmount" readonly="true"/>
+		<boolean name="useInvoiceAddress" default="true"/>
+	    <decimal name="netAmount" />
+	    <decimal name="netIGST" />
+	    <decimal name="netCGST" />
+	    <decimal name="netSGST" />
+	    <decimal name="grossAmount" />
 	    <one-to-many name="invoiceItemsList" ref="com.axelor.gst.db.InvoiceLine" mappedBy="invoice"/>
 	</entity>
 </domain-models>

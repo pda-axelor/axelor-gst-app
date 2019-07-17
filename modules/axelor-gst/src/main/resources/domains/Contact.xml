@@ -11,7 +11,7 @@
 	<entity name="Contact" sequential="true" cachable="true" >
 
 		<string name="name" required="true"/>
-		<string name="type" required="true"/>
+		<integer name="type" required="true" selection="contact.type.selection"/>
 		<string name="primaryEmail"/>
 		<string name="secondaryEmail" />
 		<string name="primaryPhone" />
