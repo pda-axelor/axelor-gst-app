@@ -17,7 +17,7 @@
 	<form name="gst-city-form" title="City" model="com.axelor.gst.db.City"
 		css="panel-red">
 
-		<panel title="Overview">
+		<panel title="City">
 			<field name="name" required="true" />
 			<field name="state" />
 			<field name="country" required="true" />

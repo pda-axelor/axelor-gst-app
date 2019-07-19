@@ -2,8 +2,11 @@ package com.axelor.gst.controllers;
 
 import java.math.BigDecimal;
 
+import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
+import com.axelor.gst.db.repo.InvoiceLineRepository;
 import com.axelor.gst.interfaces.InvoiceLineService;
+import com.axelor.inject.Beans;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
@@ -14,16 +17,18 @@ public class InvoiceLineController {
 	InvoiceLineService service;
 
 	public void setProduct(ActionRequest request, ActionResponse response) {
+
+
 		InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
+//		System.out.println(invoice.getInvoiceAddress().getState());
+
+		BigDecimal amount = service.multiply(iLine.getQty(), iLine.getPrice());
+
 		response.setValue("hsbn", iLine.getProduct().getHsbn());
 		response.setValue("item", "[" + iLine.getProduct().getCode() + "] " + iLine.getProduct().getName());
 		response.setValue("gstRate", iLine.getProduct().getGstRate());
 		response.setValue("price", iLine.getProduct().getCostPrice());
-	}
 
-	public void calculateGST(ActionRequest request, ActionResponse response) {
-		InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
-		BigDecimal amount = service.multiply(iLine.getQty(), iLine.getPrice());
 		response.setValue("netAmount", amount);
 		response.setValue("igst", service.multiply(amount, iLine.getGstRate()));
 		response.setValue("grossAmount", service.add(amount, iLine.getIgst()));
@@ -31,4 +36,5 @@ public class InvoiceLineController {
 		response.setValue("cgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
 		response.setValue("grossAmount", service.add(amount, service.add(iLine.getSgst(), iLine.getCgst())));
 	}
+
 }

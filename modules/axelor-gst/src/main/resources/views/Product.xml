@@ -26,7 +26,7 @@
         <strong>Cost Price : {{costPrice}}</strong>
         <strong>GST Rate : {{gstRate}}</strong>
       </div>
-      
+    
       
   ]]></template>
 	</cards>
@@ -45,13 +45,17 @@
 
 	<form name="product-form" title="Product" model="com.axelor.gst.db.Product"
 		css="panel-red">
+		<toolbar>
+		     <button name="btnPrintProduct" icon="fa-print" title="Generate PDF"
+				onClick="action-report-product" showIf="id" />
+		</toolbar>
 
-		<panel title="Overview">
+		<panel title="Product Details">
 
 			<field name="name" required="true" />
 			<field name="code" required="true" />
 			<field name="hsbn" />
-			<field name="productCategory" />
+			<field name="productCategory" onChange="com.axelor.gst.controllers.ProductController:setGST"/>
 			<field name="salePrice" />
 			<field name="costPrice" />
 			<field name="image" widget="image" />
@@ -59,6 +63,11 @@
 		</panel>
 
 	</form>
-
+	
+	
+	<action-report name="action-report-product" design="product.rptdesign"
+		output="product" format="pdf">
+		<param name="productId" expr="eval: id" />
+	</action-report>
 
 </object-views>

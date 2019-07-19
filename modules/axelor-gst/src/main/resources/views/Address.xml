@@ -18,7 +18,7 @@
 	<form name="address-form" title="Address"
 		model="com.axelor.gst.db.Address" css="panel-red">
 
-		<panel title="Overview">
+		<panel title="Address">
 			<field name="type" />
 		<field name="lineOne"/>
         <field name="lineTwo"/>

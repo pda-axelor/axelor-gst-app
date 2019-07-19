@@ -16,7 +16,7 @@
 	<form name="gst-state-form" title="State" model="com.axelor.gst.db.State"
 		css="panel-red">
 
-		<panel title="Overview">
+		<panel title="State">
 			<field name="name" required="true" />
 			<field name="country" required="true" />
 		</panel>

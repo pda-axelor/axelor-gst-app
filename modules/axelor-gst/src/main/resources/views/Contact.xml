@@ -23,7 +23,7 @@
 	<form name="contact-form" title="Contact" model="com.axelor.gst.db.Contact"
 		css="panel-red">
 
-		<panel title="Overview">
+		<panel title="Contact Details">
 			<field name="name" required="true" />
 			<field name="type" required="true" />
 			<field name="primaryEmail" />

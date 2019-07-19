@@ -28,10 +28,7 @@
 
 	<grid name="invoice-grid" title="Invoice" model="com.axelor.gst.db.Invoice">
 
-		<field name="status" />
-		<field name="isValidated" title="Validated" />
-		<field name="isPaid" title="Paid" />
-		<field name="isCancelled" title="Cancelled" />
+		<field name="status" />		
 		<field name="company" />
 		<field name="reference" />
 		<field name="dateTime" />
@@ -48,12 +45,11 @@
 		css="panel-red" onNew="action-gst-invoice-record-on-new">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
-				onClick="action-report-invoice" showIf="id"/>
+				onClick="action-report-invoice" showIf="id" />
 
 		</toolbar>
-		<panel title="Overview">
+		<panel title="Invoice Details">
 			<field name="status" widget="NavSelect" colspan="6" readonly="true" />
-			<field name="company" required="true" />
 			<field name="reference" readonly="true" />
 			<field name="dateTime" />
 			<field name="netAmount" title="Net Amount" readonly="true" />
@@ -61,6 +57,16 @@
 			<field name="netCGST" title="Net CGST" readonly="true" />
 			<field name="netSGST" title="Net SGST" readonly="true" />
 			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
+		</panel>
+
+		<panel title="Company Details" css="panel-violet" canEdit="true">
+			<field name="company" required="true" canEdit="false">
+				<editor x-viewer="true">
+					<field name="logo" widget="image" readonly="true"/>
+					<field name="name" 	readonly="true"/>
+					<field name="address"  readonly="true"/>
+				</editor>
+			</field>
 		</panel>
 
 		<panel sidebar="true" title="Status Controller">

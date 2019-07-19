@@ -16,7 +16,7 @@
 		<decimal name="salePrice" />
 		<decimal name="costPrice" />
 		<many-to-one name="image" ref="com.axelor.meta.db.MetaFile"/>
-		<decimal name="gstRate" />
+		<decimal name="gstRate" title="GST Rate"/>
 
 	</entity>
 </domain-models>

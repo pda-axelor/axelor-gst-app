@@ -12,7 +12,7 @@
 		<string name="name" required="true" />
 		<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile" />
 		<one-to-many name="contactList" ref="com.axelor.gst.db.Contact" />
-		<string name="gstIn" min="15" max="15" />
+		<string name="gstIn" min="15" max="15" title="GSTIN"/>
 		<one-to-many name="bankAccountList" ref="com.axelor.gst.db.BankAccount" />
 		<many-to-one name="address" ref="com.axelor.gst.db.Address" />
 		

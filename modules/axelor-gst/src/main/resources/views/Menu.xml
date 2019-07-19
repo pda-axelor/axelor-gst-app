@@ -110,6 +110,7 @@
 	<action-view name="action.gst.invoice.draft.view" title="Draft Invoices"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
 		<domain>status='1'</domain>
 	</action-view>
 
@@ -120,6 +121,7 @@
 	<action-view name="action.gst.invoice.validated.view"
 		title="Validated Invoices" model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
 		<domain>status='2'</domain>
 	</action-view>
 
@@ -129,6 +131,7 @@
 	<action-view name="action.gst.invoice.paid.view" title="Paid Invoices"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
 		<domain>status='3'</domain>
 		</action-view>
 
@@ -139,6 +142,7 @@
 	<action-view name="action.gst.invoice.cancelled.view"
 		title="Cancelled Invoices" model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
 		<domain>status='4'</domain>
 	</action-view>
 

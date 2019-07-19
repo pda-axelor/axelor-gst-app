@@ -20,7 +20,7 @@
 	<form name="bank-form" title="Bank Account" model="com.axelor.gst.db.BankAccount"
 		css="panel-red">
 
-		<panel title="Overview">
+		<panel title="Bank Account Details">
 			<field name="bank" required="true" />
 			<field name="accountNumber" required="true" />
 			<field name="ifsc" title="IFSC" required="true" />

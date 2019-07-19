@@ -4,8 +4,9 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
 	<dashboard name="gst.root.dashboard" title="GST Dashboard">
-		<dashlet action="chart:invoice-chart-bar" css="panel-blue" />
-		<dashlet action="chart:customer-chart-pie" css="panel-red" />
+		<dashlet action="chart:invoice-chart-bar" css="panel-blue" colSpan="4"/>
+		<dashlet action="chart:customer-chart-pie" css="panel-red" colSpan="4"/>
+		<dashlet action="chart:invoice-category-product-chart-bar" css="panel-red" colSpan="4"/>
 		<dashlet action="chart:invoice-status-chart-bar" css="panel-violet" />
 		<dashlet action="chart:invoice-status-count-chart-line" css="panel-black" />
 		<dashlet action="custom:invoice-custom-table" css="panel-green"

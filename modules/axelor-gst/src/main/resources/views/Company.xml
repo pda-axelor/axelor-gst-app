@@ -17,7 +17,7 @@
 	<form name="company-form" title="Company" model="com.axelor.gst.db.Company"
 		css="panel-red">
 
-		<panel title="Overview">
+		<panel title="Company Details">
 			<field name="name" required="true" />
 			<field name="logo" widget="image" />
 			<field name="contactList" title="Contact">

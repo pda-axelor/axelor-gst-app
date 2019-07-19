@@ -5,17 +5,14 @@
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 
-
-
-
 	<chart name="invoice-chart-bar" title="Unpaid Invoices per Customer">
-		<search-fields>
+	<!--  	<search-fields>
 			<field type="datetime" name="fromDateTime" title="From Date" />
 			<field type="datetime" name="toDateTime" title="To Date" />
-		</search-fields>
+		</search-fields>    -->
 		<dataset type="sql"> 
   <![CDATA[
- select gst_party.name as customer,Count(gst_invoice.id) as invoices from gst_invoice,gst_party where (gst_invoice.status != '3' AND gst_party.is_customer ='t' AND gst_invoice.date_time > :fromDateTime AND gst_invoice.date_time < :toDateTime) group by gst_party.name;
+ select gst_party.name as customer,Count(gst_invoice.id) as invoices from gst_invoice,gst_party where (gst_invoice.status != '3' AND gst_party.is_customer ='t' ) group by gst_party.name;
   ]]>
   </dataset>
 		<category key="customer" type="text" title="Customer" />
@@ -34,10 +31,10 @@
 		<series key="customers" type="pie" title="Customers" />
 	</chart>
 
+
 	<custom name="invoice-custom-table" title="Invoices Older than One Month"
 		css="report-table">
 		<field name="status" />
-		<field name="isValidated" title="Confirmed" />
 		<field name="company" />
 		<field name="reference" />
 		<field name="dateTime" />
@@ -49,21 +46,22 @@
 		<field name="grossAmount" />
 		<dataset type="sql">
   <![CDATA[
-    select status as status, is_validated as isValidated, is_paid as is_Paid, is_cancelled as is_Cancelled, company as company, reference as reference, date_time as datetime, gross_amount as grossAmount 
+    select status as status, company as company, reference as reference, date_time as datetime, gross_amount as grossAmount 
     from gst_invoice 
-    where date_time <= current_timestamp - interval'30 days' AND is_validated='t' AND is_paid='f';
+    where date_time <= current_timestamp - interval'30 days' AND status=2;
   ]]>
   </dataset>
 		<template>
   <![CDATA[
- <report-table data='data' columns='status,isValidated,isPaid,isCancelled,company,reference,datetime,grossAmount'></report-table>  
+ <report-table data='data' columns='status,company,reference,datetime,grossAmount'></report-table>  
   </div>
   ]]>
   </template>
 	</custom>
-	
+
+
 	<chart name="invoice-status-chart-bar" title="Amount per Status">
-		
+
 		<dataset type="sql"> 
   <![CDATA[
  select status as status,sum(gross_amount) as amount from gst_invoice group by status;
@@ -72,9 +70,10 @@
 		<category key="status" type="text" title="Status" />
 		<series key="amount" type="bar" title="Total Gross Amount" />
 	</chart>
-	
+
+
 	<chart name="invoice-status-count-chart-line" title="Total Invoices per Status">
-		
+
 		<dataset type="sql"> 
   <![CDATA[
  select status as status,count(id) invoice from gst_invoice group by status;
@@ -83,7 +82,23 @@
 		<category key="status" type="text" title="Status" />
 		<series key="invoice" type="line" title="Invoice Count" />
 	</chart>
-	
+
+
+
+	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product">
+	<!--  	<search-fields>
+			<field type="datetime" name="fromDateTime" title="From Date" />
+			<field type="datetime" name="toDateTime" title="To Date" />
+		</search-fields> -->
+		<dataset type="sql"> 
+  <![CDATA[
+ select gst_product_category.name as category,gst_product.name as product,count(gst_invoice.id) as invoices from gst_invoice,gst_product,gst_product_category where gst_invoice.status=3 group by gst_product_category.name,gst_product.name; 
+  ]]>
+  </dataset>
+		<category key="product" type="text" title="Product" />
+
+		<series key="invoices" type="bar" title="Paid Invoices" />
+	</chart>
 
 
 </object-views>

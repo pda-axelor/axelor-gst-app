@@ -17,7 +17,7 @@
 	<form name="sequence-form" title="Sequence" model="com.axelor.gst.db.Sequence"
 		css="panel-red" onNew="com.axelor.gst.controllers.SequenceController:calculateSequence"> 
 
-		<panel title="Overview">
+		<panel title="Sequence">
 			<field name="prefix" />
 			<field name="suffix" />
 			<field name="padding" />

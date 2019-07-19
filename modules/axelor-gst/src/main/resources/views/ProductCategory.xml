@@ -18,7 +18,7 @@
 	<form name="category-form" title="Product Categories"
 		model="com.axelor.gst.db.ProductCategory" css="panel-red">
 
-		<panel title="Overview">
+		<panel title="Product Category">
 			<field name="name" required="true" />
 			<field name="code" required="true" />
 			<field name="gstRate" />

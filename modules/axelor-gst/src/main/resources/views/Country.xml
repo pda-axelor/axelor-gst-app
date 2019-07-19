@@ -12,7 +12,7 @@
 	<form name="gst-Country-form" title="Country" model="com.axelor.gst.db.Country"
 		css="panel-red">
 
-		<panel title="Overview">
+		<panel title="Country">
 			<field name="name" required="true" />
 		</panel>
 
