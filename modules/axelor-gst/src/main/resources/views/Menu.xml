@@ -6,10 +6,9 @@
 
 
 
-	<menuitem name="gst-dashboard" title="Dashboard" order="1" />
 
 
-	<menuitem name="gst-root-party" title="Party" order="2" />
+	<menuitem name="gst-root-party" title="Party" order="2" icon="fa-user-o"/>
 
 	<menuitem name="gst-root-party-party" parent="gst-root-party"
 		title="Party" action="action.gst.party.view" order="1" />
@@ -72,7 +71,7 @@
 	</action-view>
 
 
-	<menuitem name="gst-root-product" title="Product" order="3" />
+	<menuitem name="gst-root-product" title="Product" order="3" icon="fa-product-hunt" icon-background="yellow"/>
 
 	<menuitem name="gst-root-product-product" parent="gst-root-product"
 		title="Product" action="action.gst.product.view" order="1" />
@@ -95,7 +94,7 @@
 	</action-view>
 
 
-	<menuitem name="gst-root-invoice" title="Invoice" order="4" />
+	<menuitem name="gst-root-invoice" title="Invoice" order="4" icon="fa-sticky-note" icon-background="violet"/>
 
 	<menuitem name="gst-root-invoice-create" parent="gst-root-invoice"
 		title="Create Invoice" action="action.gst.invoice.create.view" order="1" />
@@ -111,7 +110,7 @@
 	<action-view name="action.gst.invoice.draft.view" title="Draft Invoices"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
-		<domain>status=1</domain>
+		<domain>status='1'</domain>
 	</action-view>
 
 	<menuitem name="gst-root-invoice-validated" parent="gst-root-invoice"
@@ -121,7 +120,7 @@
 	<action-view name="action.gst.invoice.validated.view"
 		title="Validated Invoices" model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
-		<domain>status=2</domain>
+		<domain>status='2'</domain>
 	</action-view>
 
 	<menuitem name="gst-root-invoice-paid" parent="gst-root-invoice"
@@ -130,7 +129,7 @@
 	<action-view name="action.gst.invoice.paid.view" title="Paid Invoices"
 		model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
-		<domain>status=3</domain>
+		<domain>status='3'</domain>
 		</action-view>
 
 	<menuitem name="gst-root-invoice-cancelled" parent="gst-root-invoice"
@@ -140,7 +139,7 @@
 	<action-view name="action.gst.invoice.cancelled.view"
 		title="Cancelled Invoices" model="com.axelor.gst.db.Invoice">
 		<view type="grid" name="invoice-grid" />
-		<domain>status=4</domain>
+		<domain>status='4'</domain>
 	</action-view>
 
 

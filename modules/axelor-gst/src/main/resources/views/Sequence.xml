@@ -15,13 +15,14 @@
 	</grid>
 
 	<form name="sequence-form" title="Sequence" model="com.axelor.gst.db.Sequence"
-		css="panel-red">
+		css="panel-red" onNew="com.axelor.gst.controllers.SequenceController:calculateSequence"> 
 
 		<panel title="Overview">
 			<field name="prefix" />
 			<field name="suffix" />
 			<field name="padding" />
 			<field name="nextNumber" />
+			<field name="model" />
 		</panel>
 
 	</form>

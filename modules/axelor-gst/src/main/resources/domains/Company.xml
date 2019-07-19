@@ -15,5 +15,12 @@
 		<string name="gstIn" min="15" max="15" />
 		<one-to-many name="bankAccountList" ref="com.axelor.gst.db.BankAccount" />
 		<many-to-one name="address" ref="com.axelor.gst.db.Address" />
+		
+		<extra-code>
+		<![CDATA[
+		public static final int test1 =1 ;
+		
+		]]>
+		</extra-code>
 	</entity>
 </domain-models>

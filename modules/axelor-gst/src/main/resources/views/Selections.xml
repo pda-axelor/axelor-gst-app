@@ -25,8 +25,8 @@
 
 	<selection name="contact.type.selection">
 
-		<option value="1">Company</option>
-		<option value="2">Individual</option>
+		<option value="1">Primary</option>
+		<option value="2">Secondary	</option>
 		<option value="3">Others</option>
 
 	</selection>

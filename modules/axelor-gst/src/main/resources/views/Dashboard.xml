@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
+
+	<dashboard name="gst.root.dashboard" title="GST Dashboard">
+		<dashlet action="chart:invoice-chart-bar" css="panel-blue" />
+		<dashlet action="chart:customer-chart-pie" css="panel-red" />
+		<dashlet action="chart:invoice-status-chart-bar" css="panel-violet" />
+		<dashlet action="chart:invoice-status-count-chart-line" css="panel-black" />
+		<dashlet action="custom:invoice-custom-table" css="panel-green"
+			colSpan="12" />
+	</dashboard>
+
+
+	<menuitem name="gst-menu-dashboard" title="Dashboard" icon="fa-dashboard"
+		icon-background="blue" action="action.gst.dashboard" order="1" tag="Overview"
+		tag-style="info" />
+
+	<action-view name="action.gst.dashboard" title="Dashboard">
+		<view type="dashboard" name="gst.root.dashboard" />
+	</action-view>
+
+</object-views>

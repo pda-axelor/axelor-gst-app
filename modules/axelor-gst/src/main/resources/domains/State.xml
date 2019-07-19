@@ -10,7 +10,7 @@
 	<entity name="State" sequential="true" cachable="true">
 
 		<string name="name" required="true" />
-		<string name="country" required="true" />
+		<many-to-one name="country" ref="com.axelor.gst.db.Country" required="true" />
 
 	</entity>
 </domain-models>

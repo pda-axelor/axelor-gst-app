@@ -29,7 +29,9 @@
 	<grid name="invoice-grid" title="Invoice" model="com.axelor.gst.db.Invoice">
 
 		<field name="status" />
-		<field name="isConfirmed" title="Confirmed" />
+		<field name="isValidated" title="Validated" />
+		<field name="isPaid" title="Paid" />
+		<field name="isCancelled" title="Cancelled" />
 		<field name="company" />
 		<field name="reference" />
 		<field name="dateTime" />
@@ -44,11 +46,13 @@
 
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
 		css="panel-red" onNew="action-gst-invoice-record-on-new">
+		<toolbar>
+			<button name="btnPrint" icon="fa-print" title="Generate PDF"
+				onClick="action-report-invoice" showIf="id"/>
 
+		</toolbar>
 		<panel title="Overview">
 			<field name="status" widget="NavSelect" colspan="6" readonly="true" />
-			<field name="isConfirmed" title="Confirmed" widget="boolean-switch"
-				onChange="com.axelor.gst.controllers.InvoiceController:onConfirm" />
 			<field name="company" required="true" />
 			<field name="reference" readonly="true" />
 			<field name="dateTime" />
@@ -58,22 +62,34 @@
 			<field name="netSGST" title="Net SGST" readonly="true" />
 			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
 		</panel>
-		
-		<panel-tabs>
-			<panel title="Party Details" css="panel-blue">
-				<field name="party" required="true"
-					onChange="com.axelor.gst.controllers.InvoiceController:setParty" />
-				<field name="partyContact" />
-				<field name="invoiceAddress" required="true" />
-				<field name="shippingAddress" />
-				<field name="useInvoiceAddress"
-					onChange="com.axelor.gst.controllers.InvoiceController:setShippingAddress" />
-			</panel>
-			<panel title="Invoice Items" css="panel-green">
-				<field name="invoiceItemsList" colspan="12"
-					onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST" />
-			</panel>
-		</panel-tabs>
+
+		<panel sidebar="true" title="Status Controller">
+			<button-group>
+				<button name="statusBtn" title="Validated"
+					onClick="com.axelor.gst.controllers.InvoiceController:changeStatus"
+					icon="fa-check-square-o" />
+
+				<button name="cancelBtn" title="Cancel Invoice"
+					onClick="com.axelor.gst.controllers.InvoiceController:onCancel"
+					prompt="Are you sure you want to cancel the invoice?" icon="fa-times" />
+			</button-group>
+		</panel>
+
+		<panel title="Party Details" css="panel-blue" sidebar="true">
+			<field name="party" required="true"
+				onChange="com.axelor.gst.controllers.InvoiceController:setParty" />
+			<field name="partyContact" />
+			<field name="invoiceAddress" required="true" />
+			<field name="shippingAddress" />
+			<field name="useInvoiceAddress"
+				onChange="com.axelor.gst.controllers.InvoiceController:setShippingAddress" />
+		</panel>
+
+		<panel title="Invoice Items" css="panel-green">
+			<field name="invoiceItemsList" colSpan="12"
+				onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST" />
+		</panel>
+
 	</form>
 
 	<action-record name="action-gst-invoice-record-on-new"
@@ -81,5 +97,11 @@
 		<field name="status" expr="1" />
 		<field name="dateTime" expr="eval:__datetime__" />
 	</action-record>
+
+	<action-report name="action-report-invoice" design="invoice.rptdesign"
+		output="invoice" format="pdf">
+		<param name="invoiceId" expr="eval: id" />
+	</action-report>
+
 
 </object-views>

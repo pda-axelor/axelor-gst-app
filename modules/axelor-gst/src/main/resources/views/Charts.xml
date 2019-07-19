@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
+
+
+
+
+
+	<chart name="invoice-chart-bar" title="Unpaid Invoices per Customer">
+		<search-fields>
+			<field type="datetime" name="fromDateTime" title="From Date" />
+			<field type="datetime" name="toDateTime" title="To Date" />
+		</search-fields>
+		<dataset type="sql"> 
+  <![CDATA[
+ select gst_party.name as customer,Count(gst_invoice.id) as invoices from gst_invoice,gst_party where (gst_invoice.status != '3' AND gst_party.is_customer ='t' AND gst_invoice.date_time > :fromDateTime AND gst_invoice.date_time < :toDateTime) group by gst_party.name;
+  ]]>
+  </dataset>
+		<category key="customer" type="text" title="Customer" />
+		<series key="invoices" type="bar" title="Unpaid Invoices" />
+	</chart>
+
+
+	<chart name="customer-chart-pie" title="Customer per State">
+
+		<dataset type="sql"> 
+  <![CDATA[
+ select gst_state.name as state,Count(gst_party.id) as customers from gst_party,gst_state where gst_party.is_customer='t' group by gst_state.name;
+  ]]>
+  </dataset>
+		<category key="state" type="text" title="State" />
+		<series key="customers" type="pie" title="Customers" />
+	</chart>
+
+	<custom name="invoice-custom-table" title="Invoices Older than One Month"
+		css="report-table">
+		<field name="status" />
+		<field name="isValidated" title="Confirmed" />
+		<field name="company" />
+		<field name="reference" />
+		<field name="dateTime" />
+		<field name="useInvoiceAddress" />
+		<field name="netAmount" />
+		<field name="netIGST" />
+		<field name="netCGST" />
+		<field name="netSGST" />
+		<field name="grossAmount" />
+		<dataset type="sql">
+  <![CDATA[
+    select status as status, is_validated as isValidated, is_paid as is_Paid, is_cancelled as is_Cancelled, company as company, reference as reference, date_time as datetime, gross_amount as grossAmount 
+    from gst_invoice 
+    where date_time <= current_timestamp - interval'30 days' AND is_validated='t' AND is_paid='f';
+  ]]>
+  </dataset>
+		<template>
+  <![CDATA[
+ <report-table data='data' columns='status,isValidated,isPaid,isCancelled,company,reference,datetime,grossAmount'></report-table>  
+  </div>
+  ]]>
+  </template>
+	</custom>
+	
+	<chart name="invoice-status-chart-bar" title="Amount per Status">
+		
+		<dataset type="sql"> 
+  <![CDATA[
+ select status as status,sum(gross_amount) as amount from gst_invoice group by status;
+  ]]>
+  </dataset>
+		<category key="status" type="text" title="Status" />
+		<series key="amount" type="bar" title="Total Gross Amount" />
+	</chart>
+	
+	<chart name="invoice-status-count-chart-line" title="Total Invoices per Status">
+		
+		<dataset type="sql"> 
+  <![CDATA[
+ select status as status,count(id) invoice from gst_invoice group by status;
+  ]]>
+  </dataset>
+		<category key="status" type="text" title="Status" />
+		<series key="invoice" type="line" title="Invoice Count" />
+	</chart>
+	
+
+
+</object-views>
