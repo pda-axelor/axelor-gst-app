@@ -19,8 +19,8 @@
 		<field name="grossAmount" />
 		<template><![CDATA[
   <h4>Invoice</h4>
-  <strong>Company : {{company}}</strong>
-  <div class="card-body">Reference : {{reference}} <br> Date : {{dateTime}}</div>
+  <strong>Reference : {{reference}}</strong>
+  <div class="card-body">Creation Date : {{dateTime}} <br/> GrossAmount : {{grossAmount}}</div>
   <div class="card-footer">Gross Amount : {{grossAmount}}</div>
   ]]></template>
 	</kanban>
@@ -28,7 +28,7 @@
 
 	<grid name="invoice-grid" title="Invoice" model="com.axelor.gst.db.Invoice">
 
-		<field name="status" />		
+		<field name="status" />
 		<field name="company" />
 		<field name="reference" />
 		<field name="dateTime" />
@@ -42,14 +42,17 @@
 	</grid>
 
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
-		css="panel-red" onNew="action-gst-invoice-record-on-new">
+		css="panel-red" onNew="action-gst-invoice-record-on-new" readonlyIf="status==4">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
 				onClick="action-report-invoice" showIf="id" />
 
 		</toolbar>
-		<panel title="Invoice Details">
+		<panel showFrame="false">
 			<field name="status" widget="NavSelect" colspan="6" readonly="true" />
+		</panel>
+
+		<panel title="Invoice Details">
 			<field name="reference" readonly="true" />
 			<field name="dateTime" />
 			<field name="netAmount" title="Net Amount" readonly="true" />
@@ -57,16 +60,6 @@
 			<field name="netCGST" title="Net CGST" readonly="true" />
 			<field name="netSGST" title="Net SGST" readonly="true" />
 			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
-		</panel>
-
-		<panel title="Company Details" css="panel-violet" canEdit="true">
-			<field name="company" required="true" canEdit="false">
-				<editor x-viewer="true">
-					<field name="logo" widget="image" readonly="true"/>
-					<field name="name" 	readonly="true"/>
-					<field name="address"  readonly="true"/>
-				</editor>
-			</field>
 		</panel>
 
 		<panel sidebar="true" title="Status Controller">
@@ -81,21 +74,37 @@
 			</button-group>
 		</panel>
 
-		<panel title="Party Details" css="panel-blue" sidebar="true">
-			<field name="party" required="true"
-				onChange="com.axelor.gst.controllers.InvoiceController:setParty" />
-			<field name="partyContact" />
-			<field name="invoiceAddress" required="true" />
-			<field name="shippingAddress" />
-			<field name="useInvoiceAddress"
-				onChange="com.axelor.gst.controllers.InvoiceController:setShippingAddress" />
-		</panel>
+		<panel-tabs>
 
-		<panel title="Invoice Items" css="panel-green">
-			<field name="invoiceItemsList" colSpan="12"
-				onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST" />
-		</panel>
 
+
+
+			<panel title="Party Details" css="panel-blue">
+				<field name="party" required="true"
+					onChange="com.axelor.gst.controllers.InvoiceController:setParty" />
+				<field name="partyContact" />
+				<field name="invoiceAddress" required="true" />
+				<field name="shippingAddress" />
+				<field name="useInvoiceAddress"
+					onChange="com.axelor.gst.controllers.InvoiceController:setShippingAddress" />
+			</panel>
+
+			<panel title="Invoice Items" css="panel-green">
+				<field name="invoiceItemsList" colSpan="12"
+					onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST" />
+			</panel>
+		</panel-tabs>
+
+		<panel title="Company Details" sidebar="true" css="panel-violet"
+			canEdit="true">
+			<field name="company" required="true" canEdit="false">
+				<editor x-viewer="true">
+					<field name="logo" widget="image" readonly="true" />
+					<field name="name" readonly="true" />
+					<field name="address" readonly="true" />
+				</editor>
+			</field>
+		</panel>
 	</form>
 
 	<action-record name="action-gst-invoice-record-on-new"

@@ -18,9 +18,8 @@ public class InvoiceLineController {
 
 	public void setProduct(ActionRequest request, ActionResponse response) {
 
-
 		InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
-//		System.out.println(invoice.getInvoiceAddress().getState());
+		Invoice invoice = request.getContext().getParent().asType(Invoice.class);
 
 		BigDecimal amount = service.multiply(iLine.getQty(), iLine.getPrice());
 
@@ -30,11 +29,20 @@ public class InvoiceLineController {
 		response.setValue("price", iLine.getProduct().getCostPrice());
 
 		response.setValue("netAmount", amount);
-		response.setValue("igst", service.multiply(amount, iLine.getGstRate()));
-		response.setValue("grossAmount", service.add(amount, iLine.getIgst()));
-		response.setValue("sgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
-		response.setValue("cgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
-		response.setValue("grossAmount", service.add(amount, service.add(iLine.getSgst(), iLine.getCgst())));
+
+		if (invoice.getInvoiceAddress().getState().getId() == invoice.getCompany().getAddress().getState().getId()) {
+
+			response.setValue("sgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
+			response.setValue("cgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
+			response.setValue("grossAmount", service.add(amount, service.add(iLine.getSgst(), iLine.getCgst())));
+
+		}
+
+		else {
+			response.setValue("igst", service.multiply(amount, iLine.getGstRate()));
+			response.setValue("grossAmount", service.add(amount, iLine.getIgst()));
+		}
+
 	}
 
 }

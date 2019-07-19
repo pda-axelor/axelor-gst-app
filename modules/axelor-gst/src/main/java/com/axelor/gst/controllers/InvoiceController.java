@@ -1,11 +1,11 @@
 package com.axelor.gst.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
-import com.ibm.icu.math.BigDecimal;
 
 public class InvoiceController {
 
@@ -51,12 +51,12 @@ public class InvoiceController {
 		response.setValue("status", 4);
 		response.setAttr("cancelBtn", "readonly", "true");
 		response.setAttr("statusBtn", "readonly", "true");
-		response.setAttr("invoice-form", "canEdit", "false");
 	}
 
 	public void calculateNetGST(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
+	//list.stream().map(l->l.getNetAmount()).reduce(BigDecimal.ZERO,BigDecimal::add);
 		long netAmount = list.stream().mapToLong(l -> l.getNetAmount().longValue()).sum();
 		long netIGST = list.stream().mapToLong(l -> l.getIgst().longValue()).sum();
 		long netCGST = list.stream().mapToLong(l -> l.getCgst().longValue()).sum();
@@ -69,5 +69,5 @@ public class InvoiceController {
 		response.setValue("netSGST", BigDecimal.valueOf(netSGST));
 		response.setValue("grossAmount", BigDecimal.valueOf(netGross));
 	}
-
+	
 }
