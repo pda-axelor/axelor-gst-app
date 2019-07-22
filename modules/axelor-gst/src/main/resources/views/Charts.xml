@@ -46,7 +46,7 @@
 		<field name="grossAmount" />
 		<dataset type="sql">
   <![CDATA[
-    select status as status, company as company, reference as reference, date_time as datetime, gross_amount as grossAmount 
+    select status as status, company as company, reference as reference, date_time as datetime, gross_amount as grossAmount
     from gst_invoice 
     where date_time <= current_timestamp - interval'30 days' AND status=2;
   ]]>
@@ -86,13 +86,13 @@
 
 
 	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product">
-	<!--  	<search-fields>
+		<search-fields>
 			<field type="datetime" name="fromDateTime" title="From Date" />
 			<field type="datetime" name="toDateTime" title="To Date" />
-		</search-fields> -->
+		</search-fields> 
 		<dataset type="sql"> 
   <![CDATA[
- select gst_product_category.name as category,gst_product.name as product,count(gst_invoice.id) as invoices from gst_invoice,gst_product,gst_product_category where gst_invoice.status=3 group by gst_product_category.name,gst_product.name; 
+ select gst_product_category.name as category,gst_product.name as product,count(gst_invoice.id) as invoices from gst_invoice,gst_product,gst_product_category where gst_invoice.status=3 AND :fromDateTime <= gst_invoice.date_time AND :toDateTime >=gst_invoice.date_time group by gst_product_category.name,gst_product.name; 
   ]]>
   </dataset>
 		<category key="product" type="text" title="Product" />

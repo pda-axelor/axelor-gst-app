@@ -48,7 +48,7 @@
 		css="panel-red">
 		<toolbar>
 		     <button name="btnPrintProduct" icon="fa-print" title="Generate PDF"
-				onClick="action-report-product" showIf="id" />
+				onClick="action-method-product-set-attachment-path,action-report-product" showIf="id" />
 		</toolbar>
 
 		<panel title="Product Details">
@@ -65,10 +65,14 @@
 
 	</form>
 	
+	<action-method name="action-method-product-set-attachment-path">
+		<call class="com.axelor.gst.controllers.ProductController" method="setAttachmentPath"/>
+	</action-method>
 	
 	<action-report name="action-report-product" design="product.rptdesign"
 		output="product" format="pdf">
 		<param name="productId" expr="eval: id" />
+		<param name="AttachmentPath" expr="eval: AttachmentPath"/>
 	</action-report>
 
 </object-views>

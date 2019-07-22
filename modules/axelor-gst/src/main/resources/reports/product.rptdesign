@@ -35,6 +35,17 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="AttachmentPath" id="28">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Report" id="5">
@@ -483,7 +494,7 @@ from gst_product,meta_file where gst_product.id=? ;]]></xml-property>
                 </structure>
             </list-property>
             <property name="source">file</property>
-            <expression name="uri" type="javascript">"home/axelor/.axelor/attachments/"+row["file_path"]</expression>
+            <expression name="uri" type="javascript">params["AttachmentPath"].value+'/'+row["file_path"]</expression>
         </image>
     </body>
 </report>

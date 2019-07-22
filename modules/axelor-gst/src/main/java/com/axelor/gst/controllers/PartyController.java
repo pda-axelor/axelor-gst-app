@@ -1,5 +1,6 @@
 package com.axelor.gst.controllers;
 
+import com.axelor.db.Model;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
 import com.axelor.gst.interfaces.SequenceService;
@@ -14,7 +15,10 @@ public class PartyController {
 	SequenceService seqService;
 
 	public void setReference(ActionRequest request, ActionResponse response) {
-		Sequence seq = Beans.get(SequenceRepository.class).find((long) 1);
+		Class<Model> dfg = (Class<Model>) request.getContext().getContextClass();
+		System.out.print(dfg.getSimpleName());
+		System.out.println("------------"+dfg.getSimpleName()+"--------");
+		Sequence seq = Beans.get(SequenceRepository.class).all().filter("self.model.name=?1",dfg.getSimpleName()).fetchOne();
 		response.setValue("reference", seq.getNextNumber());
 		seqService.generateNextSequence(seq);
 	}
