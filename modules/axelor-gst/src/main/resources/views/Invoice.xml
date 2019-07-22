@@ -91,7 +91,7 @@
 
 			<panel title="Invoice Items" css="panel-green">
 				<field name="invoiceItemsList" colSpan="12"
-					onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST" />
+					onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST,save" />
 			</panel>
 		</panel-tabs>
 

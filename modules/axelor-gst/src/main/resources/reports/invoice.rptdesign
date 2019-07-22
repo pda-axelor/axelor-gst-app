@@ -89,6 +89,36 @@
                     <text-property name="displayName">logo</text-property>
                     <text-property name="heading">logo</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">gross_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">gross_amount</text-property>
+                    <text-property name="heading">gross_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">net_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">net_amount</text-property>
+                    <text-property name="heading">net_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netcgst</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netcgst</text-property>
+                    <text-property name="heading">netcgst</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netigst</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netigst</text-property>
+                    <text-property name="heading">netigst</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netsgst</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netsgst</text-property>
+                    <text-property name="heading">netsgst</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -137,6 +167,31 @@
                     <structure>
                         <property name="position">7</property>
                         <property name="name">logo</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">gross_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">net_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">netcgst</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">netigst</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">netsgst</property>
                         <property name="dataType">decimal</property>
                     </structure>
                 </list-property>
@@ -192,8 +247,43 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">gross_amount</property>
+                    <property name="nativeName">gross_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">net_amount</property>
+                    <property name="nativeName">net_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">netcgst</property>
+                    <property name="nativeName">netcgst</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">netigst</property>
+                    <property name="nativeName">netigst</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">netsgst</property>
+                    <property name="nativeName">netsgst</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[select gst_invoice.date_time, gst_invoice.invoice_address, gst_invoice.reference ,gst_party.name,gst_company.name,gst_company.address,gst_company.logo
+            <xml-property name="queryText"><![CDATA[select gst_invoice.date_time, gst_invoice.invoice_address, gst_invoice.reference ,gst_party.name,gst_company.name,gst_company.address,gst_company.logo,gst_invoice.gross_amount,gst_invoice.net_amount,gst_invoice.netcgst,gst_invoice.netigst,gst_invoice.netsgst
 from gst_invoice,gst_party,gst_company where gst_invoice.id = ?;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1682,7 +1772,7 @@ from gst_invoice_line where invoice = ?]]></xml-property>
         <label id="20">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
-            <property name="marginLeft">300pt</property>
+            <property name="marginLeft">320pt</property>
             <property name="display">inline</property>
             <text-property name="text">InvoiceAddress:</text-property>
         </label>
@@ -1705,8 +1795,8 @@ from gst_invoice_line where invoice = ?]]></xml-property>
             <property name="fontSize">16pt</property>
         </label>
         <table id="113">
-            <property name="borderBottomStyle">solid</property>
-            <property name="borderBottomWidth">medium</property>
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">normal</property>
             <property name="borderLeftStyle">solid</property>
             <property name="borderLeftWidth">medium</property>
             <property name="borderRightStyle">solid</property>
@@ -1945,33 +2035,115 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                     </cell>
                 </row>
             </detail>
-            <footer>
-                <row id="148">
-                    <property name="fontSize">14pt</property>
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">medium</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">medium</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">medium</property>
-                    <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">medium</property>
-                    <cell id="149"/>
-                    <cell id="150"/>
-                    <cell id="151"/>
-                    <cell id="152"/>
-                    <cell id="153"/>
-                    <cell id="154"/>
-                    <cell id="155"/>
-                    <cell id="156"/>
+        </table>
+        <table id="211">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">teal</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">medium</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">medium</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">medium</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">medium</property>
+            <property name="textAlign">center</property>
+            <property name="dataSet">Invoice</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">net_amount</property>
+                    <text-property name="displayName">net_amount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["net_amount"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">netigst</property>
+                    <text-property name="displayName">netigst</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["netigst"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">netcgst</property>
+                    <text-property name="displayName">netcgst</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["netcgst"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">netsgst</property>
+                    <text-property name="displayName">netsgst</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["netsgst"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">gross_amount</property>
+                    <text-property name="displayName">gross_amount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["gross_amount"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <structure name="toc"/>
+            <column id="239"/>
+            <column id="240"/>
+            <column id="241"/>
+            <column id="242"/>
+            <column id="243"/>
+            <column id="244"/>
+            <column id="245"/>
+            <column id="246"/>
+            <detail>
+                <row id="221">
+                    <cell id="222">
+                        <label id="210">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">14pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="display">inline</property>
+                            <text-property name="text">Total:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="223"/>
+                    <cell id="224"/>
+                    <cell id="225">
+                        <data id="247">
+                            <property name="resultSetColumn">net_amount</property>
+                        </data>
+                    </cell>
+                    <cell id="226">
+                        <data id="248">
+                            <property name="resultSetColumn">netigst</property>
+                        </data>
+                    </cell>
+                    <cell id="227">
+                        <data id="250">
+                            <property name="resultSetColumn">netsgst</property>
+                        </data>
+                    </cell>
+                    <cell id="228">
+                        <data id="249">
+                            <property name="resultSetColumn">netcgst</property>
+                        </data>
+                    </cell>
+                    <cell id="229">
+                        <data id="251">
+                            <property name="resultSetColumn">gross_amount</property>
+                        </data>
+                    </cell>
                 </row>
-            </footer>
+            </detail>
         </table>
         <label id="76">
             <property name="fontSize">14pt</property>
         </label>
+        <label id="206">
+            <property name="fontSize">12pt</property>
+            <property name="display">inline</property>
+            <text-property name="text">Company: </text-property>
+        </label>
         <data id="166">
             <property name="fontSize">12pt</property>
+            <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
             <list-property name="boundDataColumns">
                 <structure>

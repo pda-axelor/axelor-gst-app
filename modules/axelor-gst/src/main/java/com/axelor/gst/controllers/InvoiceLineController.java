@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
-import com.axelor.gst.db.repo.InvoiceLineRepository;
 import com.axelor.gst.interfaces.InvoiceLineService;
-import com.axelor.inject.Beans;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
@@ -29,18 +27,23 @@ public class InvoiceLineController {
 		response.setValue("price", iLine.getProduct().getCostPrice());
 
 		response.setValue("netAmount", amount);
+		try {
+			if (invoice.getInvoiceAddress().getState().getId() == invoice.getCompany().getAddress().getState()
+					.getId()) {
 
-		if (invoice.getInvoiceAddress().getState().getId() == invoice.getCompany().getAddress().getState().getId()) {
+				response.setValue("sgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
+				response.setValue("cgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
+				response.setValue("grossAmount", service.add(amount, service.add(iLine.getSgst(), iLine.getCgst())));
 
-			response.setValue("sgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
-			response.setValue("cgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
-			response.setValue("grossAmount", service.add(amount, service.add(iLine.getSgst(), iLine.getCgst())));
+			}
 
-		}
+			else {
+				response.setValue("igst", service.multiply(amount, iLine.getGstRate()));
+				response.setValue("grossAmount", service.add(amount, iLine.getIgst()));
+			}
 
-		else {
-			response.setValue("igst", service.multiply(amount, iLine.getGstRate()));
-			response.setValue("grossAmount", service.add(amount, iLine.getIgst()));
+		} catch (Exception e) {
+			response.setFlash("Address of Company or Party Field is Empty, Please add those fields");
 		}
 
 	}

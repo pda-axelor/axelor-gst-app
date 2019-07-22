@@ -17,13 +17,14 @@
 		<field name="gstRate" />
 
 		<template><![CDATA[
-       <div class="span8 card-image">
+       <div class="span4 card-image">
         <img ng-src="{{$image('image', 'content')}}">
         <strong>Name:{{name}}</strong>
         <strong>HSBN: {{hsbn}}</strong>
-        <strong>Category : {{productCategory}}</strong>
-        <strong>Sale Price : {{salePrice}}</strong>
-        <strong>Cost Price : {{costPrice}}</strong>
+        </div>
+        <div class="span4">
+        <strong>Sale Price : {{salePrice}}</strong><br/>
+        <strong>Cost Price : {{costPrice}}</strong><br/>
         <strong>GST Rate : {{gstRate}}</strong>
       </div>
     

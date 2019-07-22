@@ -30,7 +30,7 @@
 				onChange="com.axelor.gst.controllers.InvoiceLineController:setProduct" />
 			<field name="hsbn" />
 			<field name="item" required="true" />
-			<field name="qty" onChange="save,com.axelor.gst.controllers.InvoiceLineController:setProduct" />
+			<field name="qty" onChange="com.axelor.gst.controllers.InvoiceLineController:setProduct,save" />
 			<field name="price" />
 			<field name="netAmount" readonly="true" />
 			<field name="gstRate" readonly="true" title="GST Rate"/>

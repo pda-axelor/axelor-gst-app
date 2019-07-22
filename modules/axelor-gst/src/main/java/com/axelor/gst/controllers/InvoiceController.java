@@ -4,10 +4,18 @@ import java.math.BigDecimal;
 import java.util.List;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
+import com.axelor.gst.db.Sequence;
+import com.axelor.gst.db.repo.SequenceRepository;
+import com.axelor.gst.interfaces.SequenceService;
+import com.axelor.inject.Beans;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
+import com.google.inject.Inject;
 
 public class InvoiceController {
+
+	@Inject
+	SequenceService seqService;
 
 	public void setParty(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
@@ -55,20 +63,17 @@ public class InvoiceController {
 
 	public void calculateNetGST(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
+		Sequence seq = Beans.get(SequenceRepository.class).find((long) 2);
+		response.setValue("reference", seq.getNextNumber());
+		seqService.generateNextSequence(seq);
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
-	    BigDecimal bd=list.stream().map(l->l.getNetAmount()).reduce(BigDecimal.ZERO,BigDecimal::add);
-	    System.out.println(bd);
-		long netAmount = list.stream().mapToLong(l -> l.getNetAmount().longValue()).sum();
-		long netIGST = list.stream().mapToLong(l -> l.getIgst().longValue()).sum();
-		long netCGST = list.stream().mapToLong(l -> l.getCgst().longValue()).sum();
-		long netSGST = list.stream().mapToLong(l -> l.getSgst().longValue()).sum();
-		long netGross = list.stream().mapToLong(l -> l.getGrossAmount().longValue()).sum();
-
-		response.setValue("netAmount", BigDecimal.valueOf(netAmount));
-		response.setValue("netIGST", BigDecimal.valueOf(netIGST));
-		response.setValue("netCGST", BigDecimal.valueOf(netCGST));
-		response.setValue("netSGST", BigDecimal.valueOf(netSGST));
-		response.setValue("grossAmount", BigDecimal.valueOf(netGross));
+		response.setValue("netAmount",
+				list.stream().map(l -> l.getNetAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		response.setValue("netIGST", list.stream().map(l -> l.getIgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		response.setValue("netCGST", list.stream().map(l -> l.getCgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		response.setValue("netSGST", list.stream().map(l -> l.getSgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		response.setValue("grossAmount",
+				list.stream().map(l -> l.getGrossAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
 	}
-	
+
 }
