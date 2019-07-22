@@ -15,7 +15,7 @@
 		<integer name="type" selection="party.type.selection" required="true"/>
 		<boolean name="isCustomer"/>
 		<boolean name="isSupplier"/>
-		<string name="gstIn" min="15" max="15"/>
+		<string name="gstIn" min="15" max="15" title="GSTIN"/>
 		<one-to-many name="contactList" ref="com.axelor.gst.db.Contact" />
 		<one-to-many name="addressList" ref="com.axelor.gst.db.Address"/>
 	</entity>

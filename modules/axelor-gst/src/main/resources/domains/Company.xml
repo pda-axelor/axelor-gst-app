@@ -9,7 +9,7 @@
 
 	<entity name="Company" sequential="true" cachable="true">
 
-		<string name="name" required="true" />
+		<string name="name" required="true" namecolumn="true"/>
 		<many-to-one name="logo" ref="com.axelor.meta.db.MetaFile" />
 		<one-to-many name="contactList" ref="com.axelor.gst.db.Contact" />
 		<string name="gstIn" min="15" max="15" title="GSTIN"/>
@@ -18,7 +18,7 @@
 		
 		<extra-code>
 		<![CDATA[
-		public static final int test1 =1 ;
+		public static final int test1 = 1 ;
 		
 		]]>
 		</extra-code>

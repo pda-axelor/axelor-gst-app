@@ -11,7 +11,7 @@
 
 		<string name="name" required="true" />
 		<string name="code" required="true" />
-		<string name="hsbn" />
+		<string name="hsbn" title="HSBN"/>
 		<many-to-one name="productCategory" ref="com.axelor.gst.db.ProductCategory" />
 		<decimal name="salePrice" />
 		<decimal name="costPrice" />

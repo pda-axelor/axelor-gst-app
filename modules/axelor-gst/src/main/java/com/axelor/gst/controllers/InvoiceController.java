@@ -56,7 +56,8 @@ public class InvoiceController {
 	public void calculateNetGST(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
-	//list.stream().map(l->l.getNetAmount()).reduce(BigDecimal.ZERO,BigDecimal::add);
+	    BigDecimal bd=list.stream().map(l->l.getNetAmount()).reduce(BigDecimal.ZERO,BigDecimal::add);
+	    System.out.println(bd);
 		long netAmount = list.stream().mapToLong(l -> l.getNetAmount().longValue()).sum();
 		long netIGST = list.stream().mapToLong(l -> l.getIgst().longValue()).sum();
 		long netCGST = list.stream().mapToLong(l -> l.getCgst().longValue()).sum();

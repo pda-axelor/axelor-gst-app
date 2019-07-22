@@ -10,7 +10,7 @@
 	<entity name="Address" sequential="true" cachable="true">
 
 		<integer name="type" required="true" selection="address.type.selection" />
-		<string name="lineOne" required="true" />
+		<string name="lineOne" required="true" namecolumn="true"/>
 		<string name="lineTwo" />
 		<many-to-one name="city" ref="com.axelor.gst.db.City"
 			required="true" />

@@ -32,7 +32,7 @@
 			</field>
 			<field name="gstIn" min="15" max="15" />
 			<field name="bankAccountList" title="Bank Details" />
-			<field name="address" />
+			<field name="address" canNew="true"/>
 		</panel>
 
 	</form>

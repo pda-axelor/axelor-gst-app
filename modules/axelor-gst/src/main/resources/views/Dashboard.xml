@@ -14,7 +14,7 @@
 	</dashboard>
 
 
-	<menuitem name="gst-menu-dashboard" title="Dashboard" icon="fa-dashboard"
+	<menuitem name="gst-root-dashboard" title="Dashboard" icon="fa-dashboard"
 		icon-background="blue" action="action.gst.dashboard" order="1" tag="Overview"
 		tag-style="info" />
 
