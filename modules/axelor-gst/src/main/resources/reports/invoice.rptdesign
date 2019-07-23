@@ -19,6 +19,28 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="LogoAttachmentPath" id="255">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="LogoPath" id="257">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="6">
@@ -45,804 +67,6 @@
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Invoice" id="7">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">date_time</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">date_time</text-property>
-                    <text-property name="heading">date_time</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">invoice_address</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">invoice_address</text-property>
-                    <text-property name="heading">invoice_address</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">reference</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">reference</text-property>
-                    <text-property name="heading">reference</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">name</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">name</text-property>
-                    <text-property name="heading">name</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">name_1</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">name</text-property>
-                    <text-property name="heading">name</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">address</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">address</text-property>
-                    <text-property name="heading">address</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">logo</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">logo</text-property>
-                    <text-property name="heading">logo</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">gross_amount</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">gross_amount</text-property>
-                    <text-property name="heading">gross_amount</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">net_amount</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">net_amount</text-property>
-                    <text-property name="heading">net_amount</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">netcgst</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">netcgst</text-property>
-                    <text-property name="heading">netcgst</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">netigst</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">netigst</text-property>
-                    <text-property name="heading">netigst</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">netsgst</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">netsgst</text-property>
-                    <text-property name="heading">netsgst</text-property>
-                </structure>
-            </list-property>
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">invoiceId</property>
-                    <property name="paramName">invoiceId</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">date_time</property>
-                        <property name="dataType">date-time</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">invoice_address</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">reference</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">name</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">name_1</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">address</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">logo</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">gross_amount</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">net_amount</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">netcgst</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">netigst</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
-                        <property name="name">netsgst</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">date_time</property>
-                    <property name="nativeName">date_time</property>
-                    <property name="dataType">date-time</property>
-                    <property name="nativeDataType">93</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">invoice_address</property>
-                    <property name="nativeName">invoice_address</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">reference</property>
-                    <property name="nativeName">reference</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">name</property>
-                    <property name="nativeName">name</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">name_1</property>
-                    <property name="nativeName">name</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">address</property>
-                    <property name="nativeName">address</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">logo</property>
-                    <property name="nativeName">logo</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">gross_amount</property>
-                    <property name="nativeName">gross_amount</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">net_amount</property>
-                    <property name="nativeName">net_amount</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">netcgst</property>
-                    <property name="nativeName">netcgst</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
-                    <property name="name">netigst</property>
-                    <property name="nativeName">netigst</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
-                    <property name="name">netsgst</property>
-                    <property name="nativeName">netsgst</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[select gst_invoice.date_time, gst_invoice.invoice_address, gst_invoice.reference ,gst_party.name,gst_company.name,gst_company.address,gst_company.logo,gst_invoice.gross_amount,gst_invoice.net_amount,gst_invoice.netcgst,gst_invoice.netigst,gst_invoice.netsgst
-from gst_invoice,gst_party,gst_company where gst_invoice.id = ?;]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>2.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>id</design:name>
-              <design:position>1</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>id</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>id</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>archived</design:name>
-              <design:position>2</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
-            <design:precision>1</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>archived</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>archived</design:label>
-            <design:formattingHints>
-              <design:displaySize>1</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>version</design:name>
-              <design:position>3</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>version</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>version</design:label>
-            <design:formattingHints>
-              <design:displaySize>11</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>created_on</design:name>
-              <design:position>4</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
-            <design:precision>29</design:precision>
-            <design:scale>6</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>created_on</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>created_on</design:label>
-            <design:formattingHints>
-              <design:displaySize>29</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>updated_on</design:name>
-              <design:position>5</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
-            <design:precision>29</design:precision>
-            <design:scale>6</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>updated_on</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>updated_on</design:label>
-            <design:formattingHints>
-              <design:displaySize>29</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>attrs</design:name>
-              <design:position>6</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>1111</design:nativeDataTypeCode>
-            <design:precision>2147483647</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>attrs</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>attrs</design:label>
-            <design:formattingHints>
-              <design:displaySize>2147483647</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>date_time</design:name>
-              <design:position>7</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
-            <design:precision>29</design:precision>
-            <design:scale>6</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>date_time</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>date_time</design:label>
-            <design:formattingHints>
-              <design:displaySize>29</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>gross_amount</design:name>
-              <design:position>8</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>gross_amount</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>gross_amount</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>is_cancelled</design:name>
-              <design:position>9</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
-            <design:precision>1</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>is_cancelled</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>is_cancelled</design:label>
-            <design:formattingHints>
-              <design:displaySize>1</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>is_paid</design:name>
-              <design:position>10</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
-            <design:precision>1</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>is_paid</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>is_paid</design:label>
-            <design:formattingHints>
-              <design:displaySize>1</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>is_validated</design:name>
-              <design:position>11</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
-            <design:precision>1</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>is_validated</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>is_validated</design:label>
-            <design:formattingHints>
-              <design:displaySize>1</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>net_amount</design:name>
-              <design:position>12</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>net_amount</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>net_amount</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>netcgst</design:name>
-              <design:position>13</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>netcgst</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>netcgst</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>netigst</design:name>
-              <design:position>14</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>netigst</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>netigst</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>netsgst</design:name>
-              <design:position>15</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>netsgst</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>netsgst</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>priority</design:name>
-              <design:position>16</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
-            <design:precision>10</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>priority</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>priority</design:label>
-            <design:formattingHints>
-              <design:displaySize>11</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>reference</design:name>
-              <design:position>17</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>reference</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>reference</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>status</design:name>
-              <design:position>18</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>status</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>status</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>use_invoice_address</design:name>
-              <design:position>19</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
-            <design:precision>1</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>use_invoice_address</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>use_invoice_address</design:label>
-            <design:formattingHints>
-              <design:displaySize>1</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>created_by</design:name>
-              <design:position>20</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>created_by</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>created_by</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>updated_by</design:name>
-              <design:position>21</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>updated_by</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>updated_by</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>company</design:name>
-              <design:position>22</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>company</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>company</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>invoice_address</design:name>
-              <design:position>23</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>invoice_address</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>invoice_address</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>party</design:name>
-              <design:position>24</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>NotNullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>party</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>party</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>party_contact</design:name>
-              <design:position>25</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>party_contact</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>party_contact</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>shipping_address</design:name>
-              <design:position>26</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>shipping_address</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>shipping_address</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="InvoiceList" id="80">
             <list-property name="columnHints">
                 <structure>
@@ -1676,6 +900,453 @@ from gst_invoice_line where invoice = ?]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Invoice" id="254">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">date_time</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date_time</text-property>
+                    <text-property name="heading">date_time</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">reference</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">reference</text-property>
+                    <text-property name="heading">reference</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">invoice_address</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">invoice_address</text-property>
+                    <text-property name="heading">invoice_address</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name_1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">gross_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">gross_amount</text-property>
+                    <text-property name="heading">gross_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">net_amount</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">net_amount</text-property>
+                    <text-property name="heading">net_amount</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netcgst</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netcgst</text-property>
+                    <text-property name="heading">netcgst</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netigst</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netigst</text-property>
+                    <text-property name="heading">netigst</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netsgst</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netsgst</text-property>
+                    <text-property name="heading">netsgst</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">invoiceId</property>
+                    <property name="paramName">invoiceId</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">date_time</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">reference</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">invoice_address</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">name_1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">gross_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">net_amount</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">netcgst</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">netigst</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">netsgst</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">date_time</property>
+                    <property name="nativeName">date_time</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">reference</property>
+                    <property name="nativeName">reference</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">invoice_address</property>
+                    <property name="nativeName">invoice_address</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">name_1</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">gross_amount</property>
+                    <property name="nativeName">gross_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">net_amount</property>
+                    <property name="nativeName">net_amount</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">netcgst</property>
+                    <property name="nativeName">netcgst</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">netigst</property>
+                    <property name="nativeName">netigst</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">netsgst</property>
+                    <property name="nativeName">netsgst</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select gst_invoice.date_time,gst_invoice.reference,gst_invoice.invoice_address,gst_party.name,gst_company.name,gst_invoice.gross_amount,gst_invoice.net_amount,gst_invoice.netcgst,gst_invoice.netigst,gst_invoice.netsgst
+from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_time</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_time</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_time</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>reference</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>reference</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>reference</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>invoice_address</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>invoice_address</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>invoice_address</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gross_amount</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gross_amount</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gross_amount</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>net_amount</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>net_amount</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>net_amount</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>netcgst</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>netcgst</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>netcgst</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>netigst</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>netigst</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>netigst</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>netsgst</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>netsgst</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>netsgst</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>file_path</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>file_path</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>file_path</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
@@ -1697,12 +1368,29 @@ from gst_invoice_line where invoice = ?]]></xml-property>
             <property name="textAlign">center</property>
             <text-property name="text">Invoice</text-property>
         </label>
+        <label id="252"/>
+        <image id="253">
+            <property name="marginLeft">210pt</property>
+            <property name="width">200px</property>
+            <property name="dataSet">Invoice</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">file_path</property>
+                    <text-property name="displayName">file_path</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["file_path"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="source">file</property>
+            <expression name="uri" type="javascript">params["LogoAttachmentPath"].value+'/'+params["LogoPath"].value</expression>
+        </image>
         <label id="16">
             <property name="fontSize">16pt</property>
         </label>
         <label id="10">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="paddingRight">5pt</property>
             <property name="display">inline</property>
             <text-property name="text">Date: </text-property>
@@ -1710,6 +1398,7 @@ from gst_invoice_line where invoice = ?]]></xml-property>
         <data id="9">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
             <list-property name="boundDataColumns">
@@ -1725,12 +1414,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
         <label id="14">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="marginLeft">300pt</property>
             <property name="display">inline</property>
             <text-property name="text">PartyName: </text-property>
         </label>
         <data id="165">
+            <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
             <list-property name="boundDataColumns">
@@ -1749,6 +1441,7 @@ from gst_invoice_line where invoice = ?]]></xml-property>
         <label id="17">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="marginLeft">0pt</property>
             <property name="paddingRight">5pt</property>
             <property name="display">inline</property>
@@ -1757,6 +1450,7 @@ from gst_invoice_line where invoice = ?]]></xml-property>
         <data id="19">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
             <list-property name="boundDataColumns">
@@ -1772,13 +1466,16 @@ from gst_invoice_line where invoice = ?]]></xml-property>
         <label id="20">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
-            <property name="marginLeft">320pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="marginTop">0px</property>
+            <property name="marginLeft">282pt</property>
             <property name="display">inline</property>
             <text-property name="text">InvoiceAddress:</text-property>
         </label>
         <data id="21">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
             <list-property name="boundDataColumns">
@@ -1856,7 +1553,7 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                 <structure>
                     <property name="name">Aggregation</property>
                     <text-property name="displayName">Total Quantity</text-property>
-                    <property name="dataType">decimal</property>
+                    <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
                         <structure>
@@ -1974,6 +1671,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">item</property>
+                                    <text-property name="displayName">item</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["item"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">item</property>
                         </data>
                     </cell>
@@ -1982,6 +1688,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">qty</property>
+                                    <text-property name="displayName">qty</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["qty"]</expression>
+                                    <property name="dataType">integer</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">qty</property>
                         </data>
                     </cell>
@@ -1990,6 +1705,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">price</property>
+                                    <text-property name="displayName">price</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["price"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">price</property>
                         </data>
                     </cell>
@@ -1998,6 +1722,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">net_amount</property>
+                                    <text-property name="displayName">net_amount</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["net_amount"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">net_amount</property>
                         </data>
                     </cell>
@@ -2006,6 +1739,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">igst</property>
+                                    <text-property name="displayName">igst</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["igst"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">igst</property>
                         </data>
                     </cell>
@@ -2014,6 +1756,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">sgst</property>
+                                    <text-property name="displayName">sgst</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["sgst"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">sgst</property>
                         </data>
                     </cell>
@@ -2022,6 +1773,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">cgst</property>
+                                    <text-property name="displayName">cgst</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["cgst"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">cgst</property>
                         </data>
                     </cell>
@@ -2030,6 +1790,15 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                             <property name="fontFamily">sans-serif</property>
                             <property name="fontSize">12pt</property>
                             <property name="textAlign">center</property>
+                            <property name="dataSet">InvoiceList</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">gross_amount</property>
+                                    <text-property name="displayName">gross_amount</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["gross_amount"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">gross_amount</property>
                         </data>
                     </cell>
@@ -2050,39 +1819,6 @@ from gst_invoice_line where invoice = ?]]></xml-property>
             <property name="borderTopStyle">solid</property>
             <property name="borderTopWidth">medium</property>
             <property name="textAlign">center</property>
-            <property name="dataSet">Invoice</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">net_amount</property>
-                    <text-property name="displayName">net_amount</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["net_amount"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">netigst</property>
-                    <text-property name="displayName">netigst</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["netigst"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">netcgst</property>
-                    <text-property name="displayName">netcgst</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["netcgst"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">netsgst</property>
-                    <text-property name="displayName">netsgst</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["netsgst"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-                <structure>
-                    <property name="name">gross_amount</property>
-                    <text-property name="displayName">gross_amount</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["gross_amount"]</expression>
-                    <property name="dataType">decimal</property>
-                </structure>
-            </list-property>
             <structure name="toc"/>
             <column id="239"/>
             <column id="240"/>
@@ -2107,26 +1843,71 @@ from gst_invoice_line where invoice = ?]]></xml-property>
                     <cell id="224"/>
                     <cell id="225">
                         <data id="247">
+                            <property name="dataSet">Invoice</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">net_amount</property>
+                                    <text-property name="displayName">net_amount</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["net_amount"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">net_amount</property>
                         </data>
                     </cell>
                     <cell id="226">
                         <data id="248">
+                            <property name="dataSet">Invoice</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">netigst</property>
+                                    <text-property name="displayName">netigst</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["netigst"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">netigst</property>
                         </data>
                     </cell>
                     <cell id="227">
                         <data id="250">
+                            <property name="dataSet">Invoice</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">netsgst</property>
+                                    <text-property name="displayName">netsgst</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["netsgst"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">netsgst</property>
                         </data>
                     </cell>
                     <cell id="228">
                         <data id="249">
+                            <property name="dataSet">Invoice</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">netcgst</property>
+                                    <text-property name="displayName">netcgst</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["netcgst"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">netcgst</property>
                         </data>
                     </cell>
                     <cell id="229">
                         <data id="251">
+                            <property name="dataSet">Invoice</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">gross_amount</property>
+                                    <text-property name="displayName">gross_amount</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["gross_amount"]</expression>
+                                    <property name="dataType">decimal</property>
+                                </structure>
+                            </list-property>
                             <property name="resultSetColumn">gross_amount</property>
                         </data>
                     </cell>
@@ -2137,12 +1918,16 @@ from gst_invoice_line where invoice = ?]]></xml-property>
             <property name="fontSize">14pt</property>
         </label>
         <label id="206">
+            <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <text-property name="text">Company: </text-property>
         </label>
         <data id="166">
+            <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
             <list-property name="boundDataColumns">

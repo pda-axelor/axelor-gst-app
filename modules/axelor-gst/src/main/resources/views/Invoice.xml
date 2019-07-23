@@ -45,7 +45,8 @@
 		css="panel-red" onNew="action-gst-invoice-record-on-new" readonlyIf="status==4">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
-				onClick="action-report-invoice" showIf="id" />
+				onClick="action-method-invoice-set-logo-attachment-path,action-report-invoice"
+				showIf="id" />
 
 		</toolbar>
 		<panel showFrame="false">
@@ -116,7 +117,12 @@
 	<action-report name="action-report-invoice" design="invoice.rptdesign"
 		output="invoice" format="pdf">
 		<param name="invoiceId" expr="eval: id" />
+		<param name="LogoAttachmentPath" expr="eval: LogoAttachmentPath" />
+		<param name="LogoPath" expr="eval: LogoPath" />
 	</action-report>
-
+	<action-method name="action-method-invoice-set-logo-attachment-path">
+		<call class="com.axelor.gst.controllers.InvoiceController"
+			method="setAttachmentPath" />
+	</action-method>
 
 </object-views>

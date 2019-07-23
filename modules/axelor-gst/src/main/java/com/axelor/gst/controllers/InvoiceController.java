@@ -2,6 +2,8 @@ package com.axelor.gst.controllers;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.axelor.app.AppSettings;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Sequence;
@@ -74,6 +76,12 @@ public class InvoiceController {
 		response.setValue("netSGST", list.stream().map(l -> l.getSgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
 		response.setValue("grossAmount",
 				list.stream().map(l -> l.getGrossAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
+	}
+
+	public void setAttachmentPath(ActionRequest request, ActionResponse response) {
+		request.getContext().put("LogoAttachmentPath", AppSettings.get().get("file.upload.dir"));
+		request.getContext().put("LogoPath", request.getContext().asType(Invoice.class).getCompany().getLogo().getFilePath());
+		System.out.println(AppSettings.get().get("file.upload.dir"));
 	}
 
 }

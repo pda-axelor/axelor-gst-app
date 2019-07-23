@@ -19,10 +19,10 @@
 		<template><![CDATA[
        <div class="span4 card-image">
         <img ng-src="{{$image('image', 'content')}}">
-        <strong>Name:{{name}}</strong>
-        <strong>HSBN: {{hsbn}}</strong>
+        <strong>Name : {{name}}</strong>       
         </div>
         <div class="span4">
+        <strong>HSBN: {{hsbn}}</strong><br/>
         <strong>Sale Price : {{salePrice}}</strong><br/>
         <strong>Cost Price : {{costPrice}}</strong><br/>
         <strong>GST Rate : {{gstRate}}</strong>
@@ -33,7 +33,10 @@
 	</cards>
 
 	<grid name="product-grid" title="Product" model="com.axelor.gst.db.Product">
-
+		<toolbar>
+			<button name="btnPrintProductGrid" icon="fa-print" title="Print"
+				onClick="action-report-print-product-list"/>
+		</toolbar>
 		<field name="name" />
 		<field name="code" />
 		<field name="hsbn" />
@@ -47,8 +50,9 @@
 	<form name="product-form" title="Product" model="com.axelor.gst.db.Product"
 		css="panel-red">
 		<toolbar>
-		     <button name="btnPrintProduct" icon="fa-print" title="Generate PDF"
-				onClick="action-method-product-set-attachment-path,action-report-product" showIf="id" />
+			<button name="btnPrintProduct" icon="fa-print" title="Print"
+				onClick="action-method-product-set-attachment-path,action-report-product"
+				showIf="id" />
 		</toolbar>
 
 		<panel title="Product Details">
@@ -56,7 +60,8 @@
 			<field name="name" required="true" />
 			<field name="code" required="true" />
 			<field name="hsbn" />
-			<field name="productCategory" onChange="com.axelor.gst.controllers.ProductController:setGST"/>
+			<field name="productCategory"
+				onChange="com.axelor.gst.controllers.ProductController:setGST" />
 			<field name="salePrice" />
 			<field name="costPrice" />
 			<field name="image" widget="image" />
@@ -64,15 +69,20 @@
 		</panel>
 
 	</form>
-	
+
 	<action-method name="action-method-product-set-attachment-path">
-		<call class="com.axelor.gst.controllers.ProductController" method="setAttachmentPath"/>
+		<call class="com.axelor.gst.controllers.ProductController"
+			method="setAttachmentPath" />
 	</action-method>
-	
+
 	<action-report name="action-report-product" design="product.rptdesign"
 		output="product" format="pdf">
 		<param name="productId" expr="eval: id" />
-		<param name="AttachmentPath" expr="eval: AttachmentPath"/>
+		<param name="AttachmentPath" expr="eval: AttachmentPath" />
 	</action-report>
+
+	<action-report name="action-report-print-product-list"
+		design="productList.rptdesign" output="ProductList" format="pdf" />
+
 
 </object-views>
