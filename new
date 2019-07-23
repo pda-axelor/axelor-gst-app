@@ -1,0 +1,5 @@
+ SELECT c.name as category,p.name as product,count(i.id) as invoices 
+ FROM Invoice i,Product p,ProductCategory c
+ WHERE i.status=3 
+ AND (i.dateTime BETWEEN :fromDateTime AND :toDateTime) 
+ GROUP BY c.name,p.name

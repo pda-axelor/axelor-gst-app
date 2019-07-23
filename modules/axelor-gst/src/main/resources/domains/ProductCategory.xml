@@ -12,6 +12,6 @@
 		<string name="name" required="true" />
 		<string name="code" required="true" />
 		<decimal name="gstRate" />
-
+        <one-to-many name="productList" ref="com.axelor.gst.db.Product"/>
 	</entity>
 </domain-models>

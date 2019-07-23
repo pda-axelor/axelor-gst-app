@@ -13,6 +13,7 @@
 		<string name="code" required="true" />
 		<string name="hsbn" title="HSBN"/>
 		<many-to-one name="productCategory" ref="com.axelor.gst.db.ProductCategory" />
+		<one-to-many name="invoiceLineList" ref="com.axelor.gst.db.InvoiceLine"/>
 		<decimal name="salePrice" />
 		<decimal name="costPrice" />
 		<many-to-one name="image" ref="com.axelor.meta.db.MetaFile"/>

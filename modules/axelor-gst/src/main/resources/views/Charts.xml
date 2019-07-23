@@ -5,14 +5,22 @@
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 
-	<chart name="invoice-chart-bar" title="Unpaid Invoices per Customer">
-	<!--  	<search-fields>
-			<field type="datetime" name="fromDateTime" title="From Date" />
-			<field type="datetime" name="toDateTime" title="To Date" />
-		</search-fields>    -->
-		<dataset type="sql"> 
+	<chart name="invoice-chart-bar" title="Unpaid Invoices per Customer"
+		onInit="action-record-set-default-date-time">
+		<search-fields>
+			<field type="datetime" name="fromDateTime" title="From Date"
+				expr="eval: __datetime__.minusMonths(1)" />
+			<field type="datetime" name="toDateTime" title="To Date"
+				expr="eval: __datetime__" />
+		</search-fields>
+		<dataset type="jpql"> 
   <![CDATA[
- select gst_party.name as customer,Count(gst_invoice.id) as invoices from gst_invoice,gst_party where (gst_invoice.status != '3' AND gst_party.is_customer ='t' ) group by gst_party.name;
+ SELECT p.name as customer,Count(i.id) as invoices 
+ FROM Invoice i,Party p 
+ WHERE i.status != '3' 
+ AND p.isCustomer ='t' 
+ AND i.dateTime 
+ BETWEEN :fromDateTime AND :toDateTime  group by p.name
   ]]>
   </dataset>
 		<category key="customer" type="text" title="Customer" />
@@ -61,7 +69,6 @@
 
 
 	<chart name="invoice-status-chart-bar" title="Amount per Status">
-
 		<dataset type="sql"> 
   <![CDATA[
  select status as status,sum(gross_amount) as amount from gst_invoice group by status;
@@ -85,20 +92,30 @@
 
 
 
-	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product">
+	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product" onInit="action-record-set-default-date-time">
 		<search-fields>
 			<field type="datetime" name="fromDateTime" title="From Date" />
 			<field type="datetime" name="toDateTime" title="To Date" />
-		</search-fields> 
-		<dataset type="sql"> 
+		</search-fields>
+		<dataset type="jpql"> 
   <![CDATA[
- select gst_product_category.name as category,gst_product.name as product,count(gst_invoice.id) as invoices from gst_invoice,gst_product,gst_product_category where gst_invoice.status=3 AND :fromDateTime <= gst_invoice.date_time AND :toDateTime >=gst_invoice.date_time group by gst_product_category.name,gst_product.name; 
+  
+  SELECT p.name as product,COUNT(i.id) as invoices FROM Invoice i
+  INNER JOIN InvoiceLine l ON i.id = l.invoice
+  INNER JOIN Product p ON l.product=p.id 
+  WHERE i.status=3 
+  AND (i.dateTime BETWEEN :fromDateTime AND :toDateTime) 
+  GROUP BY p.name
+ 
   ]]>
   </dataset>
 		<category key="product" type="text" title="Product" />
-
 		<series key="invoices" type="bar" title="Paid Invoices" />
 	</chart>
 
-
+	<action-record model="com.axelor.gst.db.Invoice"
+		name="action-record-set-default-date-time">
+		<field name="toDateTime" expr="eval:__datetime__" />
+		<field name="fromDateTime" expr="eval:__datetime__.minusMonths(1)" />
+	</action-record>
 </object-views>
