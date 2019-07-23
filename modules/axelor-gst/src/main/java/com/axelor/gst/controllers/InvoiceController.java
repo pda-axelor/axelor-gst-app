@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.axelor.app.AppSettings;
+import com.axelor.db.Model;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Sequence;
@@ -47,7 +48,11 @@ public class InvoiceController {
 
 		case 1:
 			response.setValue("status", 2);
-			response.setAttr("statusBtn", "title", "Paid");
+			Class<Model> model = (Class<Model>) request.getContext().getContextClass();
+			Sequence seq = Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", model.getSimpleName())
+					.fetchOne();
+			response.setValue("reference", seq.getNextNumber());
+			seqService.generateNextSequence(seq);
 			break;
 
 		case 2:
@@ -64,10 +69,8 @@ public class InvoiceController {
 	}
 
 	public void calculateNetGST(ActionRequest request, ActionResponse response) {
+
 		Invoice invoice = request.getContext().asType(Invoice.class);
-		Sequence seq = Beans.get(SequenceRepository.class).find((long) 2);
-		response.setValue("reference", seq.getNextNumber());
-		seqService.generateNextSequence(seq);
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
 		response.setValue("netAmount",
 				list.stream().map(l -> l.getNetAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
@@ -80,7 +83,8 @@ public class InvoiceController {
 
 	public void setAttachmentPath(ActionRequest request, ActionResponse response) {
 		request.getContext().put("LogoAttachmentPath", AppSettings.get().get("file.upload.dir"));
-		request.getContext().put("LogoPath", request.getContext().asType(Invoice.class).getCompany().getLogo().getFilePath());
+		request.getContext().put("LogoPath",
+				request.getContext().asType(Invoice.class).getCompany().getLogo().getFilePath());
 		System.out.println(AppSettings.get().get("file.upload.dir"));
 	}
 

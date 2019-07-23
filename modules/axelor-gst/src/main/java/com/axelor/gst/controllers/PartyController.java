@@ -16,9 +16,8 @@ public class PartyController {
 
 	public void setReference(ActionRequest request, ActionResponse response) {
 		Class<Model> dfg = (Class<Model>) request.getContext().getContextClass();
-		System.out.print(dfg.getSimpleName());
-		System.out.println("------------"+dfg.getSimpleName()+"--------");
-		Sequence seq = Beans.get(SequenceRepository.class).all().filter("self.model.name=?1",dfg.getSimpleName()).fetchOne();
+		Sequence seq = Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", dfg.getSimpleName())
+				.fetchOne();
 		response.setValue("reference", seq.getNextNumber());
 		seqService.generateNextSequence(seq);
 	}

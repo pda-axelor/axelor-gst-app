@@ -9,7 +9,7 @@
 
 	<entity name="Invoice" sequential="true" cachable="true">
 
-		<integer name="status" readonly="true" min="1" max="4" selection="invoice.status.selection" />		
+		<integer name="status" readonly="true" min="1" max="4" selection="invoice.status.selection" default="1"/>		
 		<many-to-one name="company" ref="com.axelor.gst.db.Company"
 			required="true" />
 		<string name="reference" readonly="true" />

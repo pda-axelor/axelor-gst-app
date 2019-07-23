@@ -65,12 +65,12 @@
 
 		<panel sidebar="true" title="Status Controller">
 			<button-group>
-				<button name="statusBtn" title="Validated"
-					onClick="com.axelor.gst.controllers.InvoiceController:changeStatus"
-					icon="fa-check-square-o" />
+				<button name="statusBtn" title="Proceed"
+					onClick="com.axelor.gst.controllers.InvoiceController:changeStatus,save"
+					icon="fa-arrow-right" />
 
 				<button name="cancelBtn" title="Cancel Invoice"
-					onClick="com.axelor.gst.controllers.InvoiceController:onCancel"
+					onClick="com.axelor.gst.controllers.InvoiceController:onCancel,save"
 					prompt="Are you sure you want to cancel the invoice?" icon="fa-times" />
 			</button-group>
 		</panel>
@@ -109,8 +109,7 @@
 	</form>
 
 	<action-record name="action-gst-invoice-record-on-new"
-		model="com.axelor.gst.db.Invoice">
-		<field name="status" expr="1" />
+		model="com.axelor.gst.db.Invoice">		
 		<field name="dateTime" expr="eval:__datetime__" />
 	</action-record>
 
