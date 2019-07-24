@@ -72,6 +72,8 @@ public class InvoiceController {
 				response.setAttr("statusBtn", "readonly", "true");
 				break;
 			}
+		} catch (NullPointerException e) {
+			response.setFlash("Please Set a Sequence for the Model");
 		} catch (Exception e) {
 			response.setFlash(e.toString());
 		}

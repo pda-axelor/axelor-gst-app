@@ -30,9 +30,9 @@
 
 	<chart name="customer-chart-pie" title="Customer per State">
 
-		<dataset type="sql"> 
+		<dataset type="jpql"> 
   <![CDATA[
- select gst_state.name as state,Count(gst_party.id) as customers from gst_party,gst_state where gst_party.is_customer='t' group by gst_state.name;
+ select s.name as state,Count(p.id) as customers from Party p,State s where p.isCustomer='t' group by s.name
   ]]>
   </dataset>
 		<category key="state" type="text" title="State" />

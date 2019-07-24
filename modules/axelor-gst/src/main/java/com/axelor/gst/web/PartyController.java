@@ -16,11 +16,14 @@ public class PartyController {
 
 	public void setReference(ActionRequest request, ActionResponse response) {
 		try {
+			@SuppressWarnings("unchecked")
 			Class<Model> dfg = (Class<Model>) request.getContext().getContextClass();
 			Sequence seq = Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", dfg.getSimpleName())
 					.fetchOne();
 			response.setValue("reference", seq.getNextNumber());
 			seqService.generateNextSequence(seq);
+		} catch (NullPointerException e) {
+			response.setFlash("Please Set a Sequence for the Model");
 		} catch (Exception e) {
 			response.setFlash(e.toString());
 		}
