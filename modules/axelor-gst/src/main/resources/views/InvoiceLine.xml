@@ -27,10 +27,10 @@
 
 		<panel title="Overview">
 			<field name="product"
-				onChange="com.axelor.gst.webLineController:setProduct" />
+				onChange="com.axelor.gst.web.InvoiceLineController:setProduct" />
 			<field name="hsbn" />
 			<field name="item" required="true" />
-			<field name="qty" onChange="com.axelcom.axelor.gst.web:setProduct,save" />
+			<field name="qty" onChange="com.axelor.gst.web.InvoiceController:setProduct,save" />
 			<field name="price" />
 			<field name="netAmount" readonly="true" />
 			<field name="gstRate" readonly="true" title="GST Rate"/>
