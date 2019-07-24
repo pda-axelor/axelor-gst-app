@@ -1,13 +1,16 @@
 package com.axelor.gst.controllers;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.axelor.app.AppSettings;
 import com.axelor.db.Model;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
+import com.axelor.gst.db.Product;
 import com.axelor.gst.db.Sequence;
+import com.axelor.gst.db.repo.ProductRepository;
 import com.axelor.gst.db.repo.SequenceRepository;
 import com.axelor.gst.interfaces.SequenceService;
 import com.axelor.inject.Beans;
@@ -48,6 +51,7 @@ public class InvoiceController {
 
 		case 1:
 			response.setValue("status", 2);
+			@SuppressWarnings("unchecked")
 			Class<Model> model = (Class<Model>) request.getContext().getContextClass();
 			Sequence seq = Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", model.getSimpleName())
 					.fetchOne();
@@ -88,4 +92,23 @@ public class InvoiceController {
 		System.out.println(AppSettings.get().get("file.upload.dir"));
 	}
 
+	public void setSelectedProducts(ActionRequest request, ActionResponse response) {
+
+		if (request.getContext().get("ids") != null) {
+			List<Long> productIds = (List<Long>) request.getContext().get("ids");
+			List<Product> pList = Beans.get(ProductRepository.class).all().filter("id in (?1)", productIds).fetch();
+			List<InvoiceLine> lineList = new ArrayList<InvoiceLine>();
+
+			for (int i = 0; i < pList.size(); i++) {
+				InvoiceLine il = new InvoiceLine();
+				il.setProduct(pList.get(i));
+				lineList.add(il);
+			}
+
+			Invoice invoice = request.getContext().asType(Invoice.class);
+			invoice.setInvoiceItemsList(lineList);
+			response.setValues(invoice);
+
+		}
+	}
 }

@@ -102,6 +102,7 @@
 	<action-view name="action.gst.invoice.create.view" title="New Invoice"
 		model="com.axelor.gst.db.Invoice">
 		<view type="form" name="invoice-form" />
+		<context name="ids" expr="eval:_ids"/>
 	</action-view>
 
 	<menuitem name="gst-root-invoice-draft" parent="gst-root-invoice"

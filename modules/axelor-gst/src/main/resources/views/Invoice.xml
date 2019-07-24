@@ -42,7 +42,7 @@
 	</grid>
 
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
-		css="panel-red" onNew="action-gst-invoice-record-on-new" readonlyIf="status==4">
+		css="panel-red" onNew="action-gst-invoice-record-on-new,com.axelor.gst.controllers.InvoiceController:setSelectedProducts" readonlyIf="status==4">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
 				onClick="action-method-invoice-set-logo-attachment-path,action-report-invoice"

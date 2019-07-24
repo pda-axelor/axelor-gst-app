@@ -33,10 +33,14 @@
 	</cards>
 
 	<grid name="product-grid" title="Product" model="com.axelor.gst.db.Product">
+	
 		<toolbar>
 			<button name="btnPrintProductGrid" icon="fa-print" title="Print"
-				onClick="action-report-print-product-list"/>
+				onClick="action-report-print-product-list" />
+			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
+				onClick="action.gst.invoice.create.view" />
 		</toolbar>
+		
 		<field name="name" />
 		<field name="code" />
 		<field name="hsbn" />
@@ -53,6 +57,7 @@
 			<button name="btnPrintProduct" icon="fa-print" title="Print"
 				onClick="action-method-product-set-attachment-path,action-report-product"
 				showIf="id" />
+
 		</toolbar>
 
 		<panel title="Product Details">

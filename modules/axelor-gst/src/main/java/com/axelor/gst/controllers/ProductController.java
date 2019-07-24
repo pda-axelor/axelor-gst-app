@@ -18,8 +18,4 @@ public class ProductController {
 		request.getContext().put("AttachmentPath", AppSettings.get().get("file.upload.dir"));
 	}
 	
-	public void createInvoice(ActionRequest request, ActionResponse response)
-	{
-		
-	}
 }

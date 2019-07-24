@@ -23,7 +23,7 @@
 	</grid>
 
 	<form name="invoiceline-form" title="Invoice Line"
-		model="com.axelor.gst.db.InvoiceLine" css="panel-red">
+		model="com.axelor.gst.db.InvoiceLine" css="panel-red" >
 
 		<panel title="Overview">
 			<field name="product"
