@@ -39,7 +39,7 @@
 	</grid>
 
 	<form name="party-form" title="Party" model="com.axelor.gst.db.Party"
-		css="panel-red" onSave="com.axelor.gst.controllers.PartyController:setReference,save">
+		css="panel-red" onSave="com.axelor.gst.web:setReference,save">
 
 		<panel title="Party Details">
 			<field name="reference" readonly="true" />

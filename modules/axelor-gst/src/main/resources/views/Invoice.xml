@@ -42,7 +42,9 @@
 	</grid>
 
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
-		css="panel-red" onNew="action-gst-invoice-record-on-new,com.axelor.gst.controllers.InvoiceController:setSelectedProducts" readonlyIf="status==4">
+		css="panel-red"
+		onNew="action-gst-invoice-record-on-new,com.axelor.gst.web.InvoiceController:setSelectedProducts"
+		readonlyIf="status==4">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
 				onClick="action-method-invoice-set-logo-attachment-path,action-report-invoice"
@@ -66,11 +68,11 @@
 		<panel sidebar="true" title="Status Controller">
 			<button-group>
 				<button name="statusBtn" title="Proceed"
-					onClick="com.axelor.gst.controllers.InvoiceController:changeStatus,save"
+					onClick="com.axelor.gst.web.InvoiceController:changeStatus,save"
 					icon="fa-arrow-right" />
 
 				<button name="cancelBtn" title="Cancel Invoice"
-					onClick="com.axelor.gst.controllers.InvoiceController:onCancel,save"
+					onClick="com.axelor.gst.web.InvoiceController:onCancel,save"
 					prompt="Are you sure you want to cancel the invoice?" icon="fa-times" />
 			</button-group>
 		</panel>
@@ -82,21 +84,22 @@
 
 			<panel title="Party Details" css="panel-blue">
 				<field name="party" required="true"
-					onChange="com.axelor.gst.controllers.InvoiceController:setParty" />
+					onChange="com.axelor.gst.web.InvoiceController:setParty" />
 				<field name="partyContact" />
 				<field name="invoiceAddress" required="true" />
 				<field name="shippingAddress" />
 				<field name="useInvoiceAddress"
-					onChange="com.axelor.gst.controllers.InvoiceController:setShippingAddress" />
+					onChange="com.axelor.gst.web.InvoiceController:setShippingAddress" />
 			</panel>
 
 			<panel title="Invoice Items" css="panel-green">
 				<field name="invoiceItemsList" colSpan="12"
-					onChange="com.axelor.gst.controllers.InvoiceController:calculateNetGST,save" />
+					onChange="com.axelor.gst.web.InvoiceController:calculateNetGST,save" />
 			</panel>
 		</panel-tabs>
 
-		<panel title="Company Details" sidebar="true" css="panel-violet"
+		<panel title="
+						Company Details " sidebar="true" css="panel-violet"
 			canEdit="true">
 			<field name="company" required="true" canEdit="false">
 				<editor x-viewer="true">
@@ -109,7 +112,7 @@
 	</form>
 
 	<action-record name="action-gst-invoice-record-on-new"
-		model="com.axelor.gst.db.Invoice">		
+		model="com.axelor.gst.db.Invoice">
 		<field name="dateTime" expr="eval:__datetime__" />
 	</action-record>
 
@@ -120,8 +123,6 @@
 		<param name="LogoPath" expr="eval: LogoPath" />
 	</action-report>
 	<action-method name="action-method-invoice-set-logo-attachment-path">
-		<call class="com.axelor.gst.controllers.InvoiceController"
-			method="setAttachmentPath" />
+		<call class="com.axelor.gst.web.InvoiceController" method="setAttachmentPath" />
 	</action-method>
-
 </object-views>

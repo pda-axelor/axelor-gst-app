@@ -92,7 +92,7 @@
 
 
 
-	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product" onInit="action-record-set-default-date-time">
+	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Product" onInit="action-record-set-default-date-time">
 		<search-fields>
 			<field type="datetime" name="fromDateTime" title="From Date" />
 			<field type="datetime" name="toDateTime" title="To Date" />

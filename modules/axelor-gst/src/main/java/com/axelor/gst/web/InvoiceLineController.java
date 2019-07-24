@@ -1,4 +1,4 @@
-package com.axelor.gst.controllers;
+package com.axelor.gst.web;
 
 import java.math.BigDecimal;
 
@@ -47,7 +47,5 @@ public class InvoiceLineController {
 		}
 
 	}
-	
-
 
 }

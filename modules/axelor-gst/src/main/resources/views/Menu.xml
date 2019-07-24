@@ -5,12 +5,9 @@
   http://axelor.com/xml/ns/object-views/object-views_5.0.xsd">
 
 
+	<menuitem name="axelor-gst-root-party" title="Party" order="2" icon="fa-user-o"/>
 
-
-
-	<menuitem name="gst-root-party" title="Party" order="2" icon="fa-user-o"/>
-
-	<menuitem name="gst-root-party-party" parent="gst-root-party"
+	<menuitem name="axelor-gst-root-party-party" parent="axelor-gst-root-party"
 		title="Party" action="action.gst.party.view" order="1" />
 
 	<action-view name="action.gst.party.view" title="Party"
@@ -20,7 +17,7 @@
 		<view type="form" name="party-form" />
 	</action-view>
 
-	<menuitem name="gst-root-party-contact" parent="gst-root-party"
+	<menuitem name="axelor-gst-root-party-contact" parent="axelor-gst-root-party"
 		title="Contact" action="action.gst.party.contact.view" order="2" />
 
 	<action-view name="action.gst.party.contact.view" title="Contact"
@@ -30,10 +27,10 @@
 		<view type="form" name="contact-form" />
 	</action-view>
 
-	<menuitem name="gst-root-party-configurations" parent="gst-root-party"
+	<menuitem name="axelor-gst-root-party-configurations" parent="axelor-gst-root-party"
 		title="Configurations" order="3" />
 
-	<menuitem name="gst-root-party-configurations-address" parent="gst-root-party-configurations"
+	<menuitem name="axelor-gst-root-party-configurations-address" parent="axelor-gst-root-party-configurations"
 		title="Address" action="action.gst.party.address.view" order="1" />
 
 
@@ -43,7 +40,7 @@
 		<view type="form" name="address-form" />
 	</action-view>
 
-	<menuitem name="gst-root-party-configurations-city" parent="gst-root-party-configurations"
+	<menuitem name="axelor-gst-root-party-configurations-city" parent="axelor-gst-root-party-configurations"
 		title="City" action="action.gst.party.address.city.view" order="2" />
 
 	<action-view name="action.gst.party.address.city.view"
@@ -52,7 +49,7 @@
 		<view type="form" name="gst-city-form" />
 	</action-view>
 
-	<menuitem name="gst-root-party-configurations-state" parent="gst-root-party-configurations"
+	<menuitem name="axelor-gst-root-party-configurations-state" parent="axelor-gst-root-party-configurations"
 		title="State" action="action.gst.party.address.state.view" order="3" />
 
 	<action-view name="action.gst.party.address.state.view"
@@ -61,7 +58,7 @@
 		<view type="form" name="gst-state-form" />
 	</action-view>
 
-	<menuitem name="gst-root-party-configurations-country" parent="gst-root-party-configurations"
+	<menuitem name="axelor-gst-root-party-configurations-country" parent="axelor-gst-root-party-configurations"
 		title="Country" action="action.gst.party.address.country.view" order="4" />
 
 	<action-view name="action.gst.party.address.country.view"
@@ -71,9 +68,9 @@
 	</action-view>
 
 
-	<menuitem name="gst-root-product" title="Product" order="3" icon="fa-product-hunt" icon-background="yellow"/>
+	<menuitem name="axelor-gst-root-product" title="Product" order="3" icon="fa-product-hunt" icon-background="yellow"/>
 
-	<menuitem name="gst-root-product-product" parent="gst-root-product"
+	<menuitem name="axelor-gst-root-product-product" parent="axelor-gst-root-product"
 		title="Product" action="action.gst.product.view" order="1" />
 
 	<action-view name="action.gst.product.view" title="Products"
@@ -83,7 +80,7 @@
 		<view type="form" name="product-form" />
 	</action-view>
 
-	<menuitem name="gst-root-party-categories" parent="gst-root-product"
+	<menuitem name="axelor-gst-root-party-categories" parent="axelor-gst-root-product"
 		title="Product Categories" action="action.gst.product.category.view"
 		order="2" />
 
@@ -94,9 +91,9 @@
 	</action-view>
 
 
-	<menuitem name="gst-root-invoice" title="Invoice" order="4" icon="fa-sticky-note" icon-background="violet"/>
+	<menuitem name="axelor-gst-root-invoice" title="Invoice" order="4" icon="fa-sticky-note" icon-background="violet"/>
 
-	<menuitem name="gst-root-invoice-create" parent="gst-root-invoice"
+	<menuitem name="axelor-gst-root-invoice-create" parent="axelor-gst-root-invoice"
 		title="Create Invoice" action="action.gst.invoice.create.view" order="1" />
 
 	<action-view name="action.gst.invoice.create.view" title="New Invoice"
@@ -105,7 +102,7 @@
 		<context name="ids" expr="eval:_ids"/>
 	</action-view>
 
-	<menuitem name="gst-root-invoice-draft" parent="gst-root-invoice"
+	<menuitem name="axelor-gst-root-invoice-draft" parent="axelor-gst-root-invoice"
 		title="Draft Invoices" action="action.gst.invoice.draft.view" order="2" />
 
 	<action-view name="action.gst.invoice.draft.view" title="Draft Invoices"
@@ -115,7 +112,7 @@
 		<domain>status='1'</domain>
 	</action-view>
 
-	<menuitem name="gst-root-invoice-validated" parent="gst-root-invoice"
+	<menuitem name="axelor-gst-root-invoice-validated" parent="axelor-gst-root-invoice"
 		title="Validated Invoices" action="action.gst.invoice.validated.view"
 		order="3" />
 
@@ -126,7 +123,7 @@
 		<domain>status='2'</domain>
 	</action-view>
 
-	<menuitem name="gst-root-invoice-paid" parent="gst-root-invoice"
+	<menuitem name="axelor-gst-root-invoice-paid" parent="axelor-gst-root-invoice"
 		title="Paid Invoices" action="action.gst.invoice.paid.view" order="4" />
 
 	<action-view name="action.gst.invoice.paid.view" title="Paid Invoices"
@@ -136,7 +133,7 @@
 		<domain>status='3'</domain>
 		</action-view>
 
-	<menuitem name="gst-root-invoice-cancelled" parent="gst-root-invoice"
+	<menuitem name="axelor-gst-root-invoice-cancelled" parent="axelor-gst-root-invoice"
 		title="Cancelled Invoices" action="action.gst.invoice.cancelled.view"
 		order="5" />
 
@@ -148,7 +145,7 @@
 	</action-view>
 
 
-	<menuitem name="gst-root-invoice-all" parent="gst-root-invoice"
+	<menuitem name="axelor-gst-root-invoice-all" parent="axelor-gst-root-invoice"
 		title="All Invoices" action="action.gst.invoice.all.view" order="6" />
 
 	<action-view name="action.gst.invoice.all.view" title="All Invoices"
@@ -159,9 +156,9 @@
 	</action-view>
 
 
-	<menuitem name="gst-root-company" title="Company" order="5" />
+	<menuitem name="axelor-gst-root-company" title="Company" order="5" />
 
-	<menuitem name="gst-root-company-company" parent="gst-root-company"
+	<menuitem name="axelor-gst-root-company-company" parent="axelor-gst-root-company"
 		title="Company" action="action.gst.company.view" order="1" />
 
 	<action-view name="action.gst.company.view" title="Company"
@@ -170,7 +167,7 @@
 		<view type="form" name="company-form" />
 	</action-view>
 
-	<menuitem name="gst-root-company-bankaccount" parent="gst-root-company"
+	<menuitem name="axelor-gst-root-company-bankaccount" parent="axelor-gst-root-company"
 		title="Bank Account" action="action.gst.company.bankaccount.view"
 		order="2" />
 
@@ -182,7 +179,7 @@
 
 	</action-view>
 
-	<menuitem name="gst-root-company-sequence" parent="gst-root-company"
+	<menuitem name="axelor-gst-root-company-sequence" parent="axelor-gst-root-company"
 		title="Sequence" action="action.gst.company.sequence.view" order="3" />
 
 	<action-view name="action.gst.company.sequence.view" title="Sequence"

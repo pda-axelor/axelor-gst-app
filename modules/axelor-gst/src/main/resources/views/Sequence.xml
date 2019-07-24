@@ -15,7 +15,7 @@
 	</grid>
 
 	<form name="sequence-form" title="Sequence" model="com.axelor.gst.db.Sequence"
-		css="panel-red" onSave="com.axelor.gst.controllers.SequenceController:calculateSequence,save"> 
+		css="panel-red" onSave="com.axelor.gst.web:calculateSequence,save"> 
 
 		<panel title="Sequence">
 			<field name="prefix" />
