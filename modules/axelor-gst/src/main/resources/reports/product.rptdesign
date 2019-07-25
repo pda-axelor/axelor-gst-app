@@ -383,7 +383,7 @@ from gst_product,meta_file where gst_product.id=? ;]]></xml-property>
         <label id="9">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
-            <property name="marginLeft">100pt</property>
+            <property name="marginLeft">200pt</property>
             <property name="display">inline</property>
             <text-property name="text">Code: </text-property>
         </label>
@@ -409,7 +409,7 @@ from gst_product,meta_file where gst_product.id=? ;]]></xml-property>
         <label id="12">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
-            <property name="marginLeft">100pt</property>
+            <property name="marginLeft">200pt</property>
             <property name="display">inline</property>
             <text-property name="text">Name: </text-property>
         </label>
@@ -434,7 +434,7 @@ from gst_product,meta_file where gst_product.id=? ;]]></xml-property>
         <label id="16">
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
-            <property name="marginLeft">100pt</property>
+            <property name="marginLeft">200pt</property>
             <property name="display">inline</property>
             <text-property name="text">HSBN: </text-property>
         </label>
@@ -458,7 +458,7 @@ from gst_product,meta_file where gst_product.id=? ;]]></xml-property>
             <property name="fontFamily">sans-serif</property>
             <property name="fontSize">12pt</property>
             <property name="fontWeight">bold</property>
-            <property name="marginLeft">50pt</property>
+            <property name="marginLeft">200pt</property>
             <property name="display">inline</property>
             <text-property name="text">SalePrice: </text-property>
         </label>

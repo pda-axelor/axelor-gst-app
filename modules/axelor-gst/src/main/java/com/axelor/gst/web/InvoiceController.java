@@ -3,9 +3,11 @@ package com.axelor.gst.web;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.axelor.app.AppSettings;
 import com.axelor.db.Model;
+import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Product;
@@ -26,12 +28,13 @@ public class InvoiceController {
 	public void setParty(ActionRequest request, ActionResponse response) {
 		try {
 			Invoice invoice = request.getContext().asType(Invoice.class);
+			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
+					.findFirst();
 			response.setValue("partyContact",
 					invoice.getParty().getContactList().stream().filter(c -> c.getType() == 1).findFirst());
-			response.setValue("invoiceAddress",
-					invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2).findFirst());
+			response.setValue("invoiceAddress", invoiceAddress);
 			if (invoice.getUseInvoiceAddress()) {
-				response.setValue("shippingAddress", invoice.getInvoiceAddress());
+				response.setValue("shippingAddress", invoiceAddress);
 			}
 		} catch (Exception e) {
 			response.setFlash(e.toString());

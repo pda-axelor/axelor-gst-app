@@ -51,11 +51,12 @@
 				showIf="id" />
 
 		</toolbar>
-		<panel showFrame="false">
-			<field name="status" widget="NavSelect" colspan="6" readonly="true" />
-		</panel>
+
 
 		<panel title="Invoice Details">
+			<field name="status" widget="NavSelect" colspan="6" readonly="true"
+				colSpan="12" />
+
 			<field name="reference" readonly="true" />
 			<field name="dateTime" />
 			<field name="netAmount" title="Net Amount" readonly="true" />
@@ -63,9 +64,7 @@
 			<field name="netCGST" title="Net CGST" readonly="true" />
 			<field name="netSGST" title="Net SGST" readonly="true" />
 			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
-		</panel>
-
-		<panel sidebar="true" title="Status Controller">
+			<field name="company" required="true" canEdit="false" />
 			<button-group>
 				<button name="statusBtn" title="Proceed"
 					onClick="com.axelor.gst.web.InvoiceController:changeStatus,save"
@@ -73,9 +72,11 @@
 
 				<button name="cancelBtn" title="Cancel Invoice"
 					onClick="com.axelor.gst.web.InvoiceController:onCancel,save"
-					prompt="Are you sure you want to cancel the invoice?" icon="fa-times" />
-			</button-group>
+					prompt="Are you sure you want to cancel the invoice?" icon="fa-times" css="btn-danger"/>
+			</button-group>	
 		</panel>
+
+
 
 		<panel-tabs>
 
@@ -96,19 +97,9 @@
 				<field name="invoiceItemsList" colSpan="12"
 					onChange="com.axelor.gst.web.InvoiceController:calculateNetGST,save" />
 			</panel>
+
 		</panel-tabs>
 
-		<panel title="
-						Company Details " sidebar="true" css="panel-violet"
-			canEdit="true">
-			<field name="company" required="true" canEdit="false">
-				<editor x-viewer="true">
-					<field name="logo" widget="image" readonly="true" />
-					<field name="name" readonly="true" />
-					<field name="address" readonly="true" />
-				</editor>
-			</field>
-		</panel>
 	</form>
 
 	<action-record name="action-gst-invoice-record-on-new"

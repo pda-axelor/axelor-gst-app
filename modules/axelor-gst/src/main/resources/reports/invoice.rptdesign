@@ -1389,7 +1389,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <label id="10">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="paddingRight">5pt</property>
             <property name="display">inline</property>
@@ -1397,7 +1397,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <data id="9">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
@@ -1413,7 +1413,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </data>
         <label id="14">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="marginLeft">300pt</property>
             <property name="display">inline</property>
@@ -1421,7 +1421,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <data id="165">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
@@ -1440,7 +1440,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <label id="17">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="marginLeft">0pt</property>
             <property name="paddingRight">5pt</property>
@@ -1449,7 +1449,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <data id="19">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
@@ -1465,7 +1465,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </data>
         <label id="20">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="marginTop">0px</property>
             <property name="marginLeft">282pt</property>
@@ -1474,7 +1474,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <data id="21">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
@@ -1550,19 +1550,6 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     <expression name="expression" type="javascript">dataSetRow["sgst"]</expression>
                     <property name="dataType">decimal</property>
                 </structure>
-                <structure>
-                    <property name="name">Aggregation</property>
-                    <text-property name="displayName">Total Quantity</text-property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["qty"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
-                </structure>
             </list-property>
             <column id="157"/>
             <column id="158"/>
@@ -1582,7 +1569,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="116">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">Item</text-property>
@@ -1592,7 +1579,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="118">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">Quantity</text-property>
@@ -1602,7 +1589,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="120">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">Price</text-property>
@@ -1612,7 +1599,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="122">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">Net Amount</text-property>
@@ -1622,7 +1609,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="124">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">IGST</text-property>
@@ -1632,7 +1619,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="126">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">SGST</text-property>
@@ -1642,7 +1629,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="128">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">CGST</text-property>
@@ -1652,7 +1639,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                         <label id="130">
                             <property name="backgroundColor">teal</property>
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">11pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="color">white</property>
                             <text-property name="text">Gross Amount</text-property>
@@ -1662,143 +1649,58 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
             </header>
             <detail>
                 <row id="131">
+                    <property name="fontFamily">sans-serif</property>
+                    <property name="fontSize">14pt</property>
                     <property name="borderBottomStyle">none</property>
                     <property name="borderLeftStyle">none</property>
                     <property name="borderRightStyle">none</property>
                     <property name="borderTopStyle">none</property>
+                    <property name="textAlign">center</property>
                     <cell id="132">
-                        <data id="139">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">item</property>
-                                    <text-property name="displayName">item</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["item"]</expression>
-                                    <property name="dataType">string</property>
-                                </structure>
-                            </list-property>
+                        <data id="258">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">item</property>
                         </data>
                     </cell>
                     <cell id="134">
-                        <data id="145">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">qty</property>
-                                    <text-property name="displayName">qty</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["qty"]</expression>
-                                    <property name="dataType">integer</property>
-                                </structure>
-                            </list-property>
+                        <data id="259">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">qty</property>
                         </data>
                     </cell>
                     <cell id="136">
-                        <data id="143">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">price</property>
-                                    <text-property name="displayName">price</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["price"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                            </list-property>
+                        <data id="260">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">price</property>
                         </data>
                     </cell>
                     <cell id="138">
-                        <data id="141">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">net_amount</property>
-                                    <text-property name="displayName">net_amount</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["net_amount"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                            </list-property>
+                        <data id="261">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">net_amount</property>
                         </data>
                     </cell>
                     <cell id="140">
-                        <data id="137">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">igst</property>
-                                    <text-property name="displayName">igst</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["igst"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                            </list-property>
+                        <data id="262">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">igst</property>
                         </data>
                     </cell>
                     <cell id="142">
-                        <data id="147">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">sgst</property>
-                                    <text-property name="displayName">sgst</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["sgst"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                            </list-property>
+                        <data id="263">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">sgst</property>
                         </data>
                     </cell>
                     <cell id="144">
-                        <data id="133">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">cgst</property>
-                                    <text-property name="displayName">cgst</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["cgst"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                            </list-property>
+                        <data id="264">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">cgst</property>
                         </data>
                     </cell>
                     <cell id="146">
-                        <data id="135">
-                            <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">12pt</property>
-                            <property name="textAlign">center</property>
-                            <property name="dataSet">InvoiceList</property>
-                            <list-property name="boundDataColumns">
-                                <structure>
-                                    <property name="name">gross_amount</property>
-                                    <text-property name="displayName">gross_amount</text-property>
-                                    <expression name="expression" type="javascript">dataSetRow["gross_amount"]</expression>
-                                    <property name="dataType">decimal</property>
-                                </structure>
-                            </list-property>
+                        <data id="265">
+                            <property name="fontSize">11pt</property>
                             <property name="resultSetColumn">gross_amount</property>
                         </data>
                     </cell>
@@ -1833,7 +1735,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     <cell id="222">
                         <label id="210">
                             <property name="fontFamily">sans-serif</property>
-                            <property name="fontSize">14pt</property>
+                            <property name="fontSize">12pt</property>
                             <property name="fontWeight">bold</property>
                             <property name="display">inline</property>
                             <text-property name="text">Total:</text-property>
@@ -1843,6 +1745,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     <cell id="224"/>
                     <cell id="225">
                         <data id="247">
+                            <property name="fontSize">12pt</property>
                             <property name="dataSet">Invoice</property>
                             <list-property name="boundDataColumns">
                                 <structure>
@@ -1857,6 +1760,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     </cell>
                     <cell id="226">
                         <data id="248">
+                            <property name="fontSize">12pt</property>
                             <property name="dataSet">Invoice</property>
                             <list-property name="boundDataColumns">
                                 <structure>
@@ -1871,6 +1775,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     </cell>
                     <cell id="227">
                         <data id="250">
+                            <property name="fontSize">12pt</property>
                             <property name="dataSet">Invoice</property>
                             <list-property name="boundDataColumns">
                                 <structure>
@@ -1885,6 +1790,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     </cell>
                     <cell id="228">
                         <data id="249">
+                            <property name="fontSize">12pt</property>
                             <property name="dataSet">Invoice</property>
                             <list-property name="boundDataColumns">
                                 <structure>
@@ -1899,6 +1805,7 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
                     </cell>
                     <cell id="229">
                         <data id="251">
+                            <property name="fontSize">12pt</property>
                             <property name="dataSet">Invoice</property>
                             <list-property name="boundDataColumns">
                                 <structure>
@@ -1919,14 +1826,14 @@ from gst_invoice,gst_company,gst_party where gst_invoice.id = ?]]></xml-property
         </label>
         <label id="206">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <text-property name="text">Company: </text-property>
         </label>
         <data id="166">
             <property name="fontFamily">sans-serif</property>
-            <property name="fontSize">12pt</property>
+            <property name="fontSize">11pt</property>
             <property name="fontWeight">bold</property>
             <property name="display">inline</property>
             <property name="dataSet">Invoice</property>
