@@ -124,7 +124,6 @@
 
 	<action-record name="action-gst-invoice-use-invoice-address"
 		model="com.axelor.gst.db.Invoice">
-		<field name="shippingAddress" if="useInvoiceAddress" expr="eval: invoiceAddress" />
-		<field name="shippingAddress" if="!useInvoiceAddress" expr="" />
+		<field name="shippingAddress"  expr="eval: useInvoiceAddress?invoiceAddress:null" />
 	</action-record>
 </object-views>
