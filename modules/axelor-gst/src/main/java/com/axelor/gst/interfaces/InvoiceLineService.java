@@ -2,14 +2,18 @@ package com.axelor.gst.interfaces;
 
 import java.math.BigDecimal;
 
+import com.axelor.gst.db.InvoiceLine;
+
 public interface InvoiceLineService {
 
-	public BigDecimal add(BigDecimal n1, BigDecimal n2);
+	public BigDecimal getNetAmount(InvoiceLine iLine);
 
-	public BigDecimal multiply(BigDecimal n1, BigDecimal n2);
+	public BigDecimal getSgstCgst(InvoiceLine iLine,BigDecimal amount);
 
-	public BigDecimal multiply(Integer n1, BigDecimal n2);
-
-	public BigDecimal divide(BigDecimal n1, Integer n2);
+	public BigDecimal getGrossAmount1(BigDecimal amount, BigDecimal SGSTCGST);
+	
+	public BigDecimal getIgst(InvoiceLine iLine,BigDecimal amount);
+	
+	public BigDecimal getGrossAmount2(BigDecimal IGST,BigDecimal amount);
 
 }

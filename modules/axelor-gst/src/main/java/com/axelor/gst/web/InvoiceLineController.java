@@ -15,35 +15,41 @@ public class InvoiceLineController {
 	InvoiceLineService service;
 
 	public void setProduct(ActionRequest request, ActionResponse response) {
-
-		InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
-		Invoice invoice = request.getContext().getParent().asType(Invoice.class);
-
-		BigDecimal amount = service.multiply(iLine.getQty(), iLine.getPrice());
-
-		response.setValue("hsbn", iLine.getProduct().getHsbn());
-		response.setValue("item", "[" + iLine.getProduct().getCode() + "] " + iLine.getProduct().getName());
-		response.setValue("gstRate", iLine.getProduct().getGstRate());
-		response.setValue("price", iLine.getProduct().getCostPrice());
-
-		response.setValue("netAmount", amount);
 		try {
-			if (invoice.getInvoiceAddress().getState().getId() == invoice.getCompany().getAddress().getState()
-					.getId()) {
+			InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
+			Invoice invoice = request.getContext().getParent().asType(Invoice.class);
 
-				response.setValue("sgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
-				response.setValue("cgst", service.divide(service.multiply(amount, iLine.getGstRate()), 2));
-				response.setValue("grossAmount", service.add(amount, service.add(iLine.getSgst(), iLine.getCgst())));
+			if (invoice.getInvoiceAddress() != null || invoice.getCompany() != null) {
+				BigDecimal amount = service.getNetAmount(iLine);
 
-			}
+				response.setValue("hsbn", iLine.getProduct().getHsbn());
+				response.setValue("item", "[" + iLine.getProduct().getCode() + "] " + iLine.getProduct().getName());
+				response.setValue("gstRate", iLine.getProduct().getGstRate());
+				response.setValue("price", iLine.getProduct().getCostPrice());
 
-			else {
-				response.setValue("igst", service.multiply(amount, iLine.getGstRate()));
-				response.setValue("grossAmount", service.add(amount, iLine.getIgst()));
+				response.setValue("netAmount", amount);
+
+				if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
+
+					BigDecimal SGSTCGST = service.getSgstCgst(iLine, amount);
+					response.setValue("sgst", SGSTCGST);
+					response.setValue("cgst", SGSTCGST);
+					response.setValue("grossAmount", service.getGrossAmount1(amount, SGSTCGST));
+
+				}
+
+				else {
+
+					BigDecimal IGST = service.getIgst(iLine, amount);
+					response.setValue("igst", IGST);
+					response.setValue("grossAmount", service.getGrossAmount2(IGST, amount));
+				}
+			} else {
+				response.setFlash("Address of Company or Party Field is Empty, Please add those fields");
 			}
 
 		} catch (Exception e) {
-			response.setFlash("Address of Company or Party Field is Empty, Please add those fields");
+			response.setFlash(e.toString());
 		}
 
 	}

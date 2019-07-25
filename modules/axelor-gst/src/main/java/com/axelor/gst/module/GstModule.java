@@ -6,7 +6,7 @@ import com.axelor.gst.interfaces.SequenceService;
 import com.axelor.gst.services.InvoiceLineServiceImpl;
 import com.axelor.gst.services.SequenceServiceImpl;
 
-public class ServiceModule extends AxelorModule {
+public class GstModule extends AxelorModule {
 
 	@Override
 	protected void configure() {
