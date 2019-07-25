@@ -3,7 +3,6 @@ package com.axelor.gst.services;
 import java.math.BigDecimal;
 
 import com.axelor.gst.db.InvoiceLine;
-import com.axelor.gst.interfaces.InvoiceLineService;
 
 public class InvoiceLineServiceImpl implements InvoiceLineService {
 

@@ -1,9 +1,9 @@
 package com.axelor.gst.module;
 
 import com.axelor.app.AxelorModule;
-import com.axelor.gst.interfaces.InvoiceLineService;
-import com.axelor.gst.interfaces.SequenceService;
+import com.axelor.gst.services.InvoiceLineService;
 import com.axelor.gst.services.InvoiceLineServiceImpl;
+import com.axelor.gst.services.SequenceService;
 import com.axelor.gst.services.SequenceServiceImpl;
 
 public class GstModule extends AxelorModule {

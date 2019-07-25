@@ -1,4 +1,4 @@
-package com.axelor.gst.interfaces;
+package com.axelor.gst.services;
 
 import java.math.BigDecimal;
 

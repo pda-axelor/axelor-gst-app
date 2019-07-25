@@ -1,12 +1,17 @@
 package com.axelor.gst.services;
 
+import com.axelor.db.Model;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
-import com.axelor.gst.interfaces.SequenceService;
 import com.axelor.inject.Beans;
 import com.google.inject.persist.Transactional;
 
 public class SequenceServiceImpl implements SequenceService {
+
+	@Override
+	public Sequence getSequenceModel(Class<Model> dfg) {
+		return Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", dfg.getSimpleName()).fetchOne();
+	}
 
 	@Override
 	@Transactional
@@ -37,4 +42,5 @@ public class SequenceServiceImpl implements SequenceService {
 			System.out.println("End of Padding");
 		}
 	}
+
 }

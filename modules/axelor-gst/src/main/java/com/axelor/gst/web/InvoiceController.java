@@ -14,7 +14,7 @@ import com.axelor.gst.db.Product;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.ProductRepository;
 import com.axelor.gst.db.repo.SequenceRepository;
-import com.axelor.gst.interfaces.SequenceService;
+import com.axelor.gst.services.SequenceService;
 import com.axelor.inject.Beans;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
@@ -52,8 +52,7 @@ public class InvoiceController {
 				response.setValue("status", 2);
 				@SuppressWarnings("unchecked")
 				Class<Model> model = (Class<Model>) request.getContext().getContextClass();
-				Sequence seq = Beans.get(SequenceRepository.class).all()
-						.filter("self.model.name=?1", model.getSimpleName()).fetchOne();
+				Sequence seq = seqService.getSequenceModel(model);
 				response.setValue("reference", seq.getNextNumber());
 				seqService.generateNextSequence(seq);
 				break;
