@@ -44,7 +44,7 @@
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
 		css="panel-red"
 		onNew="action-gst-invoice-record-on-new,com.axelor.gst.web.InvoiceController:setSelectedProducts"
-		readonlyIf="status==4">
+		readonlyIf="status==3 || status==4">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
 				onClick="action-method-invoice-set-logo-attachment-path,action-report-invoice"
@@ -72,8 +72,9 @@
 
 				<button name="cancelBtn" title="Cancel Invoice"
 					onClick="com.axelor.gst.web.InvoiceController:onCancel,save"
-					prompt="Are you sure you want to cancel the invoice?" icon="fa-times" css="btn-danger"/>
-			</button-group>	
+					prompt="Are you sure you want to cancel the invoice?" icon="fa-times"
+					css="btn-danger" />
+			</button-group>
 		</panel>
 
 
@@ -85,12 +86,11 @@
 
 			<panel title="Party Details" css="panel-blue">
 				<field name="party" required="true"
-					onChange="com.axelor.gst.web.InvoiceController:setParty" />
+					onChange="action-method-invoice-set-party" />
 				<field name="partyContact" />
 				<field name="invoiceAddress" required="true" />
 				<field name="shippingAddress" />
-				<field name="useInvoiceAddress"
-					onChange="com.axelor.gst.web.InvoiceController:setShippingAddress" />
+				<field name="useInvoiceAddress" onChange="action-gst-invoice-use-invoice-address" />
 			</panel>
 
 			<panel title="Invoice Items" css="panel-green">
@@ -113,7 +113,18 @@
 		<param name="LogoAttachmentPath" expr="eval: LogoAttachmentPath" />
 		<param name="LogoPath" expr="eval: LogoPath" />
 	</action-report>
+
 	<action-method name="action-method-invoice-set-logo-attachment-path">
 		<call class="com.axelor.gst.web.InvoiceController" method="setAttachmentPath" />
 	</action-method>
+	
+	<action-method name="action-method-invoice-set-party">
+		<call class="com.axelor.gst.web.InvoiceController" method="setParty" />
+	</action-method>
+
+	<action-record name="action-gst-invoice-use-invoice-address"
+		model="com.axelor.gst.db.Invoice">
+		<field name="shippingAddress" if="useInvoiceAddress" expr="eval: invoiceAddress" />
+		<field name="shippingAddress" if="!useInvoiceAddress" expr="" />
+	</action-record>
 </object-views>

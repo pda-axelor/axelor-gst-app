@@ -28,27 +28,15 @@ public class InvoiceController {
 	public void setParty(ActionRequest request, ActionResponse response) {
 		try {
 			Invoice invoice = request.getContext().asType(Invoice.class);
-			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
-					.findFirst();
+			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream()
+					.filter(a -> a.getType() == 2).findFirst();
 			response.setValue("partyContact",
 					invoice.getParty().getContactList().stream().filter(c -> c.getType() == 1).findFirst());
 			response.setValue("invoiceAddress", invoiceAddress);
-			if (invoice.getUseInvoiceAddress()) {
-				response.setValue("shippingAddress", invoiceAddress);
-			}
-		} catch (Exception e) {
-			response.setFlash(e.toString());
-		}
-	}
+			response.setValue("useInvoiceAddress", true);
+			response.setValue("shippingAddress", invoiceAddress);
 
-	public void setShippingAddress(ActionRequest request, ActionResponse response) {
-		try {
-			Invoice invoice = request.getContext().asType(Invoice.class);
-			if (invoice.getUseInvoiceAddress()) {
-				response.setValue("shippingAddress", invoice.getInvoiceAddress());
-			} else {
-				response.setValue("shippingAddress", "");
-			}
+
 		} catch (Exception e) {
 			response.setFlash(e.toString());
 		}

@@ -15,9 +15,10 @@
 		</search-fields>
 		<dataset type="jpql"> 
   <![CDATA[
- SELECT p.name as customer,Count(i.id) as invoices 
- FROM Invoice i,Party p 
- WHERE i.status != '3' 
+ SELECT p.name as customer,COUNT(i.id) as invoices 
+ FROM Invoice i
+ INNER JOIN Party p ON p.id = i.party   
+ WHERE i.status != 3 
  AND p.isCustomer ='t' 
  AND i.dateTime 
  BETWEEN :fromDateTime AND :toDateTime  group by p.name
@@ -32,40 +33,16 @@
 
 		<dataset type="jpql"> 
   <![CDATA[
- select s.name as state,Count(p.id) as customers from Party p,State s where p.isCustomer='t' group by s.name
+ SELECT a.state.name as state,Count(p.id) as customers 
+ FROM Party p, Address a
+ WHERE p.isCustomer='t' 
+ GROUP BY a.state.name
   ]]>
   </dataset>
 		<category key="state" type="text" title="State" />
 		<series key="customers" type="pie" title="Customers" />
 	</chart>
 
-
-	<custom name="invoice-custom-table" title="Invoices Older than One Month"
-		css="report-table">
-		<field name="status" />
-		<field name="company" />
-		<field name="reference" />
-		<field name="dateTime" />
-		<field name="useInvoiceAddress" />
-		<field name="netAmount" />
-		<field name="netIGST" />
-		<field name="netCGST" />
-		<field name="netSGST" />
-		<field name="grossAmount" />
-		<dataset type="sql">
-  <![CDATA[
-    select status as status, company as company, reference as reference, date_time as datetime, gross_amount as grossAmount
-    from gst_invoice 
-    where date_time <= current_timestamp - interval'30 days' AND status=2;
-  ]]>
-  </dataset>
-		<template>
-  <![CDATA[
- <report-table data='data' columns='status,company,reference,datetime,grossAmount'></report-table>  
-  </div>
-  ]]>
-  </template>
-	</custom>
 
 
 	<chart name="invoice-status-chart-bar" title="Amount per Status">
@@ -92,7 +69,8 @@
 
 
 
-	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Product" onInit="action-record-set-default-date-time">
+	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product"
+		onInit="action-record-set-default-date-time">
 		<search-fields>
 			<field type="datetime" name="fromDateTime" title="From Date" />
 			<field type="datetime" name="toDateTime" title="To Date" />
@@ -100,17 +78,19 @@
 		<dataset type="jpql"> 
   <![CDATA[
   
-  SELECT p.name as product,COUNT(i.id) as invoices FROM Invoice i
+  SELECT p.name as product,c.name as category,COUNT(i.id) as invoices FROM Invoice i
   INNER JOIN InvoiceLine l ON i.id = l.invoice
   INNER JOIN Product p ON l.product=p.id 
+  INNER JOIN ProductCategory c ON p.productCategory = c.id
   WHERE i.status=3 
   AND (i.dateTime BETWEEN :fromDateTime AND :toDateTime) 
-  GROUP BY p.name
+  GROUP BY p.name,c.name
  
   ]]>
   </dataset>
-		<category key="product" type="text" title="Product" />
-		<series key="invoices" type="bar" title="Paid Invoices" />
+		<category key="category" type="text" title="Product" />
+		<series key="invoices" type="bar" title="Paid Invoices"
+			groupBy="product" />
 	</chart>
 
 	<action-record model="com.axelor.gst.db.Invoice"

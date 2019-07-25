@@ -4,12 +4,15 @@
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.1.xsd">
 
 	<dashboard name="gst.root.dashboard" title="GST Dashboard">
-		<dashlet action="chart:invoice-chart-bar" css="panel-blue" colSpan="4"/>
-		<dashlet action="chart:customer-chart-pie" css="panel-red" colSpan="4"/>
-		<dashlet action="chart:invoice-category-product-chart-bar" css="panel-red" colSpan="4"/>
+		<dashlet action="chart:invoice-chart-bar" css="panel-blue"
+			colSpan="6" />
+		<dashlet action="chart:customer-chart-pie" css="panel-red"
+			colSpan="6" />
+		<dashlet action="chart:invoice-category-product-chart-bar"
+			css="panel-red" colSpan="12" />
 		<dashlet action="chart:invoice-status-chart-bar" css="panel-violet" />
 		<dashlet action="chart:invoice-status-count-chart-line" css="panel-black" />
-		<dashlet action="custom:invoice-custom-table" css="panel-green"
+		<dashlet action="action-view-invoice-grid-older" css="panel-green"
 			colSpan="12" />
 	</dashboard>
 
@@ -20,6 +23,14 @@
 
 	<action-view name="action.gst.dashboard" title="Dashboard">
 		<view type="dashboard" name="gst.root.dashboard" />
+	</action-view>
+
+	<action-view name="action-view-invoice-grid-older" title="Invoices"
+		model="com.axelor.gst.db.Invoice">
+		<view type="grid" name="invoice-grid" />
+		<view type="form" name="invoice-form" />
+		<domain> date_time &lt; :date AND status=2</domain>
+		<context name="date" expr="eval:__datetime__.minusMonths(1)" />
 	</action-view>
 
 </object-views>
