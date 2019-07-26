@@ -29,7 +29,7 @@ public class InvoiceController {
 
 	@Inject
 	SequenceService seqService;
-	
+
 	@Inject
 	InvoiceLineService iLineservice;
 
@@ -111,17 +111,29 @@ public class InvoiceController {
 					Product p = pList.get(i);
 					InvoiceLine il = new InvoiceLine();
 					il.setProduct(p);
-					il.setItem("["+p.getCode()+"] "+p.getName());
+					il.setItem("[" + p.getCode() + "] " + p.getName());
 					il.setPrice(p.getCostPrice());
 					lineList.add(il);
 				}
 				invoice.setInvoiceItemsList(lineList);
 				invoice.setCompany(company);
 				invoice.setParty(party);
-				Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
-						.findFirst().get();
-				invoice.setInvoiceAddress(invoiceAddress);
-				invoice.setShippingAddress(invoiceAddress);
+				
+				if (invoice.getParty().getContactList().stream().filter(a -> a.getType() == 1).findFirst()
+						.isPresent()) {
+					Contact partyContact = invoice.getParty().getContactList().stream().filter(a -> a.getType() == 1)
+							.findFirst().get();
+					invoice.setPartyContact(partyContact);
+		
+				}
+				
+				if (invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2).findFirst()
+						.isPresent()) {
+					Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
+							.findFirst().get();
+					invoice.setInvoiceAddress(invoiceAddress);
+					invoice.setShippingAddress(invoiceAddress);
+				}
 			}
 
 			System.out.println(request.getContext().entrySet());

@@ -107,7 +107,7 @@
 		<panel name="mainPanel">
 			<field name="company" required="true" canEdit="false" />
 			<field name="party" required="true" />
-			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
+			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice" readonlyIf="(!party)||(!company)"
 				onClick="action.gst.invoice.create.view,close" />
 		</panel>
 	</form>

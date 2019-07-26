@@ -101,7 +101,7 @@
 		<view type="form" name="invoice-form" />
 		<context name="companyId" expr="eval: company.id" if="company"/>
 		<context name="partyId" expr="eval: party.id" if="party"/>
-		<context name="ids" expr="eval:ids"/>
+		<context name="ids" expr="eval:ids" if="ids"/>
 	</action-view>
 
 	<menuitem name="axelor-gst-root-invoice-draft" parent="axelor-gst-root-invoice"
