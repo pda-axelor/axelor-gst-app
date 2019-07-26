@@ -8,12 +8,17 @@ import java.util.Optional;
 import com.axelor.app.AppSettings;
 import com.axelor.db.Model;
 import com.axelor.gst.db.Address;
+import com.axelor.gst.db.Company;
+import com.axelor.gst.db.Contact;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
+import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Product;
 import com.axelor.gst.db.Sequence;
+import com.axelor.gst.db.repo.CompanyRepository;
+import com.axelor.gst.db.repo.PartyRepository;
 import com.axelor.gst.db.repo.ProductRepository;
-import com.axelor.gst.db.repo.SequenceRepository;
+import com.axelor.gst.services.InvoiceLineService;
 import com.axelor.gst.services.SequenceService;
 import com.axelor.inject.Beans;
 import com.axelor.rpc.ActionRequest;
@@ -24,23 +29,9 @@ public class InvoiceController {
 
 	@Inject
 	SequenceService seqService;
-
-	public void setParty(ActionRequest request, ActionResponse response) {
-		try {
-			Invoice invoice = request.getContext().asType(Invoice.class);
-			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream()
-					.filter(a -> a.getType() == 2).findFirst();
-			response.setValue("partyContact",
-					invoice.getParty().getContactList().stream().filter(c -> c.getType() == 1).findFirst());
-			response.setValue("invoiceAddress", invoiceAddress);
-			response.setValue("useInvoiceAddress", true);
-			response.setValue("shippingAddress", invoiceAddress);
-
-
-		} catch (Exception e) {
-			response.setFlash(e.toString());
-		}
-	}
+	
+	@Inject
+	InvoiceLineService iLineservice;
 
 	public void changeStatus(ActionRequest request, ActionResponse response) {
 		try {
@@ -102,29 +93,59 @@ public class InvoiceController {
 
 	}
 
-	public void setSelectedProducts(ActionRequest request, ActionResponse response) {
+	public void setSelected(ActionRequest request, ActionResponse response) {
 		try {
+			Invoice invoice = request.getContext().asType(Invoice.class);
+
 			if (request.getContext().get("ids") != null) {
+
 				List<Long> productIds = (List<Long>) request.getContext().get("ids");
+				Long cId = new Long(request.getContext().get("companyId").toString());
+				Long pId = new Long(request.getContext().get("partyId").toString());
 				List<Product> pList = Beans.get(ProductRepository.class).all().filter("id in (?1)", productIds).fetch();
+				Company company = Beans.get(CompanyRepository.class).find(cId);
+				Party party = Beans.get(PartyRepository.class).find(pId);
 				List<InvoiceLine> lineList = new ArrayList<InvoiceLine>();
 
 				for (int i = 0; i < pList.size(); i++) {
+					Product p = pList.get(i);
 					InvoiceLine il = new InvoiceLine();
-					il.setProduct(pList.get(i));
+					il.setProduct(p);
+					il.setItem("["+p.getCode()+"] "+p.getName());
+					il.setPrice(p.getCostPrice());
 					lineList.add(il);
 				}
-
-				Invoice invoice = request.getContext().asType(Invoice.class);
 				invoice.setInvoiceItemsList(lineList);
-				response.setValues(invoice);
-
+				invoice.setCompany(company);
+				invoice.setParty(party);
+				Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
+						.findFirst().get();
+				invoice.setInvoiceAddress(invoiceAddress);
+				invoice.setShippingAddress(invoiceAddress);
 			}
+
+			System.out.println(request.getContext().entrySet());
+
+			response.setValues(invoice);
 
 		} catch (Exception e) {
 			response.setFlash(e.toString());
 		}
 
+	}
+
+	public void setParty(ActionRequest request, ActionResponse response) {
+		Invoice invoice = request.getContext().asType(Invoice.class);
+
+		if (invoice.getParty() != null) {
+			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream()
+					.filter(a -> a.getType() == 2).findFirst();
+			response.setValue("partyContact",
+					invoice.getParty().getContactList().stream().filter(c -> c.getType() == 1).findFirst());
+			response.setValue("invoiceAddress", invoiceAddress);
+			response.setValue("useInvoiceAddress", true);
+			response.setValue("shippingAddress", invoiceAddress);
+		}
 	}
 
 }

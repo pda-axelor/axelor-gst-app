@@ -99,7 +99,9 @@
 	<action-view name="action.gst.invoice.create.view" title="New Invoice"
 		model="com.axelor.gst.db.Invoice">
 		<view type="form" name="invoice-form" />
-		<context name="ids" expr="eval:_ids"/>
+		<context name="companyId" expr="eval: company.id" if="company"/>
+		<context name="partyId" expr="eval: party.id" if="party"/>
+		<context name="ids" expr="eval:ids"/>
 	</action-view>
 
 	<menuitem name="axelor-gst-root-invoice-draft" parent="axelor-gst-root-invoice"

@@ -37,8 +37,8 @@
 		<toolbar>
 			<button name="btnPrintProductGrid" icon="fa-print" title="Print"
 				onClick="action-report-print-product-list" />
-			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
-				onClick="action.gst.invoice.create.view" />
+			<button name="btnInvoicePopUp" icon="fa-th" title="Create Invoice"
+				onClick="action-gst-invoice-pop-up" />
 		</toolbar>
 		
 		<field name="name" />
@@ -88,6 +88,7 @@
 
 	<action-report name="action-report-print-product-list"
 		design="productList.rptdesign" output="ProductList" format="pdf" />
+		
 
 
 </object-views>

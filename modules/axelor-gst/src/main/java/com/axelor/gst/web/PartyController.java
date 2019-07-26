@@ -15,8 +15,8 @@ public class PartyController {
 	public void setReference(ActionRequest request, ActionResponse response) {
 		try {
 			@SuppressWarnings("unchecked")
-			Class<Model> dfg = (Class<Model>) request.getContext().getContextClass();
-			Sequence seq = seqService.getSequenceModel(dfg);
+			Class<Model> model = (Class<Model>) request.getContext().getContextClass();
+			Sequence seq = seqService.getSequenceModel(model);
 			response.setValue("reference", seq.getNextNumber());
 			seqService.generateNextSequence(seq);
 		} catch (NullPointerException e) {

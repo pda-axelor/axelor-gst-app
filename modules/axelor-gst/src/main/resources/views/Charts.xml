@@ -96,6 +96,6 @@
 	<action-record model="com.axelor.gst.db.Invoice"
 		name="action-record-set-default-date-time">
 		<field name="toDateTime" expr="eval:__datetime__" />
-		<field name="fromDateTime" expr="eval:__datetime__.dayOfMonth().withMinimumValue()" />
+		<field name="fromDateTime" expr="eval:" />
 	</action-record>
 </object-views>
