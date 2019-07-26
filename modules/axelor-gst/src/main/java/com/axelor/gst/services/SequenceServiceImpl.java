@@ -9,8 +9,8 @@ import com.google.inject.persist.Transactional;
 public class SequenceServiceImpl implements SequenceService {
 
 	@Override
-	public Sequence getSequenceModel(Class<Model> model) {
-		return Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", model.getSimpleName()).fetchOne();
+	public Sequence getSequenceModel(String name) {
+		return Beans.get(SequenceRepository.class).all().filter("self.model.name=?1", name).fetchOne();
 	}
 
 	@Override

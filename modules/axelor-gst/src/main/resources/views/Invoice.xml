@@ -103,12 +103,14 @@
 	</form>
 
 	<form name="gst-invoice-details-popup" title="Enter Details"
-		model="com.axelor.gst.db.Invoice" css="panel-violet" onNew="">
+		model="com.axelor.gst.db.Wizard" css="panel-violet" onNew="">
 		<panel name="mainPanel">
-			<field name="company" required="true" canEdit="false" />
-			<field name="party" required="true" />
-			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice" readonlyIf="(!party)||(!company)"
-				onClick="action.gst.invoice.create.view,close" />
+			<field name="$company" type="many-to-one" title="Company"
+				required="true" target="com.axelor.gst.db.Company" />
+			<field name="$party" type="many-to-one" title="Party" required="true"
+				target="com.axelor.gst.db.Party" />
+			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
+				readonlyIf="(!$party)||(!$company)" onClick="action.gst.invoice.create.view,close" />
 		</panel>
 	</form>
 

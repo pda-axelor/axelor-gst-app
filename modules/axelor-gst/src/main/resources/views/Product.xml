@@ -66,7 +66,7 @@
 			<field name="code" required="true" />
 			<field name="hsbn" />
 			<field name="productCategory"
-				onChange="com.axelor.gst.web.ProductController:setGST" />
+				onChange="action-record-set-gst" />
 			<field name="salePrice" />
 			<field name="costPrice" />
 			<field name="image" widget="image" />
@@ -89,6 +89,8 @@
 	<action-report name="action-report-print-product-list"
 		design="productList.rptdesign" output="ProductList" format="pdf" />
 		
-
+   <action-record name="action-record-set-gst" model="com.axelor.gst.db.Product">
+      <field name="gstRate" expr="eval:productCategory.gstRate"/>
+   </action-record>
 
 </object-views>

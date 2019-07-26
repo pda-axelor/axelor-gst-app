@@ -41,11 +41,6 @@ public class InvoiceController {
 
 			case 1:
 				response.setValue("status", 2);
-				@SuppressWarnings("unchecked")
-				Class<Model> model = (Class<Model>) request.getContext().getContextClass();
-				Sequence seq = seqService.getSequenceModel(model);
-				response.setValue("reference", seq.getNextNumber());
-				seqService.generateNextSequence(seq);
 				break;
 
 			case 2:
@@ -118,15 +113,15 @@ public class InvoiceController {
 				invoice.setInvoiceItemsList(lineList);
 				invoice.setCompany(company);
 				invoice.setParty(party);
-				
+
 				if (invoice.getParty().getContactList().stream().filter(a -> a.getType() == 1).findFirst()
 						.isPresent()) {
 					Contact partyContact = invoice.getParty().getContactList().stream().filter(a -> a.getType() == 1)
 							.findFirst().get();
 					invoice.setPartyContact(partyContact);
-		
+
 				}
-				
+
 				if (invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2).findFirst()
 						.isPresent()) {
 					Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
