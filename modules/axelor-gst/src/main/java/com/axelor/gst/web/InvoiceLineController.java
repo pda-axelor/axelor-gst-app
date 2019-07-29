@@ -28,25 +28,24 @@ public class InvoiceLineController {
 				response.setValue("price", iLine.getProduct().getCostPrice());
 
 				response.setValue("netAmount", amount);
-			
-					if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
 
-						BigDecimal SGSTCGST = service.getSgstCgst(iLine, amount);
-						response.setValue("sgst", SGSTCGST);
-						response.setValue("cgst", SGSTCGST);
-						response.setValue("grossAmount", service.getGrossAmount1(amount, SGSTCGST));
+				if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
 
-					}
-			
+					BigDecimal SGST_CGST = service.getSgstCgst(iLine, amount);
+					response.setValue("sgst", SGST_CGST);
+					response.setValue("cgst", SGST_CGST);
+					response.setValue("grossAmount", service.getGrossAmount1(amount, SGST_CGST));
+
+				}
 
 				else {
 
 					BigDecimal IGST = service.getIgst(iLine, amount);
 					response.setValue("igst", IGST);
 					response.setValue("grossAmount", service.getGrossAmount2(IGST, amount));
-				
+
 				}
-			
+
 			} else {
 				response.setFlash("Address of Company or Party Field is Empty, Please add those fields");
 				response.setReload(true);

@@ -9,7 +9,8 @@
 
 	<entity name="Invoice" sequential="true" cachable="true">
 
-		<integer name="status" readonly="true" min="1" max="4" selection="invoice.status.selection" default="1"/>		
+		<integer name="status" readonly="true" min="1" max="4"
+			selection="invoice.status.selection" default="1" />
 		<many-to-one name="company" ref="com.axelor.gst.db.Company"
 			required="true" />
 		<string name="reference" readonly="true" />
@@ -29,5 +30,12 @@
 		<decimal name="grossAmount" />
 		<one-to-many name="invoiceItemsList" ref="com.axelor.gst.db.InvoiceLine"
 			mappedBy="invoice" />
+
+		<extra-code><![CDATA[
+			public static final int INVOICE_STATUS_SELECT_DRAFT = 1;
+			public static final int INVOICE_STATUS_SELECT_VALIDATED = 2;
+			public static final int INVOICE_STATUS_SELECT_PAID = 3;
+			public static final int INVOICE_STATUS_SELECT_CANCELLED = 4;
+			]]></extra-code>
 	</entity>
 </domain-models>

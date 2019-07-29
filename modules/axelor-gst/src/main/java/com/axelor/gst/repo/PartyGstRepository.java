@@ -8,7 +8,7 @@ import com.axelor.gst.db.repo.PartyRepository;
 import com.axelor.gst.services.SequenceService;
 import com.google.inject.Inject;
 
-public class PartySequenceRepository extends PartyRepository {
+public class PartyGstRepository extends PartyRepository {
 
 	@Inject
 	SequenceService seqService;

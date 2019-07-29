@@ -1,6 +1,5 @@
 package com.axelor.gst.services;
 
-import com.axelor.db.Model;
 import com.axelor.gst.db.Sequence;
 import com.axelor.gst.db.repo.SequenceRepository;
 import com.axelor.inject.Beans;

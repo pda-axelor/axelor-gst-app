@@ -8,7 +8,7 @@ import com.axelor.gst.db.repo.InvoiceRepository;
 import com.axelor.gst.services.SequenceService;
 import com.google.inject.Inject;
 
-public class InvoiceSequenceRepository extends InvoiceRepository {
+public class InvoiceGstRepository extends InvoiceRepository {
 
 	@Inject
 	SequenceService seqService;
@@ -20,7 +20,7 @@ public class InvoiceSequenceRepository extends InvoiceRepository {
 			if (seq == null)
 				throw new PersistenceException();
 
-			if (invoice.getStatus() == 2) {
+			if (invoice.getStatus() == INVOICE_STATUS_SELECT_VALIDATED) {
 				invoice.setReference(seq.getNextNumber());
 				seqService.generateNextSequence(seq);
 				return super.save(invoice);
