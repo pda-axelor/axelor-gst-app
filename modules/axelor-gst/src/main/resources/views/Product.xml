@@ -33,14 +33,14 @@
 	</cards>
 
 	<grid name="product-grid" title="Product" model="com.axelor.gst.db.Product">
-	
+
 		<toolbar>
 			<button name="btnPrintProductGrid" icon="fa-print" title="Print"
 				onClick="action-report-print-product-list" />
 			<button name="btnInvoicePopUp" icon="fa-th" title="Create Invoice"
 				onClick="action-gst-invoice-pop-up" />
 		</toolbar>
-		
+
 		<field name="name" />
 		<field name="code" />
 		<field name="hsbn" />
@@ -65,8 +65,7 @@
 			<field name="name" required="true" />
 			<field name="code" required="true" />
 			<field name="hsbn" />
-			<field name="productCategory"
-				onChange="action-record-set-gst" />
+			<field name="productCategory" onChange="action-record-set-gst" />
 			<field name="salePrice" />
 			<field name="costPrice" />
 			<field name="image" widget="image" />
@@ -76,8 +75,7 @@
 	</form>
 
 	<action-method name="action-method-product-set-attachment-path">
-		<call class="com.axelor.gst.web.ProductController"
-			method="setAttachmentPath" />
+		<call class="com.axelor.gst.web.ProductController" method="setAttachmentPath" />
 	</action-method>
 
 	<action-report name="action-report-product" design="product.rptdesign"
@@ -87,10 +85,12 @@
 	</action-report>
 
 	<action-report name="action-report-print-product-list"
-		design="productList.rptdesign" output="ProductList" format="pdf" />
-		
-   <action-record name="action-record-set-gst" model="com.axelor.gst.db.Product">
-      <field name="gstRate" expr="eval:productCategory.gstRate"/>
-   </action-record>
+		design="productList.rptdesign" output="ProductList" format="pdf">
+		<param name="ids" expr="eval:_ids" />
+	</action-report>
+
+	<action-record name="action-record-set-gst" model="com.axelor.gst.db.Product">
+		<field name="gstRate" expr="eval:productCategory.gstRate" />
+	</action-record>
 
 </object-views>

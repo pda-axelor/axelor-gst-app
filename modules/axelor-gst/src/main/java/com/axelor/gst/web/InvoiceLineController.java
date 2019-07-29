@@ -16,41 +16,45 @@ public class InvoiceLineController {
 
 	public void setProduct(ActionRequest request, ActionResponse response) {
 		try {
+
 			InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
 			Invoice invoice = request.getContext().getParent().asType(Invoice.class);
+			if (invoice.getParty() != null && invoice.getCompany() != null) {
+				if (invoice.getInvoiceAddress() != null && invoice.getCompany().getAddress() != null) {
+					BigDecimal amount = service.getNetAmount(iLine);
 
-			if (invoice.getInvoiceAddress() != null && invoice.getCompany().getAddress() != null) {
-				BigDecimal amount = service.getNetAmount(iLine);
+					response.setValue("hsbn", iLine.getProduct().getHsbn());
+					response.setValue("item", "[" + iLine.getProduct().getCode() + "] " + iLine.getProduct().getName());
+					response.setValue("gstRate", iLine.getProduct().getGstRate());
+					response.setValue("price", iLine.getProduct().getCostPrice());
 
-				response.setValue("hsbn", iLine.getProduct().getHsbn());
-				response.setValue("item", "[" + iLine.getProduct().getCode() + "] " + iLine.getProduct().getName());
-				response.setValue("gstRate", iLine.getProduct().getGstRate());
-				response.setValue("price", iLine.getProduct().getCostPrice());
+					response.setValue("netAmount", amount);
 
-				response.setValue("netAmount", amount);
+					if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
 
-				if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
+						BigDecimal SGST_CGST = service.getSgstCgst(iLine, amount);
+						response.setValue("sgst", SGST_CGST);
+						response.setValue("cgst", SGST_CGST);
+						response.setValue("grossAmount", service.getGrossAmount1(amount, SGST_CGST));
 
-					BigDecimal SGST_CGST = service.getSgstCgst(iLine, amount);
-					response.setValue("sgst", SGST_CGST);
-					response.setValue("cgst", SGST_CGST);
-					response.setValue("grossAmount", service.getGrossAmount1(amount, SGST_CGST));
+					}
 
+					else {
+
+						BigDecimal IGST = service.getIgst(iLine, amount);
+						response.setValue("igst", IGST);
+						response.setValue("grossAmount", service.getGrossAmount2(IGST, amount));
+
+					}
+
+				} else {
+					response.setFlash("Address of Company or Party Field is Empty, Please add those fields");
+					response.setReload(true);
 				}
-
-				else {
-
-					BigDecimal IGST = service.getIgst(iLine, amount);
-					response.setValue("igst", IGST);
-					response.setValue("grossAmount", service.getGrossAmount2(IGST, amount));
-
-				}
-
 			} else {
-				response.setFlash("Address of Company or Party Field is Empty, Please add those fields");
-				response.setReload(true);
-			}
+				response.setFlash("Please enter both Company and Party Fields");
 
+			}
 		} catch (Exception e) {
 			response.setFlash(e.toString());
 		}

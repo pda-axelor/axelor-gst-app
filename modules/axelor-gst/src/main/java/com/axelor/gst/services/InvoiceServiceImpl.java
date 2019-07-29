@@ -61,14 +61,14 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Override
-	public List<BigDecimal> getCalculations(List<InvoiceLine> list) {
-		List<BigDecimal> cals = new ArrayList<BigDecimal>();
-		cals.add(list.stream().map(l -> l.getNetAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		cals.add(list.stream().map(l -> l.getIgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		cals.add(list.stream().map(l -> l.getCgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		cals.add(list.stream().map(l -> l.getSgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		cals.add(list.stream().map(l -> l.getGrossAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		return cals;
+	public Invoice getCalculations(List<InvoiceLine> list, Invoice invoice) {
+
+		invoice.setNetAmount(list.stream().map(l -> l.getNetAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		invoice.setNetIGST(list.stream().map(l -> l.getIgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		invoice.setNetCGST(list.stream().map(l -> l.getCgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		invoice.setNetSGST(list.stream().map(l -> l.getSgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		invoice.setGrossAmount(list.stream().map(l -> l.getGrossAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		return invoice;
 	}
 
 }

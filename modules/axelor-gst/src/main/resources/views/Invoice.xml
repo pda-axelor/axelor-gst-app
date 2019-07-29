@@ -42,7 +42,9 @@
 	</grid>
 
 	<form name="invoice-form" title="Invoice" model="com.axelor.gst.db.Invoice"
-		css="panel-red" onNew="action-gst-invoice-record-on-new,com.axelor.gst.web.InvoiceController:setSelected" readonlyIf="status==3 || status==4">
+		css="panel-red"
+		onNew="action-gst-invoice-record-on-new,com.axelor.gst.web.InvoiceController:setSelected"
+		readonlyIf="status==3 || status==4">
 		<toolbar>
 			<button name="btnPrint" icon="fa-print" title="Generate PDF"
 				onClick="action-method-invoice-set-logo-attachment-path,action-report-invoice"
@@ -108,7 +110,8 @@
 			<field name="$party" type="many-to-one" title="Party" required="true"
 				target="com.axelor.gst.db.Party" />
 			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
-				readonlyIf="(!$party)||(!$company)" onClick="com.axelor.gst.web.InvoiceController:invoiceView,close" />
+				readonlyIf="(!$party)||(!$company)"
+				onClick="com.axelor.gst.web.InvoiceController:invoiceView,com.axelor.gst.web.InvoiceLineController:setProduct,close" />
 		</panel>
 	</form>
 
@@ -136,7 +139,8 @@
 		<field name="shippingAddress" expr="eval: useInvoiceAddress?invoiceAddress:null" />
 	</action-record>
 
-	<action-view name="action-gst-invoice-pop-up" title="Invoice" model="com.axelor.gst.db.Invoice">
+	<action-view name="action-gst-invoice-pop-up" title="Invoice"
+		model="com.axelor.gst.db.Invoice">
 		<view type="form" name="gst-invoice-details-popup" />
 		<view-param name="popup" value="true" />
 		<view-param name="show-toolbar" value="false" />

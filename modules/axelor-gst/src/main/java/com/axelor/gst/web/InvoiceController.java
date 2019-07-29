@@ -1,6 +1,5 @@
 package com.axelor.gst.web;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +46,6 @@ public class InvoiceController {
 				response.setAttr("statusBtn", "readonly", "true");
 				break;
 			}
-		} catch (NullPointerException e) {
-			response.setFlash("Please Set a Sequence for the Model");
 		} catch (Exception e) {
 			response.setFlash(e.toString());
 		}
@@ -64,12 +61,7 @@ public class InvoiceController {
 
 		Invoice invoice = request.getContext().asType(Invoice.class);
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
-		List<BigDecimal> cals = invoiceService.getCalculations(list);
-		response.setValue("netAmount", cals.get(0));
-		response.setValue("netIGST", cals.get(1));
-		response.setValue("netCGST", cals.get(2));
-		response.setValue("netSGST", cals.get(3));
-		response.setValue("grossAmount", cals.get(4));
+		response.setValues(invoiceService.getCalculations(list, invoice));
 
 	}
 
