@@ -7,4 +7,7 @@ public interface SequenceService {
 	public Sequence getSequenceModel(String name);
 
 	public void generateNextSequence(Sequence seq);
+
+	public String generateFirstSequence(Sequence seq);
+	
 }

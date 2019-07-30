@@ -111,7 +111,7 @@
 				target="com.axelor.gst.db.Party" />
 			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
 				readonlyIf="(!$party)||(!$company)"
-				onClick="com.axelor.gst.web.InvoiceController:invoiceView,com.axelor.gst.web.InvoiceLineController:setProduct,close" />
+				onClick="com.axelor.gst.web.InvoiceController:invoiceView,close" />
 		</panel>
 	</form>
 

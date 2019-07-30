@@ -82,6 +82,7 @@
 		output="product" format="pdf">
 		<param name="productId" expr="eval: id" />
 		<param name="AttachmentPath" expr="eval: AttachmentPath" />
+		<param name="ImageFilePath" expr="eval: FilePath"/>
 	</action-report>
 
 	<action-report name="action-report-print-product-list"

@@ -9,6 +9,6 @@ public interface InvoiceService {
 
 	public Invoice setInvoice(Invoice invoice, List<Long> productIds, Long cId, Long pId);
 
-	public Invoice getCalculations(List<InvoiceLine> list, Invoice invoice);
+	public Invoice calculateData(List<InvoiceLine> list, Invoice invoice);
 
 }

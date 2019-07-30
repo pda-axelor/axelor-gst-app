@@ -7,28 +7,25 @@ import com.axelor.gst.db.InvoiceLine;
 public class InvoiceLineServiceImpl implements InvoiceLineService {
 
 	@Override
-	public BigDecimal getNetAmount(InvoiceLine iLine) {
-		return BigDecimal.valueOf(iLine.getQty()).multiply(iLine.getPrice());
+	public InvoiceLine calculateCgstSgst(InvoiceLine invoiceLine) {
+		BigDecimal amount = BigDecimal.valueOf(invoiceLine.getQty()).multiply(invoiceLine.getPrice());
+		BigDecimal sgst_cgst = amount
+				.multiply(invoiceLine.getGstRate().divide(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(2)));
+		invoiceLine.setNetAmount(amount);
+		invoiceLine.setCgst(sgst_cgst);
+		invoiceLine.setSgst(sgst_cgst);
+		invoiceLine.setGrossAmount(amount.add(sgst_cgst.multiply(BigDecimal.valueOf(2))));
+		return invoiceLine;
 	}
 
 	@Override
-	public BigDecimal getSgstCgst(InvoiceLine iLine, BigDecimal amount) {
-		return amount.multiply(iLine.getGstRate().divide(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(2)));
-	}
-
-	@Override
-	public BigDecimal getGrossAmount1(BigDecimal amount, BigDecimal SGSTCGST) {
-		return amount.add(SGSTCGST.multiply(BigDecimal.valueOf(2)));
-	}
-
-	@Override
-	public BigDecimal getGrossAmount2(BigDecimal IGST, BigDecimal amount) {
-		return amount.add(IGST);
-	}
-
-	@Override
-	public BigDecimal getIgst(InvoiceLine iLine, BigDecimal amount) {
-		return amount.multiply(iLine.getGstRate().divide(BigDecimal.valueOf(100)));
+	public InvoiceLine calculateIgst(InvoiceLine invoiceLine) {
+		BigDecimal amount = BigDecimal.valueOf(invoiceLine.getQty()).multiply(invoiceLine.getPrice());
+		BigDecimal igst = amount.multiply(invoiceLine.getGstRate().divide(BigDecimal.valueOf(100)));
+		invoiceLine.setNetAmount(amount);
+		invoiceLine.setIgst(igst);
+		invoiceLine.setGrossAmount(amount.add(igst));
+		return invoiceLine;
 	}
 
 }

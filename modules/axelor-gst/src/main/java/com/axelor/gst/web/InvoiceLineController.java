@@ -1,7 +1,5 @@
 package com.axelor.gst.web;
 
-import java.math.BigDecimal;
-
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.services.InvoiceLineService;
@@ -16,35 +14,24 @@ public class InvoiceLineController {
 
 	public void setProduct(ActionRequest request, ActionResponse response) {
 		try {
-
-			InvoiceLine iLine = request.getContext().asType(InvoiceLine.class);
+			InvoiceLine invoiceLine = request.getContext().asType(InvoiceLine.class);
 			Invoice invoice = request.getContext().getParent().asType(Invoice.class);
+
 			if (invoice.getParty() != null && invoice.getCompany() != null) {
 				if (invoice.getInvoiceAddress() != null && invoice.getCompany().getAddress() != null) {
-					BigDecimal amount = service.getNetAmount(iLine);
 
-					response.setValue("hsbn", iLine.getProduct().getHsbn());
-					response.setValue("item", "[" + iLine.getProduct().getCode() + "] " + iLine.getProduct().getName());
-					response.setValue("gstRate", iLine.getProduct().getGstRate());
-					response.setValue("price", iLine.getProduct().getCostPrice());
-
-					response.setValue("netAmount", amount);
+					invoiceLine.setHsbn(invoiceLine.getProduct().getHsbn());
+					invoiceLine.setItem(
+							"[" + invoiceLine.getProduct().getCode() + "] " + invoiceLine.getProduct().getName());
+					invoiceLine.setGstRate(invoiceLine.getProduct().getGstRate());
+					invoiceLine.setPrice(invoiceLine.getProduct().getCostPrice());
 
 					if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
-
-						BigDecimal SGST_CGST = service.getSgstCgst(iLine, amount);
-						response.setValue("sgst", SGST_CGST);
-						response.setValue("cgst", SGST_CGST);
-						response.setValue("grossAmount", service.getGrossAmount1(amount, SGST_CGST));
-
+						response.setValues(service.calculateCgstSgst(invoiceLine));
 					}
 
 					else {
-
-						BigDecimal IGST = service.getIgst(iLine, amount);
-						response.setValue("igst", IGST);
-						response.setValue("grossAmount", service.getGrossAmount2(IGST, amount));
-
+						response.setValues(service.calculateIgst(invoiceLine));
 					}
 
 				} else {

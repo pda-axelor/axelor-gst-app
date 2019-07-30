@@ -22,7 +22,7 @@
     <parameters>
         <scalar-parameter name="ids" id="62">
             <property name="valueType">static</property>
-            <property name="dataType">decimal</property>
+            <property name="dataType">string</property>
             <property name="distinct">true</property>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -191,7 +191,7 @@
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select gst_product.name,gst_product.code,gst_product.hsbn,gst_product.sale_price,gst_product.cost_price,gst_product.gst_rate
-from gst_product where gst_product.id in (?)]]></xml-property>
+from gst_product where gst_product.id in ?]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>

@@ -32,23 +32,21 @@ public class InvoiceController {
 	InvoiceService invoiceService;
 
 	public void changeStatus(ActionRequest request, ActionResponse response) {
-		try {
-			Invoice invoice = request.getContext().asType(Invoice.class);
 
-			switch (invoice.getStatus()) {
+		Invoice invoice = request.getContext().asType(Invoice.class);
 
-			case 1:
-				response.setValue("status", InvoiceRepository.INVOICE_STATUS_SELECT_VALIDATED);
-				break;
+		switch (invoice.getStatus()) {
 
-			case 2:
-				response.setValue("status", InvoiceRepository.INVOICE_STATUS_SELECT_PAID);
-				response.setAttr("statusBtn", "readonly", "true");
-				break;
-			}
-		} catch (Exception e) {
-			response.setFlash(e.toString());
+		case 1:
+			response.setValue("status", InvoiceRepository.INVOICE_STATUS_SELECT_VALIDATED);
+			break;
+
+		case 2:
+			response.setValue("status", InvoiceRepository.INVOICE_STATUS_SELECT_PAID);
+			response.setAttr("statusBtn", "readonly", "true");
+			break;
 		}
+
 	}
 
 	public void onCancel(ActionRequest request, ActionResponse response) {
@@ -61,18 +59,15 @@ public class InvoiceController {
 
 		Invoice invoice = request.getContext().asType(Invoice.class);
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
-		response.setValues(invoiceService.getCalculations(list, invoice));
+		response.setValues(invoiceService.calculateData(list, invoice));
 
 	}
 
 	public void setAttachmentPath(ActionRequest request, ActionResponse response) {
-		try {
-			request.getContext().put("LogoAttachmentPath", AppSettings.get().get("file.upload.dir"));
-			request.getContext().put("LogoPath",
-					request.getContext().asType(Invoice.class).getCompany().getLogo().getFilePath());
-		} catch (Exception e) {
-			response.setFlash(e.toString());
-		}
+
+		request.getContext().put("LogoAttachmentPath", AppSettings.get().get("file.upload.dir"));
+		request.getContext().put("LogoPath",
+				request.getContext().asType(Invoice.class).getCompany().getLogo().getFilePath());
 
 	}
 

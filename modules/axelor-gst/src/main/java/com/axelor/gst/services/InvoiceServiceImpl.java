@@ -33,6 +33,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 				il.setProduct(p);
 				il.setItem("[" + p.getCode() + "] " + p.getName());
 				il.setPrice(p.getCostPrice());
+				
 				lineList.add(il);
 			}
 			invoice.setInvoiceItemsList(lineList);
@@ -61,7 +62,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Override
-	public Invoice getCalculations(List<InvoiceLine> list, Invoice invoice) {
+	public Invoice calculateData(List<InvoiceLine> list, Invoice invoice) {
 
 		invoice.setNetAmount(list.stream().map(l -> l.getNetAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
 		invoice.setNetIGST(list.stream().map(l -> l.getIgst()).reduce(BigDecimal.ZERO, BigDecimal::add));

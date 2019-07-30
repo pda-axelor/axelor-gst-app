@@ -8,11 +8,9 @@ import com.axelor.rpc.ActionResponse;
 public class ProductController {
 
 	public void setAttachmentPath(ActionRequest request, ActionResponse response) {
-		try {
-			request.getContext().put("AttachmentPath", AppSettings.get().get("file.upload.dir"));
-		} catch (Exception e) {
-			response.setFlash(e.toString());
-		}
+
+		request.getContext().put("AttachmentPath", AppSettings.get().get("file.upload.dir"));
+		request.getContext().put("FilePath", request.getContext().asType(Product.class).getImage().getFilePath());
 
 	}
 

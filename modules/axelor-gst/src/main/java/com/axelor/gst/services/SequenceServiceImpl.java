@@ -42,4 +42,25 @@ public class SequenceServiceImpl implements SequenceService {
 		}
 	}
 
+	@Override
+	public String generateFirstSequence(Sequence seq) {
+
+		String padding = "", number;
+
+		for (int i = 1; i < seq.getPadding(); i++) {
+			padding = padding + "0";
+		}
+
+		if (seq.getSuffix() == null) {
+
+			number = seq.getPrefix() + padding + "1";
+
+		} else {
+			number = seq.getPrefix() + padding + "1" + seq.getSuffix();
+		}
+
+		return number;
+
+	}
+
 }
