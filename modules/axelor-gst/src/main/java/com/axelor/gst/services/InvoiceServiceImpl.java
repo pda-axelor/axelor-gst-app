@@ -11,7 +11,9 @@ import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Party;
 import com.axelor.gst.db.Product;
+import com.axelor.gst.db.repo.AddressRepository;
 import com.axelor.gst.db.repo.CompanyRepository;
+import com.axelor.gst.db.repo.ContactRepository;
 import com.axelor.gst.db.repo.PartyRepository;
 import com.axelor.gst.db.repo.ProductRepository;
 import com.axelor.inject.Beans;
@@ -26,24 +28,24 @@ public class InvoiceServiceImpl implements InvoiceService {
 	InvoiceService invoiceService;
 
 	@Override
-	public Invoice setInvoice(Invoice invoice, List<Long> productIds, Long cId, Long pId) {
+	public Invoice setInvoice(Invoice invoice, List<Long> productIds, Long companyId, Long productId) {
 		try {
 
 			List<Product> pList = Beans.get(ProductRepository.class).all().filter("id in (?1)", productIds).fetch();
-			Company company = Beans.get(CompanyRepository.class).find(cId);
-			Party party = Beans.get(PartyRepository.class).find(pId);
+			Company company = Beans.get(CompanyRepository.class).find(companyId);
+			Party party = Beans.get(PartyRepository.class).find(productId);
 			invoice.setCompany(company);
 			invoice.setParty(party);
 
-			if (invoice.getParty().getContactList().stream().filter(a -> a.getType() == 1).findFirst().isPresent()) {
-				Contact partyContact = invoice.getParty().getContactList().stream().filter(a -> a.getType() == 1)
+			if (invoice.getParty().getContactList().stream().filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().isPresent()) {
+				Contact partyContact = invoice.getParty().getContactList().stream().filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY)
 						.findFirst().get();
 				invoice.setPartyContact(partyContact);
 
 			}
 
-			if (invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2).findFirst().isPresent()) {
-				Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == 2)
+			if (invoice.getParty().getAddressList().stream().filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst().isPresent()) {
+				Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE)
 						.findFirst().get();
 				invoice.setInvoiceAddress(invoiceAddress);
 				invoice.setShippingAddress(invoiceAddress);

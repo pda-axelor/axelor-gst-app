@@ -58,7 +58,7 @@
 				colSpan="12" />
 
 			<field name="reference" readonly="true" />
-			<field name="dateTime" />
+			<field name="dateTime" readonly="true"/>
 			<field name="netAmount" title="Net Amount" readonly="true" />
 			<field name="netIGST" title="Net IGST" readonly="true" />
 			<field name="netCGST" title="Net CGST" readonly="true" />
@@ -67,11 +67,11 @@
 			<field name="company" required="true" canEdit="false" />
 			<button-group>
 				<button name="statusBtn" title="Proceed"
-					onClick="com.axelor.gst.web.InvoiceController:changeStatus,save"
+					onClick="save,com.axelor.gst.web.InvoiceController:changeStatus,save"
 					icon="fa-arrow-right" />
 
 				<button name="cancelBtn" title="Cancel Invoice"
-					onClick="com.axelor.gst.web.InvoiceController:onCancel,save"
+					onClick="save,com.axelor.gst.web.InvoiceController:onCancel,save"
 					prompt="Are you sure you want to cancel the invoice?" icon="fa-times"
 					css="btn-danger" />
 			</button-group>

@@ -40,6 +40,7 @@ public class InvoiceLineController {
 				}
 			} else {
 				response.setFlash("Please enter both Company and Party Fields");
+				response.setReload(true);
 
 			}
 		} catch (Exception e) {

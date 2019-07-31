@@ -47,9 +47,15 @@
 
 
 	<chart name="invoice-status-chart-bar" title="Amount per Status">
-		<dataset type="sql"> 
+		<dataset type="jpql"> 
   <![CDATA[
- select status as status,sum(gross_amount) as amount from gst_invoice group by status;
+ SELECT  i.title as status,sum(v.grossAmount) as amount 
+ FROM MetaSelect s
+ INNER JOIN MetaSelectItem i ON s.id=i.select
+ INNER JOIN Invoice v ON CAST(i.value AS int)  =  v.status
+ WHERE s.id=18 
+ GROUP BY i.title,v.status 
+ ORDER BY v.status
   ]]>
   </dataset>
 		<category key="status" type="text" title="Status" />

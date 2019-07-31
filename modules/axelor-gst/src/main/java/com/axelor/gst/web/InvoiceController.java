@@ -73,9 +73,9 @@ public class InvoiceController {
 		@SuppressWarnings("unchecked")
 		List<Long> productIds = (List<Long>) request.getContext().get("ids");
 		if (productIds != null) {
-			Long pId = new Long(request.getContext().get("partyId").toString());
-			Long cId = new Long(request.getContext().get("companyId").toString());
-			response.setValues(invoiceService.setInvoice(invoice, productIds, cId, pId));
+			Long productId = new Long(request.getContext().get("partyId").toString());
+			Long companyId = new Long(request.getContext().get("companyId").toString());
+			response.setValues(invoiceService.setInvoice(invoice, productIds, companyId, productId));
 		}
 	}
 
