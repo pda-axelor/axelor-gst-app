@@ -82,12 +82,12 @@
 		output="product" format="pdf">
 		<param name="productId" expr="eval: id" />
 		<param name="AttachmentPath" expr="eval: AttachmentPath" />
-		<param name="ImageFilePath" expr="eval: FilePath"/>
+		<param name="ImageFilePath" expr="eval: FilePath" />
 	</action-report>
 
 	<action-report name="action-report-print-product-list"
 		design="productList.rptdesign" output="ProductList" format="pdf">
-		<param name="ids" expr="eval:_ids" />
+		<param name="ids" expr="eval: _ids.join(',')" />
 	</action-report>
 
 	<action-record name="action-record-set-gst" model="com.axelor.gst.db.Product">

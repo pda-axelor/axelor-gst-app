@@ -12,7 +12,6 @@ import com.axelor.gst.db.Party;
 import com.axelor.gst.db.repo.AddressRepository;
 import com.axelor.gst.db.repo.ContactRepository;
 import com.axelor.gst.db.repo.InvoiceRepository;
-import com.axelor.gst.services.InvoiceLineService;
 import com.axelor.gst.services.InvoiceService;
 import com.axelor.gst.services.SequenceService;
 import com.axelor.meta.schema.actions.ActionView;
@@ -24,9 +23,6 @@ public class InvoiceController {
 
 	@Inject
 	SequenceService seqService;
-
-	@Inject
-	InvoiceLineService iLineservice;
 
 	@Inject
 	InvoiceService invoiceService;

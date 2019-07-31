@@ -34,7 +34,8 @@
 		<dataset type="jpql"> 
   <![CDATA[
  SELECT a.state.name as state,Count(p.id) as customers 
- FROM Party p, Address a
+ FROM Party p
+ INNER JOIN p.addressList a 
  WHERE p.isCustomer='t' 
  GROUP BY a.state.name
   ]]>

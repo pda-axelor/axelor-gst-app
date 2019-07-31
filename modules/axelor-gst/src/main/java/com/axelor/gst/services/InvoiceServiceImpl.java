@@ -15,8 +15,15 @@ import com.axelor.gst.db.repo.CompanyRepository;
 import com.axelor.gst.db.repo.PartyRepository;
 import com.axelor.gst.db.repo.ProductRepository;
 import com.axelor.inject.Beans;
+import com.google.inject.Inject;
 
 public class InvoiceServiceImpl implements InvoiceService {
+
+	@Inject
+	InvoiceLineService service;
+
+	@Inject
+	InvoiceService invoiceService;
 
 	@Override
 	public Invoice setInvoice(Invoice invoice, List<Long> productIds, Long cId, Long pId) {
@@ -25,18 +32,6 @@ public class InvoiceServiceImpl implements InvoiceService {
 			List<Product> pList = Beans.get(ProductRepository.class).all().filter("id in (?1)", productIds).fetch();
 			Company company = Beans.get(CompanyRepository.class).find(cId);
 			Party party = Beans.get(PartyRepository.class).find(pId);
-			List<InvoiceLine> lineList = new ArrayList<InvoiceLine>();
-
-			for (int i = 0; i < pList.size(); i++) {
-				Product p = pList.get(i);
-				InvoiceLine il = new InvoiceLine();
-				il.setProduct(p);
-				il.setItem("[" + p.getCode() + "] " + p.getName());
-				il.setPrice(p.getCostPrice());
-				
-				lineList.add(il);
-			}
-			invoice.setInvoiceItemsList(lineList);
 			invoice.setCompany(company);
 			invoice.setParty(party);
 
@@ -54,6 +49,28 @@ public class InvoiceServiceImpl implements InvoiceService {
 				invoice.setShippingAddress(invoiceAddress);
 			}
 
+			List<InvoiceLine> lineList = new ArrayList<InvoiceLine>();
+
+			for (int i = 0; i < pList.size(); i++) {
+				Product p = pList.get(i);
+				InvoiceLine invoiceLine = new InvoiceLine();
+				invoiceLine.setProduct(p);
+				invoiceLine.setHsbn(p.getHsbn());
+				invoiceLine.setItem("[" + p.getCode() + "] " + p.getName());
+				invoiceLine.setGstRate(p.getGstRate());
+				invoiceLine.setPrice(p.getCostPrice());
+				if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
+					invoiceLine = service.calculateCgstSgst(invoiceLine);
+				}
+
+				else {
+					invoiceLine = service.calculateIgst(invoiceLine);
+				}
+
+				lineList.add(invoiceLine);
+			}
+			invoice.setInvoiceItemsList(lineList);
+			invoice = invoiceService.calculateData(lineList, invoice);
 			return invoice;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -64,11 +81,21 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Override
 	public Invoice calculateData(List<InvoiceLine> list, Invoice invoice) {
 
-		invoice.setNetAmount(list.stream().map(l -> l.getNetAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		invoice.setNetIGST(list.stream().map(l -> l.getIgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		invoice.setNetCGST(list.stream().map(l -> l.getCgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		invoice.setNetSGST(list.stream().map(l -> l.getSgst()).reduce(BigDecimal.ZERO, BigDecimal::add));
-		invoice.setGrossAmount(list.stream().map(l -> l.getGrossAmount()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		BigDecimal amount = BigDecimal.ZERO, igst = BigDecimal.ZERO, gross = BigDecimal.ZERO,
+				sgst_cgst = BigDecimal.ZERO;
+		for (InvoiceLine l : list) {
+			amount = amount.add(l.getNetAmount());
+			sgst_cgst = sgst_cgst.add(l.getCgst());
+			igst = igst.add(l.getIgst());
+			gross = gross.add(l.getGrossAmount());
+		}
+
+		invoice.setNetAmount(amount);
+		invoice.setNetIGST(igst);
+		invoice.setNetCGST(sgst_cgst);
+		invoice.setNetSGST(sgst_cgst);
+		invoice.setGrossAmount(gross);
+
 		return invoice;
 	}
 
