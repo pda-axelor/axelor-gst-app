@@ -10,7 +10,12 @@ public class ProductController {
 	public void setAttachmentPath(ActionRequest request, ActionResponse response) {
 
 		request.getContext().put("AttachmentPath", AppSettings.get().get("file.upload.dir"));
-		request.getContext().put("FilePath", request.getContext().asType(Product.class).getImage().getFilePath());
+		Product product = request.getContext().asType(Product.class);
+		if (product.getImage() != null) {
+			request.getContext().put("FilePath", product.getImage().getFilePath());
+		} else {
+			request.getContext().put("FilePath", "1.jpg");
+		}
 
 	}
 

@@ -6,7 +6,7 @@
 
 
 	<kanban name="invoice-kanban" title="All Invoices" model="com.axelor.gst.db.Invoice"
-		columnBy="status" sequenceBy="priority">
+		columnBy="status" sequenceBy="priority" draggable="false">
 		<field name="status" />
 		<field name="company" />
 		<field name="reference" />
@@ -46,7 +46,7 @@
 		onNew="action-gst-invoice-record-on-new,com.axelor.gst.web.InvoiceController:setSelected"
 		readonlyIf="status==3 || status==4">
 		<toolbar>
-			<button name="btnPrint" icon="fa-print" title="Generate PDF"
+			<button name="btnPrint" icon="fa-print" title="Print"
 				onClick="action-method-invoice-set-logo-attachment-path,action-report-invoice"
 				showIf="id" />
 
@@ -56,15 +56,17 @@
 		<panel title="Invoice Details">
 			<field name="status" widget="NavSelect" colspan="6" readonly="true"
 				colSpan="12" />
-
 			<field name="reference" readonly="true" />
-			<field name="dateTime" readonly="true"/>
+			<field name="dateTime" readonly="true" />
 			<field name="netAmount" title="Net Amount" readonly="true" />
 			<field name="netIGST" title="Net IGST" readonly="true" />
 			<field name="netCGST" title="Net CGST" readonly="true" />
 			<field name="netSGST" title="Net SGST" readonly="true" />
 			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
 			<field name="company" required="true" canEdit="false" />
+		</panel>
+
+		<panel title="Status Controller" sidebar="true" css="panel-violet">
 			<button-group>
 				<button name="statusBtn" title="Proceed"
 					onClick="save,com.axelor.gst.web.InvoiceController:changeStatus,save"
@@ -77,28 +79,19 @@
 			</button-group>
 		</panel>
 
+		<panel title="Party Details" sidebar="true" css="panel-blue">
+			<field name="party" required="true"
+				onChange="com.axelor.gst.web.InvoiceController:setParty" />
+			<field name="partyContact" />
+			<field name="invoiceAddress" required="true" />
+			<field name="shippingAddress" />
+			<field name="useInvoiceAddress" onChange="action-gst-invoice-use-invoice-address" />
+		</panel>
 
-
-		<panel-tabs>
-
-
-
-
-			<panel title="Party Details" css="panel-blue">
-				<field name="party" required="true"
-					onChange="com.axelor.gst.web.InvoiceController:setParty" />
-				<field name="partyContact" />
-				<field name="invoiceAddress" required="true" />
-				<field name="shippingAddress" />
-				<field name="useInvoiceAddress" onChange="action-gst-invoice-use-invoice-address" />
-			</panel>
-
-			<panel title="Invoice Items" css="panel-green">
-				<field name="invoiceItemsList" colSpan="12"
-					onChange="com.axelor.gst.web.InvoiceController:calculateNetGST,save" />
-			</panel>
-
-		</panel-tabs>
+		<panel title="Invoice Items" css="panel-green">
+			<field name="invoiceItemsList" colSpan="12"
+				onChange="com.axelor.gst.web.InvoiceController:calculateNetGST,save" />
+		</panel>
 
 	</form>
 
@@ -110,8 +103,7 @@
 			<field name="$party" type="many-to-one" title="Party" required="true"
 				target="com.axelor.gst.db.Party" />
 			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
-				readonlyIf="(!$party)||(!$company)"
-				onClick="com.axelor.gst.web.InvoiceController:invoiceView,close" />
+				readonlyIf="(!$party)||(!$company)" onClick="com.axelor.gst.web.InvoiceController:invoiceView,close" />
 		</panel>
 	</form>
 

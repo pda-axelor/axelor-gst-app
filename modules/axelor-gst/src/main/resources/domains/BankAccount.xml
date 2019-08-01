@@ -11,7 +11,7 @@
 
 		<string name="bank" required="true" />
 		<string name="accountNumber" required="true" />
-		<string name="ifsc" required="true" />
+		<string name="ifsc" required="true" title="IFSC"/>
 		<integer name="type" selection="account.type.selection"
 			default="1" />
 		<string name="address" large="true" />

@@ -13,12 +13,13 @@
 		<field name="productCategory" />
 		<field name="salePrice" />
 		<field name="costPrice" />
-		<field name="image" />
 		<field name="gstRate" />
+		<field name="hasImage" />
 
 		<template><![CDATA[
        <div class="span4 card-image">
-        <img ng-src="{{$image('image', 'content')}}">
+         <img ng-if="hasImage" ng-src="{{$image(null, 'image')}}">
+        <img ng-if="!hasImage" src="img/user.png">
         <strong>Name : {{name}}</strong>       
         </div>
         <div class="span4">

@@ -81,7 +81,6 @@ public class InvoiceController {
 
 	public void setParty(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
-
 		if (invoice.getParty() != null) {
 			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream()
 					.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst();
@@ -90,6 +89,11 @@ public class InvoiceController {
 			response.setValue("invoiceAddress", invoiceAddress);
 			response.setValue("useInvoiceAddress", true);
 			response.setValue("shippingAddress", invoiceAddress);
+		} else {
+			response.setValue("partyContact", "");
+			response.setValue("invoiceAddress", null);
+			response.setValue("useInvoiceAddress", true);
+			response.setValue("shippingAddress", "");
 		}
 	}
 

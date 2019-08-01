@@ -65,15 +65,20 @@
 
 	<chart name="invoice-status-count-chart-line" title="Total Invoices per Status">
 
-		<dataset type="sql"> 
+		<dataset type="jpql"> 
   <![CDATA[
- select status as status,count(id) invoice from gst_invoice group by status;
+ SELECT v.status as status,count(v.id) as invoice 
+ FROM MetaSelect s
+ INNER JOIN MetaSelectItem i ON s.id=i.select 
+ INNER JOIN  Invoice v ON CAST(i.value as int) = v.status
+ WHERE s.id=18
+ GROUP BY v.status,i.title
+ ORDER BY v.status
   ]]>
   </dataset>
-		<category key="status" type="text" title="Status" />
+		<category key="status" type="number" title="Status" />
 		<series key="invoice" type="line" title="Invoice Count" />
 	</chart>
-
 
 
 	<chart name="invoice-category-product-chart-bar" title="Paid Invoices per Category per Product"

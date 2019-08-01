@@ -24,9 +24,9 @@
 		<many-to-one name="shippingAddress" ref="com.axelor.gst.db.Address" />
 		<boolean name="useInvoiceAddress" default="true" />
 		<decimal name="netAmount" />
-		<decimal name="netIGST" />
-		<decimal name="netCGST" />
-		<decimal name="netSGST" />
+		<decimal name="netIGST" title="Net IGST"/>
+		<decimal name="netCGST" title="Net CGST"/>
+		<decimal name="netSGST" title="Net SGST"/>
 		<decimal name="grossAmount" />
 		<one-to-many name="invoiceItemsList" ref="com.axelor.gst.db.InvoiceLine"
 			mappedBy="invoice" />
