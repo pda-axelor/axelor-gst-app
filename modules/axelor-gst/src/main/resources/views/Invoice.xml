@@ -69,7 +69,7 @@
 		<panel title="Status Controller" sidebar="true" css="panel-violet">
 			<button-group>
 				<button name="statusBtn" title="Proceed"
-					onClick="save,com.axelor.gst.web.InvoiceController:changeStatus,save"
+					onClick="validate,com.axelor.gst.web.InvoiceController:changeStatus,save"
 					icon="fa-arrow-right" />
 
 				<button name="cancelBtn" title="Cancel Invoice"
@@ -88,7 +88,7 @@
 			<field name="useInvoiceAddress" onChange="action-gst-invoice-use-invoice-address" />
 		</panel>
 
-		<panel title="Invoice Items" css="panel-green">
+		<panel title="Invoice Items" css="panel-green" showIf="party &amp;&amp; company">
 			<field name="invoiceItemsList" colSpan="12"
 				onChange="com.axelor.gst.web.InvoiceController:calculateNetGST,save" />
 		</panel>
@@ -109,8 +109,7 @@
 
 	<action-record name="action-gst-invoice-record-on-new"
 		model="com.axelor.gst.db.Invoice">
-		<field name="dateTime" expr="eval:__datetime__" />
-		<field name="party" expr="eval: party" />
+		<field name="dateTime" expr="eval:__datetime__" />		
 		<field name="company" expr="eval: company" />
 	</action-record>
 

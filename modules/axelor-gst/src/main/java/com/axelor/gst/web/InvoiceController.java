@@ -12,8 +12,10 @@ import com.axelor.gst.db.Party;
 import com.axelor.gst.db.repo.AddressRepository;
 import com.axelor.gst.db.repo.ContactRepository;
 import com.axelor.gst.db.repo.InvoiceRepository;
+import com.axelor.gst.db.repo.CompanyRepository;
 import com.axelor.gst.services.InvoiceService;
 import com.axelor.gst.services.SequenceService;
+import com.axelor.inject.Beans;
 import com.axelor.meta.schema.actions.ActionView;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
@@ -70,13 +72,15 @@ public class InvoiceController {
 	public void setSelected(ActionRequest request, ActionResponse response) {
 
 		Invoice invoice = request.getContext().asType(Invoice.class);
+		invoice.setCompany(Beans.get(CompanyRepository.class).all().fetchOne());
 		@SuppressWarnings("unchecked")
 		List<Long> productIds = (List<Long>) request.getContext().get("ids");
 		if (productIds != null) {
 			Long productId = new Long(request.getContext().get("partyId").toString());
 			Long companyId = new Long(request.getContext().get("companyId").toString());
-			response.setValues(invoiceService.setInvoice(invoice, productIds, companyId, productId));
+			invoice = invoiceService.setInvoice(invoice, productIds, companyId, productId);
 		}
+		response.setValues(invoice);
 	}
 
 	public void setParty(ActionRequest request, ActionResponse response) {
