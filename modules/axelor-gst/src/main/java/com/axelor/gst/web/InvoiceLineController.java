@@ -16,13 +16,20 @@ public class InvoiceLineController {
 		try {
 			InvoiceLine invoiceLine = request.getContext().asType(InvoiceLine.class);
 			Invoice invoice = request.getContext().getParent().asType(Invoice.class);
-
+			if ((!invoice.getParty().getAddressList().isEmpty()) && invoice.getCompany().getAddress() != null)
+			{
 			invoiceLine.setHsbn(invoiceLine.getProduct().getHsbn());
 			invoiceLine.setItem("[" + invoiceLine.getProduct().getCode() + "] " + invoiceLine.getProduct().getName());
 			invoiceLine.setGstRate(invoiceLine.getProduct().getGstRate());
 			invoiceLine.setPrice(invoiceLine.getProduct().getCostPrice());
-			response.setValues(service.calculateAll(invoice, invoiceLine));
-			
+			invoiceLine = service.calculateAll(invoice, invoiceLine);			
+			response.setValues(invoiceLine);
+			}
+			else
+			{
+				response.setFlash("Address Field of Company or Party is Empty");
+				response.setReload(true);
+			}
 
 		} catch (
 

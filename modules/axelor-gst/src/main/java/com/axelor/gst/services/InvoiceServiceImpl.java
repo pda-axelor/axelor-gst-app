@@ -24,59 +24,21 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Inject
 	InvoiceLineService service;
 
-	@Inject
-	InvoiceService invoiceService;
-
 	@Override
 	public Invoice setInvoice(Invoice invoice, List<Long> productIds, Long companyId, Long productId) {
 		try {
 
-			List<Product> pList = Beans.get(ProductRepository.class).all().filter("id in (?1)", productIds).fetch();
+			List<Product> productList = Beans.get(ProductRepository.class).all().filter("id in (?1)", productIds)
+					.fetch();
 			Company company = Beans.get(CompanyRepository.class).find(companyId);
 			Party party = Beans.get(PartyRepository.class).find(productId);
 			invoice.setCompany(company);
 			invoice.setParty(party);
-
-			if (invoice.getParty().getContactList().stream()
-					.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst()
-					.isPresent()) {
-				Contact partyContact = invoice.getParty().getContactList().stream()
-						.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().get();
-				invoice.setPartyContact(partyContact);
-
-			}
-
-			if (invoice.getParty().getAddressList().stream()
-					.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst()
-					.isPresent()) {
-				Address invoiceAddress = invoice.getParty().getAddressList().stream()
-						.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst().get();
-				invoice.setInvoiceAddress(invoiceAddress);
-				invoice.setShippingAddress(invoiceAddress);
-			}
-
+			invoice = this.getPartyContactAddress(invoice);
 			List<InvoiceLine> lineList = new ArrayList<InvoiceLine>();
-
-			for (int i = 0; i < pList.size(); i++) {
-				Product p = pList.get(i);
-				InvoiceLine invoiceLine = new InvoiceLine();
-				invoiceLine.setProduct(p);
-				invoiceLine.setHsbn(p.getHsbn());
-				invoiceLine.setItem("[" + p.getCode() + "] " + p.getName());
-				invoiceLine.setGstRate(p.getGstRate());
-				invoiceLine.setPrice(p.getCostPrice());
-				if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
-					invoiceLine = service.calculateCgstSgst(invoiceLine);
-				}
-
-				else {
-					invoiceLine = service.calculateIgst(invoiceLine);
-				}
-
-				lineList.add(invoiceLine);
-			}
+			lineList = this.getInvoiceLineList(invoice, productList, lineList);
 			invoice.setInvoiceItemsList(lineList);
-			invoice = invoiceService.calculateData(lineList, invoice);
+			invoice = this.calculateData(lineList, invoice);
 			return invoice;
 		} catch (Exception e) {
 			System.err.println(e);
@@ -104,6 +66,52 @@ public class InvoiceServiceImpl implements InvoiceService {
 			invoice.setGrossAmount(gross);
 		}
 		return invoice;
+	}
+
+	@Override
+	public Invoice getPartyContactAddress(Invoice invoice) {
+
+		if (invoice.getParty().getContactList().stream()
+				.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().isPresent()) {
+			Contact partyContact = invoice.getParty().getContactList().stream()
+					.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().get();
+			invoice.setPartyContact(partyContact);
+
+		}
+
+		if (invoice.getParty().getAddressList().stream()
+				.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst().isPresent()) {
+			Address invoiceAddress = invoice.getParty().getAddressList().stream()
+					.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst().get();
+			invoice.setInvoiceAddress(invoiceAddress);
+			invoice.setUseInvoiceAddress(true);
+			invoice.setShippingAddress(invoiceAddress);
+		}
+		return invoice;
+	}
+
+	@Override
+	public List<InvoiceLine> getInvoiceLineList(Invoice invoice, List<Product> productList,
+			List<InvoiceLine> invoiceLineList) {
+		for (int i = 0; i < productList.size(); i++) {
+			Product p = productList.get(i);
+			InvoiceLine invoiceLine = new InvoiceLine();
+			invoiceLine.setProduct(p);
+			invoiceLine.setHsbn(p.getHsbn());
+			invoiceLine.setItem("[" + p.getCode() + "] " + p.getName());
+			invoiceLine.setGstRate(p.getGstRate());
+			invoiceLine.setPrice(p.getCostPrice());
+			if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
+				invoiceLine = service.calculateCgstSgst(invoiceLine);
+			}
+
+			else {
+				invoiceLine = service.calculateIgst(invoiceLine);
+			}
+
+			invoiceLineList.add(invoiceLine);
+		}
+		return invoiceLineList;
 	}
 
 }

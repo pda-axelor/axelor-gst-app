@@ -5,12 +5,8 @@ import java.util.List;
 
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
-import com.google.inject.Inject;
 
 public class InvoiceLineServiceImpl implements InvoiceLineService {
-
-	@Inject
-	InvoiceLineService service;
 
 	@Override
 	public InvoiceLine calculateCgstSgst(InvoiceLine invoiceLine) {
@@ -37,16 +33,17 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 	@Override
 	public InvoiceLine calculateAll(Invoice invoice, InvoiceLine invoiceLine) {
 
-		if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
-			invoiceLine.setIgst(BigDecimal.ZERO);
-			invoiceLine = service.calculateCgstSgst(invoiceLine);
-		}
+		if ((!invoice.getParty().getAddressList().isEmpty()) && invoice.getCompany().getAddress() != null)
+			if (invoice.getInvoiceAddress().getState().equals(invoice.getCompany().getAddress().getState())) {
+				invoiceLine.setIgst(BigDecimal.ZERO);
+				invoiceLine = this.calculateCgstSgst(invoiceLine);
+			}
 
-		else {
-			invoiceLine.setCgst(BigDecimal.ZERO);
-			invoiceLine.setSgst(BigDecimal.ZERO);
-			invoiceLine = service.calculateIgst(invoiceLine);
-		}
+			else {
+				invoiceLine.setCgst(BigDecimal.ZERO);
+				invoiceLine.setSgst(BigDecimal.ZERO);
+				invoiceLine = this.calculateIgst(invoiceLine);
+			}
 		return invoiceLine;
 	}
 
@@ -56,7 +53,7 @@ public class InvoiceLineServiceImpl implements InvoiceLineService {
 		List<InvoiceLine> list = invoice.getInvoiceItemsList();
 		if (list != null) {
 			for (InvoiceLine invoiceLine : list) {
-				service.calculateAll(invoice, invoiceLine);
+				this.calculateAll(invoice, invoiceLine);
 			}
 		}
 

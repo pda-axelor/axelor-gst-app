@@ -1,17 +1,13 @@
 package com.axelor.gst.web;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.axelor.app.AppSettings;
-import com.axelor.gst.db.Address;
 import com.axelor.gst.db.Company;
 import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Party;
-import com.axelor.gst.db.repo.AddressRepository;
 import com.axelor.gst.db.repo.CompanyRepository;
-import com.axelor.gst.db.repo.ContactRepository;
 import com.axelor.gst.db.repo.InvoiceRepository;
 import com.axelor.gst.services.InvoiceLineService;
 import com.axelor.gst.services.InvoiceService;
@@ -96,14 +92,13 @@ public class InvoiceController {
 		response.setValue("shippingAddress", "");
 
 		if (invoice.getParty() != null) {
-			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream()
-					.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst();
 
-			response.setValue("partyContact", invoice.getParty().getContactList().stream()
-					.filter(c -> c.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst());
-			response.setValue("invoiceAddress", invoiceAddress);
+			invoice = invoiceService.getPartyContactAddress(invoice);
+			response.setValue("partyContact", invoice.getPartyContact());
+			response.setValue("invoiceAddress", invoice.getInvoiceAddress());
 			response.setValue("useInvoiceAddress", true);
-			response.setValue("shippingAddress", invoiceAddress);
+			response.setValue("shippingAddress", invoice.getShippingAddress());
+
 			List<InvoiceLine> list = invoiceLineService.reCalculateInvoiceLine(invoice);
 			response.setValue("invoiceItemsList", list);
 			invoice = invoiceService.calculateData(list, invoice);
@@ -119,13 +114,13 @@ public class InvoiceController {
 	public void invoiceView(ActionRequest request, ActionResponse response) {
 		Party party = (Party) request.getContext().get("party");
 		Company company = (Company) request.getContext().get("company");
-		if (company.getAddress() != null) {
+		if (company.getAddress() != null && (!party.getAddressList().isEmpty())) {
 			response.setView(ActionView.define("Invoice").model(Invoice.class.getName()).add("form", "invoice-form")
 					.context("partyId", party.getId()).context("companyId", company.getId())
 					.context("ids", request.getContext().get("ids")).map());
 			response.setCanClose(true);
 		} else {
-			response.setFlash("Selected Company has No Address");
+			response.setFlash("Selected Company or Party has No Address!");
 			response.setReload(true);
 
 		}
