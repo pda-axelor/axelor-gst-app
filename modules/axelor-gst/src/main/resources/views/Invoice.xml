@@ -103,14 +103,13 @@
 			<field name="$party" type="many-to-one" title="Party" required="true"
 				target="com.axelor.gst.db.Party" />
 			<button name="btnCreateInvoice" icon="fa-th" title="Create Invoice"
-				readonlyIf="(!$party)||(!$company)" onClick="com.axelor.gst.web.InvoiceController:invoiceView,close" />
+				readonlyIf="(!$party)||(!$company)" onClick="com.axelor.gst.web.InvoiceController:invoiceView" />
 		</panel>
 	</form>
 
 	<action-record name="action-gst-invoice-record-on-new"
 		model="com.axelor.gst.db.Invoice">
-		<field name="dateTime" expr="eval:__datetime__" />		
-		<field name="company" expr="eval: company" />
+		<field name="dateTime" expr="eval:__datetime__" />
 	</action-record>
 
 	<action-report name="action-report-invoice" design="invoice.rptdesign"

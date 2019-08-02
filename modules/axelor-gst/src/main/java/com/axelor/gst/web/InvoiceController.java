@@ -10,9 +10,10 @@ import com.axelor.gst.db.Invoice;
 import com.axelor.gst.db.InvoiceLine;
 import com.axelor.gst.db.Party;
 import com.axelor.gst.db.repo.AddressRepository;
+import com.axelor.gst.db.repo.CompanyRepository;
 import com.axelor.gst.db.repo.ContactRepository;
 import com.axelor.gst.db.repo.InvoiceRepository;
-import com.axelor.gst.db.repo.CompanyRepository;
+import com.axelor.gst.services.InvoiceLineService;
 import com.axelor.gst.services.InvoiceService;
 import com.axelor.gst.services.SequenceService;
 import com.axelor.inject.Beans;
@@ -28,6 +29,9 @@ public class InvoiceController {
 
 	@Inject
 	InvoiceService invoiceService;
+
+	@Inject
+	InvoiceLineService invoiceLineService;
 
 	public void changeStatus(ActionRequest request, ActionResponse response) {
 
@@ -85,29 +89,46 @@ public class InvoiceController {
 
 	public void setParty(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
+
+		response.setValue("partyContact", "");
+		response.setValue("invoiceAddress", null);
+		response.setValue("useInvoiceAddress", true);
+		response.setValue("shippingAddress", "");
+
 		if (invoice.getParty() != null) {
 			Optional<Address> invoiceAddress = invoice.getParty().getAddressList().stream()
 					.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst();
+
 			response.setValue("partyContact", invoice.getParty().getContactList().stream()
 					.filter(c -> c.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst());
 			response.setValue("invoiceAddress", invoiceAddress);
 			response.setValue("useInvoiceAddress", true);
 			response.setValue("shippingAddress", invoiceAddress);
-		} else {
-			response.setValue("partyContact", "");
-			response.setValue("invoiceAddress", null);
-			response.setValue("useInvoiceAddress", true);
-			response.setValue("shippingAddress", "");
+			List<InvoiceLine> list = invoiceLineService.reCalculateInvoiceLine(invoice);
+			response.setValue("invoiceItemsList", list);
+			invoice = invoiceService.calculateData(list, invoice);
+			response.setValue("netAmount", invoice.getNetAmount());
+			response.setValue("netIGST", invoice.getNetIGST());
+			response.setValue("netSGST", invoice.getNetSGST());
+			response.setValue("netCGST", invoice.getNetCGST());
+			response.setValue("grossAmount", invoice.getGrossAmount());
 		}
+
 	}
 
 	public void invoiceView(ActionRequest request, ActionResponse response) {
 		Party party = (Party) request.getContext().get("party");
 		Company company = (Company) request.getContext().get("company");
+		if (company.getAddress() != null) {
+			response.setView(ActionView.define("Invoice").model(Invoice.class.getName()).add("form", "invoice-form")
+					.context("partyId", party.getId()).context("companyId", company.getId())
+					.context("ids", request.getContext().get("ids")).map());
+			response.setCanClose(true);
+		} else {
+			response.setFlash("Selected Company has No Address");
+			response.setReload(true);
 
-		response.setView(ActionView.define("Invoice").model(Invoice.class.getName()).add("form", "invoice-form")
-				.context("partyId", party.getId()).context("companyId", company.getId())
-				.context("ids", request.getContext().get("ids")).map());
+		}
 
 	}
 

@@ -37,16 +37,20 @@ public class InvoiceServiceImpl implements InvoiceService {
 			invoice.setCompany(company);
 			invoice.setParty(party);
 
-			if (invoice.getParty().getContactList().stream().filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().isPresent()) {
-				Contact partyContact = invoice.getParty().getContactList().stream().filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY)
-						.findFirst().get();
+			if (invoice.getParty().getContactList().stream()
+					.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst()
+					.isPresent()) {
+				Contact partyContact = invoice.getParty().getContactList().stream()
+						.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().get();
 				invoice.setPartyContact(partyContact);
 
 			}
 
-			if (invoice.getParty().getAddressList().stream().filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst().isPresent()) {
-				Address invoiceAddress = invoice.getParty().getAddressList().stream().filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE)
-						.findFirst().get();
+			if (invoice.getParty().getAddressList().stream()
+					.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst()
+					.isPresent()) {
+				Address invoiceAddress = invoice.getParty().getAddressList().stream()
+						.filter(a -> a.getType() == AddressRepository.ADDRESS_TYPE_SELECT_INVOICE).findFirst().get();
 				invoice.setInvoiceAddress(invoiceAddress);
 				invoice.setShippingAddress(invoiceAddress);
 			}
@@ -83,21 +87,22 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Override
 	public Invoice calculateData(List<InvoiceLine> list, Invoice invoice) {
 
-		BigDecimal amount = BigDecimal.ZERO, igst = BigDecimal.ZERO, gross = BigDecimal.ZERO,
-				sgst_cgst = BigDecimal.ZERO;
-		for (InvoiceLine l : list) {
-			amount = amount.add(l.getNetAmount());
-			sgst_cgst = sgst_cgst.add(l.getCgst());
-			igst = igst.add(l.getIgst());
-			gross = gross.add(l.getGrossAmount());
+		if (list != null) {
+			BigDecimal amount = BigDecimal.ZERO, igst = BigDecimal.ZERO, gross = BigDecimal.ZERO,
+					sgst_cgst = BigDecimal.ZERO;
+			for (InvoiceLine l : list) {
+				amount = amount.add(l.getNetAmount());
+				sgst_cgst = sgst_cgst.add(l.getCgst());
+				igst = igst.add(l.getIgst());
+				gross = gross.add(l.getGrossAmount());
+			}
+
+			invoice.setNetAmount(amount);
+			invoice.setNetIGST(igst);
+			invoice.setNetCGST(sgst_cgst);
+			invoice.setNetSGST(sgst_cgst);
+			invoice.setGrossAmount(gross);
 		}
-
-		invoice.setNetAmount(amount);
-		invoice.setNetIGST(igst);
-		invoice.setNetCGST(sgst_cgst);
-		invoice.setNetSGST(sgst_cgst);
-		invoice.setGrossAmount(gross);
-
 		return invoice;
 	}
 
