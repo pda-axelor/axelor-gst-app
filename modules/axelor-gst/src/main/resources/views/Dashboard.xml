@@ -13,7 +13,7 @@
 		<dashlet action="chart:invoice-status-chart-bar" css="panel-violet" />
 		<dashlet action="chart:invoice-status-count-chart-line" css="panel-black" />
 		<dashlet action="action-view-invoice-grid-older" css="panel-green"
-			colSpan="12" />
+			colSpan="12" title="Unpaid Invoices Older than One Month"/>
 	</dashboard>
 
 

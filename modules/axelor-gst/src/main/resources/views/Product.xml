@@ -39,7 +39,7 @@
 			<button name="btnPrintProductGrid" icon="fa-print" title="Print"
 				onClick="action-report-print-product-list" />
 			<button name="btnInvoicePopUp" icon="fa-th" title="Create Invoice"
-				onClick="action-gst-invoice-pop-up" />
+				onClick="action-gst-invoice-pop-up" showIf="_ids"/>
 		</toolbar>
 
 		<field name="name" />
