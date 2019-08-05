@@ -37,7 +37,7 @@
 
 		<toolbar>
 			<button name="btnPrintProductGrid" icon="fa-print" title="Print"
-				onClick="action-report-print-product-list" />
+				onClick="action-method-product-set-attachment-path,action-report-print-product-list" showIf="_ids"/>
 			<button name="btnInvoicePopUp" icon="fa-th" title="Create Invoice"
 				onClick="action-gst-invoice-pop-up" showIf="_ids"/>
 		</toolbar>
@@ -89,6 +89,7 @@
 	<action-report name="action-report-print-product-list"
 		design="productList.rptdesign" output="ProductList" format="pdf">
 		<param name="ids" expr="eval: _ids.join(',')" />
+		<param name="AttachmentPath" expr="eval: AttachmentPath" />
 	</action-report>
 
 	<action-record name="action-record-set-gst" model="com.axelor.gst.db.Product">
