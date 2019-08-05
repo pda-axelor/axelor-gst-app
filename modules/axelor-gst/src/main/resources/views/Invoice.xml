@@ -63,7 +63,8 @@
 			<field name="netCGST" title="Net CGST" readonly="true" />
 			<field name="netSGST" title="Net SGST" readonly="true" />
 			<field name="grossAmount" title="Net Gross Amount" readonly="true" />
-			<field name="company" required="true" canEdit="false" />
+			<field name="company" required="true" canEdit="false"
+				onChange="com.axelor.gst.web.InvoiceController:setInvoice" />
 		</panel>
 
 		<panel title="Status Controller" sidebar="true" css="panel-violet">
@@ -81,7 +82,7 @@
 
 		<panel title="Party Details" sidebar="true" css="panel-blue">
 			<field name="party" required="true"
-				onChange="com.axelor.gst.web.InvoiceController:setParty" />
+				onChange="com.axelor.gst.web.InvoiceController:setInvoice" />
 			<field name="partyContact" />
 			<field name="invoiceAddress" required="true" />
 			<field name="shippingAddress" />

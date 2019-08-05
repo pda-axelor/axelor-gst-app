@@ -71,12 +71,15 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Override
 	public Invoice getPartyContactAddress(Invoice invoice) {
 
+		invoice.setPartyContact(null);
+		invoice.setInvoiceAddress(null);
+		invoice.setUseInvoiceAddress(true);
+		invoice.setShippingAddress(null);
 		if (invoice.getParty().getContactList().stream()
 				.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().isPresent()) {
 			Contact partyContact = invoice.getParty().getContactList().stream()
 					.filter(a -> a.getType() == ContactRepository.CONTACT_TYPE_SELECT_PRIMARY).findFirst().get();
 			invoice.setPartyContact(partyContact);
-
 		}
 
 		if (invoice.getParty().getAddressList().stream()

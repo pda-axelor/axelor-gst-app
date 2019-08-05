@@ -83,30 +83,35 @@ public class InvoiceController {
 		response.setValues(invoice);
 	}
 
-	public void setParty(ActionRequest request, ActionResponse response) {
+	public void setInvoice(ActionRequest request, ActionResponse response) {
 		Invoice invoice = request.getContext().asType(Invoice.class);
 
 		response.setValue("partyContact", "");
 		response.setValue("invoiceAddress", null);
 		response.setValue("useInvoiceAddress", true);
 		response.setValue("shippingAddress", "");
-
+        System.out.println(invoice.getParty());
 		if (invoice.getParty() != null) {
 
 			invoice = invoiceService.getPartyContactAddress(invoice);
 			response.setValue("partyContact", invoice.getPartyContact());
-			response.setValue("invoiceAddress", invoice.getInvoiceAddress());
-			response.setValue("useInvoiceAddress", true);
-			response.setValue("shippingAddress", invoice.getShippingAddress());
+			if (invoice.getInvoiceAddress() != null && invoice.getCompany().getAddress()!=null) {
+				response.setValue("invoiceAddress", invoice.getInvoiceAddress());
+				response.setValue("useInvoiceAddress", true);
+				response.setValue("shippingAddress", invoice.getShippingAddress());
 
-			List<InvoiceLine> list = invoiceLineService.reCalculateInvoiceLine(invoice);
-			response.setValue("invoiceItemsList", list);
-			invoice = invoiceService.calculateData(list, invoice);
-			response.setValue("netAmount", invoice.getNetAmount());
-			response.setValue("netIGST", invoice.getNetIGST());
-			response.setValue("netSGST", invoice.getNetSGST());
-			response.setValue("netCGST", invoice.getNetCGST());
-			response.setValue("grossAmount", invoice.getGrossAmount());
+				List<InvoiceLine> list = invoiceLineService.reCalculateInvoiceLine(invoice);
+				response.setValue("invoiceItemsList", list);
+				invoice = invoiceService.calculateData(list, invoice);
+				response.setValue("netAmount", invoice.getNetAmount());
+				response.setValue("netIGST", invoice.getNetIGST());
+				response.setValue("netSGST", invoice.getNetSGST());
+				response.setValue("netCGST", invoice.getNetCGST());
+				response.setValue("grossAmount", invoice.getGrossAmount());
+			} else {
+				response.setReload(true);
+				response.setFlash("No Address Found in Selected Party or Company");
+			}
 		}
 
 	}
