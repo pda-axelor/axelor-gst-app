@@ -8,13 +8,9 @@
 	<grid name="invoiceline-grid" title="Invoice Line"
 		model="com.axelor.gst.db.InvoiceLine">
 
-		<field name="product" />
-		<field name="hsbn" />
-		<field name="item" />
+		<field name="product" />		
 		<field name="qty" />
-		<field name="price" />
-		<field name="netAmount" />
-		<field name="gstRate" />
+		<field name="price" />	
 		<field name="igst" />
 		<field name="sgst" />
 		<field name="cgst" />
@@ -30,7 +26,7 @@
 				onChange="com.axelor.gst.web.InvoiceLineController:setProduct" />
 			<field name="hsbn" />
 			<field name="item" required="true" />
-			<field name="qty" onChange="com.axelor.gst.web.InvoiceLineController:setProduct" />
+			<field name="qty" onChange="com.axelor.gst.web.InvoiceLineController:setProduct" min="1"/>
 			<field name="price" />
 			<field name="netAmount" readonly="true" />
 			<field name="gstRate" readonly="true" title="GST Rate"/>

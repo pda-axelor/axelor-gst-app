@@ -83,7 +83,7 @@
 		<panel title="Party Details" sidebar="true" css="panel-blue">
 			<field name="party" required="true"
 				onChange="com.axelor.gst.web.InvoiceController:setInvoice" />
-			<field name="partyContact" />
+			<field name="partyContact"/>
 			<field name="invoiceAddress" required="true" />
 			<field name="shippingAddress" />
 			<field name="useInvoiceAddress" onChange="action-gst-invoice-use-invoice-address" />
